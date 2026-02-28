@@ -1,0 +1,27 @@
+# Lîstika Texmînkirinê - RojLang
+# Mînak: rojlang game.ku
+
+nav hejmarê_veşartî = hilbijêre(1, 10)
+
+nivîs("🎮 Xêr hatî lîstika texmînkirinê!")
+nivîs("Ez hejmarek ji 1 heta 10 hilbijartim...")
+nivîs("Tu dikarî texmîn bikî?")
+nivîs("──────────────────────────────")
+
+nav berdewame = rast
+
+dem berdewame:
+    nav texmîna_te = int(xwestin("Texmîna xwe binivîse (1-10): "))
+
+    eger texmîna_te > hejmarê_veşartî:
+        nivîs("⬇️  Hejmar mestre! Hejmareke biçûktir biceribîne.")
+
+    yan eger texmîna_te < hejmarê_veşartî:
+        nivîs("⬆️  Hejmar biçoktir! Hejmareke mezintir biceribîne.")
+
+    yan:
+        nivîs("🎉 Erê! Tu bi ser ketî! Hejmara veşartî", hejmarê_veşartî, "bû!")
+        nav berdewame = çewt
+
+nivîs("──────────────────────────────")
+nivîs("Spas ji bo lîstina xwe! 🖤")
