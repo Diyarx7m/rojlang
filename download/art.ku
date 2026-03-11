@@ -1,11 +1,6 @@
-# Hunerê Kurdî - Kurdish Art
-# RojLang v1.1 - Graphics Demo
-# Mînak: rojlang art.ku
-
 nav xalan = pencere("☀ Hunerê Kurdî — RojLang", "620x520")
 nav kevça = kevir(xalan, 620, 520, "#0a0a0f")
 
-# Rengên sereke
 nav sor    = "#e63946"
 nav zêr    = "#f0a500"
 nav kesk   = "#06d6a0"
@@ -15,24 +10,20 @@ nav pembe  = "#f15bb5"
 nav spî    = "#e8e8f0"
 nav tarî   = "#0a0a0f"
 
-# ── Paşxane / Background stripes ─────────────────────────────────
 nav renganê_pasxane = rengên_hevber("#0a0a0f", "#1a1a2e", 10)
 nav j = 0
 bo r di renganê_pasxane:
     çargoşe(kevça, 0, j * 52, 620, j * 52 + 52, r)
     j += 1
 
-# ── Xêzên xemilînê / Decorative border lines ─────────────────────
 xêz(kevça, 0,   0,   620, 0,   zêr, 3)
 xêz(kevça, 0,   517, 620, 517, zêr, 3)
 xêz(kevça, 0,   0,   0,   520, zêr, 2)
 xêz(kevça, 618, 0,   618, 520, zêr, 2)
 
-# ── Roja Kurdî / Kurdish Sun ──────────────────────────────────────
 nav navenda_x = 310
 nav navenda_y = 220
 
-# Tîrêjên rojê / Sun rays
 nav i = 0
 dem i < 12:
     nav goşe = i * 30
@@ -44,13 +35,11 @@ dem i < 12:
     xêz(kevça, x1, y1, x2, y2, zêr, 4)
     i += 1
 
-# Xemberên rojê / Sun circles
 xember(kevça, navenda_x-75, navenda_y-75, navenda_x+75, navenda_y+75, zêr)
 xember(kevça, navenda_x-55, navenda_y-55, navenda_x+55, navenda_y+55, "#e8a000")
 xember(kevça, navenda_x-35, navenda_y-35, navenda_x+35, navenda_y+35, tarî)
 xember(kevça, navenda_x-18, navenda_y-18, navenda_x+18, navenda_y+18, sor)
 
-# ── Çargoşeyên rengîn / Colorful squares left ────────────────────
 çargoşe(kevça, 30,  60,  110, 140, sor)
 çargoşe(kevça, 42,  72,  122, 152, mor)
 xêz(kevça, 30, 60, 110, 60,  spî, 1)
@@ -64,7 +53,6 @@ xêz(kevça, 30, 165, 30,  245, spî, 1)
 çargoşe(kevça, 30,  270, 110, 350, pembe)
 çargoşe(kevça, 42,  282, 122, 362, sor)
 
-# ── Çargoşeyên rengîn / Colorful squares right ───────────────────
 çargoşe(kevça, 510, 60,  590, 140, şîn)
 çargoşe(kevça, 498, 72,  578, 152, kesk)
 xêz(kevça, 590, 60, 510, 60,  spî, 1)
@@ -78,7 +66,6 @@ xêz(kevça, 590, 165, 590, 245, spî, 1)
 çargoşe(kevça, 510, 270, 590, 350, mor)
 çargoşe(kevça, 498, 282, 578, 362, pembe)
 
-# ── Rêza xemberan jêrîn / Bottom circle row ──────────────────────
 nav renganê_rêzê = [sor, zêr, kesk, şîn, mor, pembe]
 nav cx = 65
 bo rr di renganê_rêzê:
@@ -86,11 +73,9 @@ bo rr di renganê_rêzê:
     xember(kevça, cx-18, 400, cx+18, 436, tarî)
     cx += 82
 
-# ── Xêzên navîn / Center decorative lines ────────────────────────
 xêz(kevça, 140, 100, 165, 340, zêr, 1)
 xêz(kevça, 455, 100, 480, 340, zêr, 1)
 
-# ── Nivîs / Text ─────────────────────────────────────────────────
 nivîskar(kevça, 310, 462, "☀  ROJLANG  ☀", zêr, 20, "Arial")
 nivîskar(kevça, 310, 493, "Zimanê Bernamesaziyê yê Kurdî", spî, 11, "Arial")
 

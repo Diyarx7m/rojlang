@@ -276,6 +276,8 @@ footer{text-align:center;padding:4rem 1.2rem;font-family:'Space Mono',monospace;
         <button class="btn btn-outline btn-sm" onclick="dlFile('installer')">install_rojlang.bat</button>
         <button class="btn btn-outline btn-sm" onclick="dlFile('uninstall')">uninstall_rojlang.bat</button>
         <button class="btn btn-outline btn-sm" onclick="dlFile('spaceship')">spaceship.ku</button>
+        <button class="btn btn-outline btn-sm" onclick="dlFile('art')">art.ku</button>
+        <button class="btn btn-outline btn-sm" onclick="dlFile('game')">game.ku</button>
       </div>
     </div>
 
@@ -668,7 +670,7 @@ footer{text-align:center;padding:4rem 1.2rem;font-family:'Space Mono',monospace;
       <div class="step"><div class="step-n">2</div><div class="step-b"><h4>📁 Heman peldank</h4><p>Hemû pelan di heman peldankê de bixin — mînak Desktop.</p></div></div>
       <div class="step"><div class="step-n">3</div><div class="step-b"><h4>⚙️ Run as Administrator</h4><p>Li ser <code>install_rojlang.bat</code> mişkê rast → <strong style="color:var(--gold)">Run as administrator</strong></p></div></div>
       <div class="step"><div class="step-n">4</div><div class="step-b"><h4>🖥️ Terminal nû veke</h4><p>CMD nû veke — PATH tenê di terminalên nû de dixebite.</p></div></div>
-      <div class="step"><div class="step-n">5</div><div class="step-b"><h4>🚀 IDE yan CMD</h4><p><code>python rojlang_ide.py</code> — IDE bixebitîne &nbsp;·&nbsp; <code>rojlang test.ku</code> — CMD</p></div></div>
+      <div class="step"><div class="step-n">5</div><div class="step-b"><h4>🚀 IDE yan CMD</h4><p><code>unzip RojLang-IDE.zip</code> — IDE bixebitîne &nbsp;·&nbsp; <code>rojlang test.ku</code> — CMD</p></div></div>
     </div>
   </div>
 </section>
@@ -830,31 +832,24 @@ footer{text-align:center;padding:4rem 1.2rem;font-family:'Space Mono',monospace;
 
 <div class="toast" id="toast"></div>
 <script>
-// ── Toast ──
 function toast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('show');
   clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3200);
 }
-
-// ── Accordion (trouble/FAQ) ──
 function tog(el){
   const open=el.classList.contains('open');
   document.querySelectorAll('.tc').forEach(c=>c.classList.remove('open'));
   if(!open)el.classList.add('open');
 }
-
-// ── Keyword tabs ──
 function kwTab(id,btn){
   document.querySelectorAll('.kw-tab').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.kw-panel').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('kw-'+id).classList.add('active');
 }
-
-// ── File contents ──
-const _FILES = {
-  interpreter: { n:'interpreter.py',        c:`import re
+const _FILES={
+  interpreter:{n:'interpreter.py',        c:`import re
 import sys
 import os
 import traceback
@@ -1454,8 +1449,8 @@ def main():
 
 if __name__ == '__main__':
     main()
-` },
-  installer:   { n:'install_rojlang.bat',   c:`@echo off
+`},
+  installer:  {n:'install_rojlang.bat',   c:`@echo off
 chcp 65001 > nul
 title RojLang v2.1 Installer
 echo.
@@ -1476,8 +1471,8 @@ echo  Serkeftin! RojLang hat sazkirin.
 echo  Ji bo bikar bîne: cd "klasora-te" û rojlang pelê.ku
 echo  CMD nû veke ji bo PATH nûkirin.
 pause
-` },
-  uninstall:   { n:'uninstall_rojlang.bat', c:`@echo off
+`},
+  uninstall:  {n:'uninstall_rojlang.bat', c:`@echo off
 echo.
 echo  *** RojLang Rakirin / Uninstaller ***
 echo.
@@ -1498,8 +1493,8 @@ echo ==========================================
 echo  RojLang hat rakirin! / Uninstalled!
 echo ==========================================
 pause
-` },
-  spaceship:   { n:'spaceship.ku',          c:`# ☀ Keştiya Fezayê — RojLang Space Shooter
+`},
+  spaceship:  {n:'spaceship.ku',          c:`# ☀ Keştiya Fezayê — RojLang Space Shooter
 nav W = 520
 nav H = 620
 nav w = pencere("Keştiya Fezayê ☀", "520x620")
@@ -1598,13 +1593,118 @@ klavBiGire(w, "<space>", atêş)
 w.focus_set()
 loop()
 nîşan(w)
-` },
-};
+`},
+  art:        {n:'art.ku',               c:`nav xalan = pencere("☀ Hunerê Kurdî — RojLang", "620x520")
+nav kevça = kevir(xalan, 620, 520, "#0a0a0f")
 
-// ── Single file download ──
+nav sor    = "#e63946"
+nav zêr    = "#f0a500"
+nav kesk   = "#06d6a0"
+nav şîn    = "#a8dadc"
+nav mor    = "#9b5de5"
+nav pembe  = "#f15bb5"
+nav spî    = "#e8e8f0"
+nav tarî   = "#0a0a0f"
+
+nav renganê_pasxane = rengên_hevber("#0a0a0f", "#1a1a2e", 10)
+nav j = 0
+bo r di renganê_pasxane:
+    çargoşe(kevça, 0, j * 52, 620, j * 52 + 52, r)
+    j += 1
+
+xêz(kevça, 0,   0,   620, 0,   zêr, 3)
+xêz(kevça, 0,   517, 620, 517, zêr, 3)
+xêz(kevça, 0,   0,   0,   520, zêr, 2)
+xêz(kevça, 618, 0,   618, 520, zêr, 2)
+
+nav navenda_x = 310
+nav navenda_y = 220
+
+nav i = 0
+dem i < 12:
+    nav goşe = i * 30
+    nav rad = math.radians(goşe)
+    nav x1 = int(navenda_x + 85 * math.cos(rad))
+    nav y1 = int(navenda_y + 85 * math.sin(rad))
+    nav x2 = int(navenda_x + 130 * math.cos(rad))
+    nav y2 = int(navenda_y + 130 * math.sin(rad))
+    xêz(kevça, x1, y1, x2, y2, zêr, 4)
+    i += 1
+
+xember(kevça, navenda_x-75, navenda_y-75, navenda_x+75, navenda_y+75, zêr)
+xember(kevça, navenda_x-55, navenda_y-55, navenda_x+55, navenda_y+55, "#e8a000")
+xember(kevça, navenda_x-35, navenda_y-35, navenda_x+35, navenda_y+35, tarî)
+xember(kevça, navenda_x-18, navenda_y-18, navenda_x+18, navenda_y+18, sor)
+
+çargoşe(kevça, 30,  60,  110, 140, sor)
+çargoşe(kevça, 42,  72,  122, 152, mor)
+xêz(kevça, 30, 60, 110, 60,  spî, 1)
+xêz(kevça, 30, 60, 30,  140, spî, 1)
+
+çargoşe(kevça, 30,  165, 110, 245, kesk)
+çargoşe(kevça, 42,  177, 122, 257, şîn)
+xêz(kevça, 30, 165, 110, 165, spî, 1)
+xêz(kevça, 30, 165, 30,  245, spî, 1)
+
+çargoşe(kevça, 30,  270, 110, 350, pembe)
+çargoşe(kevça, 42,  282, 122, 362, sor)
+
+çargoşe(kevça, 510, 60,  590, 140, şîn)
+çargoşe(kevça, 498, 72,  578, 152, kesk)
+xêz(kevça, 590, 60, 510, 60,  spî, 1)
+xêz(kevça, 590, 60, 590, 140, spî, 1)
+
+çargoşe(kevça, 510, 165, 590, 245, zêr)
+çargoşe(kevça, 498, 177, 578, 257, sor)
+xêz(kevça, 590, 165, 510, 165, spî, 1)
+xêz(kevça, 590, 165, 590, 245, spî, 1)
+
+çargoşe(kevça, 510, 270, 590, 350, mor)
+çargoşe(kevça, 498, 282, 578, 362, pembe)
+
+nav renganê_rêzê = [sor, zêr, kesk, şîn, mor, pembe]
+nav cx = 65
+bo rr di renganê_rêzê:
+    xember(kevça, cx-28, 390, cx+28, 446, rr)
+    xember(kevça, cx-18, 400, cx+18, 436, tarî)
+    cx += 82
+
+xêz(kevça, 140, 100, 165, 340, zêr, 1)
+xêz(kevça, 455, 100, 480, 340, zêr, 1)
+
+nivîskar(kevça, 310, 462, "☀  ROJLANG  ☀", zêr, 20, "Arial")
+nivîskar(kevça, 310, 493, "Zimanê Bernamesaziyê yê Kurdî", spî, 11, "Arial")
+
+nîşan(xalan)
+`},
+  game:       {n:'game.ku',              c:`nav hejmarê_veşartî = hilbijêre(1, 10)
+
+nivîs("🎮 Xêr hatî lîstika texmînkirinê!")
+nivîs("Ez hejmarek ji 1 heta 10 hilbijartim...")
+nivîs("Tu dikarî texmîn bikî?")
+nivîs("──────────────────────────────")
+
+nav berdewame = rast
+
+dem berdewame:
+    nav texmîna_te = int(xwestin("Texmîna xwe binivîse (1-10): "))
+
+    eger texmîna_te > hejmarê_veşartî:
+        nivîs("⬇️  Hejmar mestre! Hejmareke biçûktir biceribîne.")
+
+    yan eger texmîna_te < hejmarê_veşartî:
+        nivîs("⬆️  Hejmar biçoktir! Hejmareke mezintir biceribîne.")
+
+    yan:
+        nivîs("🎉 Erê! Tu bi ser ketî! Hejmara veşartî", hejmarê_veşartî, "bû!")
+        nav berdewame = çewt
+
+nivîs("──────────────────────────────")
+nivîs("Spas ji bo lîstina xwe! 🖤")
+`},
+};
 function dlFile(key){
-  const f=_FILES[key];
-  if(!f)return;
+  const f=_FILES[key];if(!f)return;
   const blob=new Blob([f.c],{type:'application/octet-stream'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
@@ -1613,46 +1713,25 @@ function dlFile(key){
   document.body.removeChild(a);URL.revokeObjectURL(url);
   toast('⬇ '+f.n+' hat daxistin!');
 }
-
-// ── Download all ──
 function downloadAll(){
-  ['interpreter','installer','uninstall','spaceship'].forEach((k,i)=>
-    setTimeout(()=>dlFile(k), i*400)
+  ['interpreter','installer','uninstall','spaceship','art','game'].forEach((k,i)=>
+    setTimeout(()=>dlFile(k),i*400)
   );
 }
-
-// ── Copy code ──
-function copyCode(btn){
-  const pre=btn.closest('.code-block, pre, .ex-card')?.querySelector('pre') || btn.previousElementSibling;
-  if(!pre)return;
-  navigator.clipboard.writeText(pre.innerText).then(()=>{
-    const old=btn.textContent;btn.textContent='✓';
-    setTimeout(()=>btn.textContent=old,1800);
-  });
-}
-
-// ── Scroll reveal ──
 const obs=new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'),i*60);
-      obs.unobserve(e.target);
-    }
+    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}
   });
-},{threshold:0.01, rootMargin:'0px 0px -40px 0px'});
+},{threshold:0.01,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-// ── Active nav on scroll ──
 const _secs=document.querySelectorAll('section[id]');
-const _nlinks=document.querySelectorAll('.nav-links a');
+const _nl=document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll',()=>{
   let cur='';
   _secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)cur=s.id;});
-  _nlinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+  _nl.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
 });
-_nlinks.forEach(a=>a.addEventListener('click',()=>{
-  document.getElementById('navLinks')?.classList.remove('open');
-}));
+_nl.forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks')?.classList.remove('open')));
 </script>
 </body>
 </html>
