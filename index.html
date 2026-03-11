@@ -289,6 +289,7 @@ footer{text-align:center;padding:4rem 1.2rem;font-family:'Space Mono',monospace;
       </div>
       <div class="dl-btns">
         <a href="download/RojLang-IDE.zip" class="btn btn-green" download>📦 Download IDE — RojLang-IDE.zip</a>
+        <a href="download/rojlang.ico" class="btn btn-outline btn-sm" download>🎨 rojlang.ico</a>
       </div>
     </div>
   </div>
@@ -670,7 +671,7 @@ footer{text-align:center;padding:4rem 1.2rem;font-family:'Space Mono',monospace;
       <div class="step"><div class="step-n">2</div><div class="step-b"><h4>📁 Heman peldank</h4><p>Hemû pelan di heman peldankê de bixin — mînak Desktop.</p></div></div>
       <div class="step"><div class="step-n">3</div><div class="step-b"><h4>⚙️ Run as Administrator</h4><p>Li ser <code>install_rojlang.bat</code> mişkê rast → <strong style="color:var(--gold)">Run as administrator</strong></p></div></div>
       <div class="step"><div class="step-n">4</div><div class="step-b"><h4>🖥️ Terminal nû veke</h4><p>CMD nû veke — PATH tenê di terminalên nû de dixebite.</p></div></div>
-      <div class="step"><div class="step-n">5</div><div class="step-b"><h4>🚀 IDE yan CMD</h4><p><code>unzip RojLang-IDE.zip</code> — IDE bixebitîne &nbsp;·&nbsp; <code>rojlang test.ku</code> — CMD</p></div></div>
+      <div class="step"><div class="step-n">5</div><div class="step-b"><h4>🚀 IDE yan CMD</h4><p><code>python rojlang_ide.py</code> — IDE bixebitîne &nbsp;·&nbsp; <code>rojlang test.ku</code> — CMD</p></div></div>
     </div>
   </div>
 </section>
@@ -715,12 +716,15 @@ footer{text-align:center;padding:4rem 1.2rem;font-family:'Space Mono',monospace;
       <div class="tc" onclick="tog(this)">
         <div class="tc-head"><div class="tc-icon">🖥</div><div class="tc-q">IDE naxebite</div><div class="tc-arr">▼</div></div>
         <div class="tc-body">
-          <div class="tag tag-o">KONTROL BIKE</div>
-          <p><strong>interpreter.py</strong> û <strong>rojlang_ide.py</strong> divê di heman peldankê de bin.</p>
+          <div class="tag tag-g">ÇARESERÎ</div>
+          <p>IDE wekî <strong>.exe</strong> tê — Python pêwîst nîne. ZIP vekin û <strong>RojLang IDE.exe</strong> bixin.</p>
           <div class="code-wrap"><div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">folder</div></div>
-          <pre>📁 RojLang/
-   rojlang_ide.py
-   interpreter.py</pre></div>
+          <pre>📦 RojLang-IDE.zip vekin:
+📁 RojLang IDE/
+   RojLang IDE.exe  ← vê bixebitînin
+   interpreter.py
+   ...</pre></div>
+          <p style="margin-top:.6rem;font-size:.75rem;color:#666688">⚠ Windows SmartScreen: <strong>"More info" → "Run anyway"</strong> bikirtînin.</p>
         </div>
       </div>
       <div class="tc" onclick="tog(this)">
@@ -858,143 +862,143 @@ import math
 
 
 TRANSLATIONS = [
-    (r'\\bfonksîyon\\b',  'def'),
-    (r'\\bfonksiyon\\b',  'def'),
+    (r'\\\\bfonksîyon\\\\b',  'def'),
+    (r'\\\\bfonksiyon\\\\b',  'def'),
 
-    (r'\\bnivîs\\b',      'print'),
-    (r'\\bnivis\\b',      'print'),
+    (r'\\\\bnivîs\\\\b',      'print'),
+    (r'\\\\bnivis\\\\b',      'print'),
 
-    (r'\\bbêje\\b',       '_ku_beje'),
-    (r'\\bbeje\\b',       '_ku_beje'),
+    (r'\\\\bbêje\\\\b',       '_ku_beje'),
+    (r'\\\\bbeje\\\\b',       '_ku_beje'),
 
-    (r'\\bxwestin\\b',    'input'),
+    (r'\\\\bxwestin\\\\b',    'input'),
 
-    (r'\\bhilbijêre\\b',  'random.randint'),
-    (r'\\bhilbijere\\b',  'random.randint'),
+    (r'\\\\bhilbijêre\\\\b',  'random.randint'),
+    (r'\\\\bhilbijere\\\\b',  'random.randint'),
 
-    (r'\\beger\\b',       'if'),
-    (r'\\byan\\b',        'else'),
-    (r'\\bdem\\b',        'while'),
-    (r'\\bvegere\\b',     'return'),
-    (r'\\bbo\\b',         'for'),
-    (r'\\bdi\\b',         'in'),
+    (r'\\\\beger\\\\b',       'if'),
+    (r'\\\\byan\\\\b',        'else'),
+    (r'\\\\bdem\\\\b',        'while'),
+    (r'\\\\bvegere\\\\b',     'return'),
+    (r'\\\\bbo\\\\b',         'for'),
+    (r'\\\\bdi\\\\b',         'in'),
 
-    (r'\\brast\\b',       'True'),
+    (r'\\\\brast\\\\b',       'True'),
 
-    (r'\\bçewt\\b',       'False'),
-    (r'\\bcewt\\b',       'False'),
+    (r'\\\\bçewt\\\\b',       'False'),
+    (r'\\\\bcewt\\\\b',       'False'),
 
-    (r'\\bsinif\\b',      'class'),
-    (r'\\bTune\\b',       'None'),
+    (r'\\\\bsinif\\\\b',      'class'),
+    (r'\\\\bTune\\\\b',       'None'),
 
-    (r'\\bnav\\b\\s+',     ''),
+    (r'\\\\bnav\\\\b\\\\s+',     ''),
 
-    (r'\\bnîşe\\b',       'pass'),
-    (r'\\bnise\\b',       'pass'),
+    (r'\\\\bnîşe\\\\b',       'pass'),
+    (r'\\\\bnise\\\\b',       'pass'),
 
-    (r'\\bbişkîne\\b',    'break'),
-    (r'\\bbiskine\\b',    'break'),
+    (r'\\\\bbişkîne\\\\b',    'break'),
+    (r'\\\\bbiskine\\\\b',    'break'),
 
-    (r'\\bberdewam\\b',   'continue'),
-    (r'\\bderkev\\b',     'exit()'),
+    (r'\\\\bberdewam\\\\b',   'continue'),
+    (r'\\\\bderkev\\\\b',     'exit()'),
 
-    (r'\\bne\\b',         'not'),
-    (r'\\bû\\b',          'and'),
-    (r'\\bu\\b',          'and'),
-    (r'\\ban\\b',         'or'),
+    (r'\\\\bne\\\\b',         'not'),
+    (r'\\\\bû\\\\b',          'and'),
+    (r'\\\\bu\\\\b',          'and'),
+    (r'\\\\ban\\\\b',         'or'),
 
-    (r'\\bdirêj\\b',      'len'),
-    (r'\\bdirej\\b',      'len'),
+    (r'\\\\bdirêj\\\\b',      'len'),
+    (r'\\\\bdirej\\\\b',      'len'),
 
-    (r'\\bcure\\b',       'type'),
+    (r'\\\\bcure\\\\b',       'type'),
 
-    (r'\\.têxe\\b',       '.append'),
-    (r'\\.texe\\b',       '.append'),
+    (r'\\\\.têxe\\\\b',       '.append'),
+    (r'\\\\.texe\\\\b',       '.append'),
 
-    (r'\\bhejmar\\b',         'int'),
-    (r'\\bnivîsok\\b',        'str'),
-    (r'\\bnivisok\\b',        'str'),
-    (r'\\bhejimarFloat\\b',   'float'),
+    (r'\\\\bhejmar\\\\b',         'int'),
+    (r'\\\\bnivîsok\\\\b',        'str'),
+    (r'\\\\bnivisok\\\\b',        'str'),
+    (r'\\\\bhejimarFloat\\\\b',   'float'),
 
-    (r'\\bpêl\\b',            'list'),
-    (r'\\bpel\\b',            'list'),
-    (r'\\bferhenga\\b',       'dict'),
-    (r'\\bkoma\\b',           'set'),
+    (r'\\\\bpêl\\\\b',            'list'),
+    (r'\\\\bpel\\\\b',            'list'),
+    (r'\\\\bferhenga\\\\b',       'dict'),
+    (r'\\\\bkoma\\\\b',           'set'),
 
-    (r'\\bnizim\\b',          'min'),
-    (r'\\bmezin\\b',          'max'),
-    (r'\\btomkirin\\b',       'round'),
-    (r'\\bjimartina\\b',      'sum'),
-    (r'\\bbijmare\\b',        'range'),
-    (r'\\bşikeftin\\b',       'abs'),
-    (r'\\bsikeftin\\b',       'abs'),
-    (r'\\bmathSqrt\\b',       'math.sqrt'),
-    (r'\\bmathPow\\b',        'math.pow'),
-    (r'\\bmathPi\\b',         'math.pi'),
-    (r'\\bhilbijêreFloat\\b', 'random.uniform'),
-    (r'\\bhilbijereFloat\\b', 'random.uniform'),
+    (r'\\\\bnizim\\\\b',          'min'),
+    (r'\\\\bmezin\\\\b',          'max'),
+    (r'\\\\btomkirin\\\\b',       'round'),
+    (r'\\\\bjimartina\\\\b',      'sum'),
+    (r'\\\\bbijmare\\\\b',        'range'),
+    (r'\\\\bşikeftin\\\\b',       'abs'),
+    (r'\\\\bsikeftin\\\\b',       'abs'),
+    (r'\\\\bmathSqrt\\\\b',       'math.sqrt'),
+    (r'\\\\bmathPow\\\\b',        'math.pow'),
+    (r'\\\\bmathPi\\\\b',         'math.pi'),
+    (r'\\\\bhilbijêreFloat\\\\b', 'random.uniform'),
+    (r'\\\\bhilbijereFloat\\\\b', 'random.uniform'),
 
-    (r'\\bçap\\b',            'print'),
-    (r'\\bcap\\b',            'print'),
+    (r'\\\\bçap\\\\b',            'print'),
+    (r'\\\\bcap\\\\b',            'print'),
 
-    (r'\\bêşk\\b',            'try'),
-    (r'\\besk\\b',            'try'),
-    (r'\\bgirtin\\b',         'except'),
-    (r'\\bdewam\\b',          'finally'),
-    (r'\\bavêtin\\b',         'raise'),
-    (r'\\bavitin\\b',         'raise'),
+    (r'\\\\bêşk\\\\b',            'try'),
+    (r'\\\\besk\\\\b',            'try'),
+    (r'\\\\bgirtin\\\\b',         'except'),
+    (r'\\\\bdewam\\\\b',          'finally'),
+    (r'\\\\bavêtin\\\\b',         'raise'),
+    (r'\\\\bavitin\\\\b',         'raise'),
 
-    (r'\\.jorê\\(\\)',        '.upper()'),
-    (r'\\.jore\\(\\)',        '.upper()'),
-    (r'\\.jêrê\\(\\)',        '.lower()'),
-    (r'\\.jere\\(\\)',        '.lower()'),
-    (r'\\.veqetîne\\b',       '.split'),
-    (r'\\.veqetine\\b',       '.split'),
-    (r'\\.biguhêze\\b',       '.replace'),
-    (r'\\.biguhez\\b',        '.replace'),
-    (r'\\.bibîne\\b',         '.find'),
-    (r'\\.bibine\\b',         '.find'),
-    (r'\\.xêz\\(\\)',         '.strip()'),
-    (r'\\.xez\\(\\)',         '.strip()'),
-    (r'\\.hejmarê\\b',        '.count'),
-    (r'\\.hejmare\\b',        '.count'),
-    (r'\\.bike\\b',           '.join'),
-    (r'\\.jêbike\\b',         '.remove'),
-    (r'\\.jebike\\b',         '.remove'),
-    (r'\\.rêzkirin\\(\\)',     '.sort()'),
-    (r'\\.rezkirin\\(\\)',     '.sort()'),
-    (r'\\.berevajikirin\\(\\)','.reverse()'),
+    (r'\\\\.jorê\\\\(\\\\)',        '.upper()'),
+    (r'\\\\.jore\\\\(\\\\)',        '.upper()'),
+    (r'\\\\.jêrê\\\\(\\\\)',        '.lower()'),
+    (r'\\\\.jere\\\\(\\\\)',        '.lower()'),
+    (r'\\\\.veqetîne\\\\b',       '.split'),
+    (r'\\\\.veqetine\\\\b',       '.split'),
+    (r'\\\\.biguhêze\\\\b',       '.replace'),
+    (r'\\\\.biguhez\\\\b',        '.replace'),
+    (r'\\\\.bibîne\\\\b',         '.find'),
+    (r'\\\\.bibine\\\\b',         '.find'),
+    (r'\\\\.xêz\\\\(\\\\)',         '.strip()'),
+    (r'\\\\.xez\\\\(\\\\)',         '.strip()'),
+    (r'\\\\.hejmarê\\\\b',        '.count'),
+    (r'\\\\.hejmare\\\\b',        '.count'),
+    (r'\\\\.bike\\\\b',           '.join'),
+    (r'\\\\.jêbike\\\\b',         '.remove'),
+    (r'\\\\.jebike\\\\b',         '.remove'),
+    (r'\\\\.rêzkirin\\\\(\\\\)',     '.sort()'),
+    (r'\\\\.rezkirin\\\\(\\\\)',     '.sort()'),
+    (r'\\\\.berevajikirin\\\\(\\\\)','.reverse()'),
 
-    (r'\\bklavBiGire\\b',     'klavBiGire'),
-    (r'\\bbilivîne\\b',       'bilivîne'),
-    (r'\\bbilivine\\b',       'bilivîne'),
-    (r'\\bbiguherêze_reng\\b','biguherêze_reng'),
-    (r'\\bjêbike_item\\b',    'jêbike_item'),
-    (r'\\bjebike_item\\b',    'jêbike_item'),
-    (r'\\bpiştî\\b',          'piştî'),
-    (r'\\bpistî\\b',          'piştî'),
-    (r'\\bpeyam\\b',          'peyam'),
-    (r'\\bbipirse\\b',        'bipirse'),
-    (r'\\bwêne\\b',            'wêne'),
-    (r'\\bwene\\b',            'wêne'),
-    (r'\\bwêne_pîvandî\\b',   'wêne_pîvandî'),
-    (r'\\bwene_pivandi\\b',   'wêne_pîvandî'),
-    (r'\\bwêne_nîşan\\b',     'wêne_nîşan'),
-    (r'\\bwene_nishan\\b',    'wêne_nîşan'),
-    (r'\\bwêne_label\\b',     'wêne_label'),
-    (r'\\bwene_label\\b',     'wêne_label'),
-    (r'\\bdeng\\b',            'deng'),
-    (r'\\bdeng_lêde\\b',      'deng'),
-    (r'\\bdeng_leyide\\b',    'deng'),
-    (r'\\bdeng_rawest\\b',    'deng_rawest'),
-    (r'\\bdeng_dengdank\\b',  'deng_dengdank'),
-    (r'\\bdeng_bilindî\\b',   'deng_bilindî'),
-    (r'\\bdeng_bilindi\\b',   'deng_bilindî'),
+    (r'\\\\bklavBiGire\\\\b',     'klavBiGire'),
+    (r'\\\\bbilivîne\\\\b',       'bilivîne'),
+    (r'\\\\bbilivine\\\\b',       'bilivîne'),
+    (r'\\\\bbiguherêze_reng\\\\b','biguherêze_reng'),
+    (r'\\\\bjêbike_item\\\\b',    'jêbike_item'),
+    (r'\\\\bjebike_item\\\\b',    'jêbike_item'),
+    (r'\\\\bpiştî\\\\b',          'piştî'),
+    (r'\\\\bpistî\\\\b',          'piştî'),
+    (r'\\\\bpeyam\\\\b',          'peyam'),
+    (r'\\\\bbipirse\\\\b',        'bipirse'),
+    (r'\\\\bwêne\\\\b',            'wêne'),
+    (r'\\\\bwene\\\\b',            'wêne'),
+    (r'\\\\bwêne_pîvandî\\\\b',   'wêne_pîvandî'),
+    (r'\\\\bwene_pivandi\\\\b',   'wêne_pîvandî'),
+    (r'\\\\bwêne_nîşan\\\\b',     'wêne_nîşan'),
+    (r'\\\\bwene_nishan\\\\b',    'wêne_nîşan'),
+    (r'\\\\bwêne_label\\\\b',     'wêne_label'),
+    (r'\\\\bwene_label\\\\b',     'wêne_label'),
+    (r'\\\\bdeng\\\\b',            'deng'),
+    (r'\\\\bdeng_lêde\\\\b',      'deng'),
+    (r'\\\\bdeng_leyide\\\\b',    'deng'),
+    (r'\\\\bdeng_rawest\\\\b',    'deng_rawest'),
+    (r'\\\\bdeng_dengdank\\\\b',  'deng_dengdank'),
+    (r'\\\\bdeng_bilindî\\\\b',   'deng_bilindî'),
+    (r'\\\\bdeng_bilindi\\\\b',   'deng_bilindî'),
 ]
 
 POST_FIXES = [
-    (r'\\belse\\s+if\\b',      'elif'),
-    (r'(?m)(\\S)[ \\t]{2,}',  r'\\1 '),
+    (r'\\\\belse\\\\s+if\\\\b',      'elif'),
+    (r'(?m)(\\\\S)[ \\\\t]{2,}',  r'\\\\1 '),
 ]
 
 
@@ -1259,7 +1263,7 @@ def _inject_globals(code: str) -> str:
 
     lines = code.splitlines(keepends=True)
 
-    asgn = _re.compile(r'^([\\w\\u00C0-\\u024F\\u0600-\\u06FF]+)\\s*(?:[+\\-*/%&|^]?=)(?!=)', _re.UNICODE)
+    asgn = _re.compile(r'^([\\\\w\\\\u00C0-\\\\u024F\\\\u0600-\\\\u06FF]+)\\\\s*(?:[+\\\\-*/%&|^]?=)(?!=)', _re.UNICODE)
     global_names: set = set()
     for ln in lines:
         s = ln.lstrip()
@@ -1275,7 +1279,7 @@ def _inject_globals(code: str) -> str:
     result   = []
     i        = 0
     n        = len(lines)
-    func_re  = _re.compile(r'^( *)def\\s+([\\w\\u00C0-\\u024F]+)', _re.UNICODE)
+    func_re  = _re.compile(r'^( *)def\\\\s+([\\\\w\\\\u00C0-\\\\u024F]+)', _re.UNICODE)
 
     while i < n:
         ln = lines[i]
@@ -1321,7 +1325,7 @@ def _inject_globals(code: str) -> str:
 
         if needs_global:
             prefix   = ' ' * body_indent
-            g_stmt   = prefix + 'global ' + ', '.join(sorted(needs_global)) + '\\n'
+            g_stmt   = prefix + 'global ' + ', '.join(sorted(needs_global)) + '\\\\n'
             result.append(g_stmt)
 
         result.extend(body_lines)
@@ -1339,9 +1343,9 @@ def wergerine(source):
         return f'__ROJSTR{len(strings_saved) - 1}__'
 
     code = re.sub(
-        r'("""[\\s\\S]*?"""|\\'\\'\\'[\\s\\S]*?\\'\\'\\'|'
-        r'"[^"\\n\\\\]*(?:\\\\.[^"\\n\\\\]*)*"|'
-        r"'[^'\\n\\\\]*(?:\\\\.[^'\\n\\\\]*)*')",
+        r'("""[\\\\s\\\\S]*?"""|\\\\'\\\\'\\\\'[\\\\s\\\\S]*?\\\\'\\\\'\\\\'|'
+        r'"[^"\\\\n\\\\\\\\]*(?:\\\\\\\\.[^"\\\\n\\\\\\\\]*)*"|'
+        r"'[^'\\\\n\\\\\\\\]*(?:\\\\\\\\.[^'\\\\n\\\\\\\\]*)*')",
         save_str, source
     )
 
@@ -1349,7 +1353,7 @@ def wergerine(source):
         comments_saved.append(m.group(0))
         return f'__ROJCOM{len(comments_saved) - 1}__'
 
-    code = re.sub(r'#[^\\n]*', save_com, code)
+    code = re.sub(r'#[^\\\\n]*', save_com, code)
 
     for pattern, replacement in TRANSLATIONS:
         code = re.sub(pattern, replacement, code)
@@ -1391,10 +1395,10 @@ def bijere(file_path, debug=False):
 
     if debug:
         sep = '-' * 58
-        print(f'\\n{sep}\\n  [DEBUG] translated output:\\n{sep}')
+        print(f'\\\\n{sep}\\\\n  [DEBUG] translated output:\\\\n{sep}')
         for i, ln in enumerate(translated.splitlines(), 1):
             print(f'  {i:>4} | {ln}')
-        print(f'{sep}\\n')
+        print(f'{sep}\\\\n')
 
     env = {
         '__name__': '__main__',
@@ -1412,7 +1416,7 @@ def bijere(file_path, debug=False):
         text = e.text or ""
         src_lines = source.splitlines()
         ku_line = src_lines[ln-1].strip() if 0 < ln <= len(src_lines) else text.strip()
-        print(f'\\n[RojLang] !! Sasiya Syntax li reza {ln}:')
+        print(f'\\\\n[RojLang] !! Sasiya Syntax li reza {ln}:')
         print(f'  >> {ku_line}')
         print(f'  ({e.msg})')
         sys.exit(1)
@@ -1428,11 +1432,11 @@ def bijere(file_path, debug=False):
         if ku_frame:
             ln = ku_frame.lineno
             ku_line = src_lines[ln-1].strip() if 0<ln<=len(src_lines) else ""
-            print(f'\\n[RojLang] !! Sasi li reza {ln}:')
+            print(f'\\\\n[RojLang] !! Sasi li reza {ln}:')
             print(f'  >> {ku_line}')
             print(f'  ({type(e).__name__}: {e})')
         else:
-            print(f'\\n[RojLang] !! Sasi: {type(e).__name__}: {e}')
+            print(f'\\\\n[RojLang] !! Sasi: {type(e).__name__}: {e}')
         sys.exit(1)
 
 
@@ -1457,37 +1461,67 @@ echo.
 echo  *** RojLang v2.1 - Sazkirin / Installer ***
 echo.
 cd /d "%~dp0"
+
+:: Check Python
 python --version > nul 2>&1
 if errorlevel 1 (
-    echo  [ERROR] Python nedîtin! Biçe: python.org/downloads
-    pause & exit /b 1
+    echo  [SKIP] Python nayê dîtin - pip sazkirin nayê kirin.
+    echo  Ji bo IDE: RojLang-IDE.exe bixebitîne - Python pêwîst nîne.
+    echo  Ji bo interpreter: python.org/downloads
+    goto :install_cmd
 )
+
+:: Python heye - pip install libraries
+echo  [INFO] Python hat dîtin - pirtûkxaneyên pêwîst saz dike...
+echo.
+
+pip install pillow > nul 2>&1
+if errorlevel 1 (
+    echo  [SKIP] pillow - sazkirina dest pe nekir
+) else (
+    echo  [OK] pillow - wene JPG/WebP support
+)
+
+pip install pygame > nul 2>&1
+if errorlevel 1 (
+    echo  [SKIP] pygame - sazkirina dest pe nekir
+) else (
+    echo  [OK] pygame - deng/sound support
+)
+
+echo.
+
+:: Install rojlang command
 for /f "tokens=*" %%i in ('python -c "import sys; print(sys.prefix)"') do set PYDIR=%%i
 set SCRIPTS=%PYDIR%\\Scripts
 copy /Y "%~dp0interpreter.py" "%SCRIPTS%\\rojlang_interpreter.py" > nul
 echo @python "%SCRIPTS%\\rojlang_interpreter.py" %%* > "%SCRIPTS%\\rojlang.cmd"
+
+:install_cmd
 echo.
-echo  Serkeftin! RojLang hat sazkirin.
-echo  Ji bo bikar bîne: cd "klasora-te" û rojlang pelê.ku
-echo  CMD nû veke ji bo PATH nûkirin.
-pause
-`},
+echo  ============================================
+echo   Serkeftin! RojLang hat sazkirin.
+echo   Ji bo bikar bine: rojlang pele.ku
+echo   CMD nu veke ji bo PATH nuvekirin.
+echo  ============================================
+echo.
+pause`},
   uninstall:  {n:'uninstall_rojlang.bat', c:`@echo off
 echo.
 echo  *** RojLang Rakirin / Uninstaller ***
 echo.
-echo [1/3] Removing C:\\\\RojLang folder...
-if exist "C:\\\\RojLang" (
-    rmdir /S /Q "C:\\\\RojLang"
+echo [1/3] Removing C:\\\\\\\\RojLang folder...
+if exist "C:\\\\\\\\RojLang" (
+    rmdir /S /Q "C:\\\\\\\\RojLang"
     echo       OK!
 ) else (
-    echo       C:\\\\RojLang was not found.
+    echo       C:\\\\\\\\RojLang was not found.
 )
 echo [2/3] Removing from PATH...
-powershell -Command "$p=[System.Environment]::GetEnvironmentVariable('Path','Machine');$np=$p -replace ';?C:\\\\\\\\RojLang','';[System.Environment]::SetEnvironmentVariable('Path',$np,'Machine');Write-Host '      OK!'"
+powershell -Command "$p=[System.Environment]::GetEnvironmentVariable('Path','Machine');$np=$p -replace ';?C:\\\\\\\\\\\\\\\\RojLang','';[System.Environment]::SetEnvironmentVariable('Path',$np,'Machine');Write-Host '      OK!'"
 echo [3/3] Removing .ku file association...
-reg delete "HKCR\\\\.ku" /f >nul 2>&1
-reg delete "HKCR\\\\RojLangFile" /f >nul 2>&1
+reg delete "HKCR\\\\\\\\.ku" /f >nul 2>&1
+reg delete "HKCR\\\\\\\\RojLangFile" /f >nul 2>&1
 echo.
 echo ==========================================
 echo  RojLang hat rakirin! / Uninstalled!
