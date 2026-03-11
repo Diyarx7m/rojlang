@@ -1,0 +1,28 @@
+Copyright (c) 2026 Diyar (@d7r.x_)
+
+All Rights Reserved.
+
+This software, including all source code, documentation, assets, and associated
+files (collectively "the Software"), is the exclusive property of the author.
+
+Permission is NOT granted to any person to:
+
+  - Copy, reproduce, or duplicate the Software or any portion of it
+  - Modify, adapt, translate, or create derivative works
+  - Distribute, publish, sublicense, or sell copies of the Software
+  - Use the Software or any part of it in another project, product, or service
+  - Reverse-engineer or extract logic from compiled versions
+
+You MAY:
+
+  - Download and run the Software for personal, non-commercial use
+  - Share a link to the official repository or website
+  - Study the code for learning purposes only (no reproduction)
+
+Any use beyond the above requires explicit written permission from the author.
+
+Contact: didad9683@gmail.com
+Instagram: @d7r.x_
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+THE AUTHOR IS NOT LIABLE FOR ANY CLAIM OR DAMAGES ARISING FROM USE.

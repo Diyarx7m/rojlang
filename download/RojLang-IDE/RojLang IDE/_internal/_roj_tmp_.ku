@@ -1,0 +1,27 @@
+# ☀ Xer hati RojLang IDE  v3.0
+# Welcome to RojLang IDE  v3.0
+#
+# F5 / Ctrl+B -> Bixebitine / Run
+# Ctrl+S      -> Tomarkirin / Save
+# Ctrl+F      -> Bibine / Find
+# Tab / Enter -> Autocomplete qebul bike
+# Ctrl+T      -> Tab Nu / New Tab
+# Ctrl+`      -> Terminal
+
+nav silav = "Merheba, Cihane!"
+nivîs(silav)
+
+nav i = 1
+dem i <= 5:
+    nivîs("Hejmar:", i)
+    i += 1
+
+fonksîyon silav_bike(ism):
+    vegere "Silav, " + ism + "!"
+
+nivîs(silav_bike("Kurdistan"))
+
+# Mînak liste / List example:
+nav nav_list = ["Dilnoza","Rojan","Amed"]
+bo ism di nav_list:
+    nivîs("Silav", ism)

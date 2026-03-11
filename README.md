@@ -1,169 +1,285 @@
+<div align="center">
+
+<br/>
+
 # ☀ RojLang
 
-A programming language with Kurdish keywords. Write code in Kurdish, runs on Python.
+**Zimanê Bernamesaziyê yê Kurdî**
 
-**v1.1** — released 2025
+Write code in Kurdish. Run anywhere.
 
----
+[![Version](https://img.shields.io/badge/version-v2.1-06d6a0?style=flat-square)](https://github.com/d7rx/rojlang)
+[![License](https://img.shields.io/badge/license-All%20Rights%20Reserved-f0a500?style=flat-square)](#license)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776ab?style=flat-square)](https://python.org)
+[![Platform](https://img.shields.io/badge/platform-Windows-0078d4?style=flat-square)]()
 
-## What is this?
-
-RojLang lets you write programs using Kurdish words instead of English. `eger` instead of `if`, `dem` instead of `while`, `fonksîyon` instead of `def`, and so on. The interpreter translates your `.ku` file to Python and runs it — including graphical windows with shapes, colors and buttons.
-
-```
-nav x = 10
-
-eger x > 5:
-    nivîs("mezin ji 5")
-yan:
-    nivîs("biçûk ji 5")
-```
+</div>
 
 ---
 
-## Installation (Windows)
+## Çi ye? — What is this?
 
-1. Download `interpreter.py` and `install_rojlang.bat` — put them in the same folder
-2. Right-click `install_rojlang.bat` → **Run as administrator**
-3. Open a new terminal
-4. Done:
+RojLang lets you write programs using Kurdish words instead of English.  
+`eger` instead of `if`, `dem` instead of `while`, `fonksîyon` instead of `def`.  
+The interpreter translates your `.ku` file into Python and runs it — including GUI windows, animations, images, and sound.
+
+```python
+nav navê = xwestin("Navê xwe binivîse: ")
+nivîs("Silav", navê)
+
+bo i di bijmare(5):
+    nivîs("RojLang ☀", i)
+```
+
+---
+
+## Sazkirin — Install (Windows)
+
+**Step 1** — Download `interpreter.py` + `install_rojlang.bat` into the same folder
+
+**Step 2** — Right-click `install_rojlang.bat` → **Run as administrator**
+
+**Step 3** — Open a **new** terminal
 
 ```
+cd "C:\your\folder"
 rojlang myfile.ku
 ```
 
-Or double-click any `.ku` file.
-
-> **Python required.** Get it at [python.org/downloads](https://python.org/downloads) — check "Add Python to PATH" during install.
+> Python 3.8+ required — [python.org/downloads](https://python.org/downloads)  
+> During install, check **"Add Python to PATH"**
 
 ---
 
-## Running files
+## IDE — Editor v3.0
 
-```bash
-rojlang game.ku          # run the guessing game
-rojlang art.ku           # run the Kurdish art demo (opens a window)
-rojlang myfile.ku --debug    # show translated Python code
+Full Kurdish editor with syntax highlighting, autocomplete, file tree, multi-tab, built-in terminal, and image/sound support.
+
+```
+python rojlang_ide.py
 ```
 
----
-
-## Keyword reference
-
-### Core language
-
-| RojLang | Python | meaning |
-|---|---|---|
-| `nivîs` | `print()` | print to screen |
-| `bêje` | `print(end="")` | print, no newline |
-| `nav x = …` | `x = …` | declare variable |
-| `xwestin` | `input()` | read user input |
-| `hilbijêre(a, b)` | `random.randint(a, b)` | random number |
-| `eger` | `if` | if condition |
-| `yan eger` | `elif` | else-if |
-| `yan` | `else` | else |
-| `dem` | `while` | while loop |
-| `bo … di` | `for … in` | for loop |
-| `fonksîyon` | `def` | define function |
-| `vegere` | `return` | return value |
-| `rast` | `True` | boolean true |
-| `çewt` | `False` | boolean false |
-| `Tune` | `None` | null / none |
-| `ne` | `not` | logical not |
-| `û` | `and` | logical and |
-| `an` | `or` | logical or |
-| `bişkîne` | `break` | break loop |
-| `berdewam` | `continue` | continue loop |
-| `nîşe` | `pass` | do nothing |
-| `derkev` | `exit()` | exit program |
-| `dirêj(x)` | `len(x)` | length |
-| `x.têxe(y)` | `x.append(y)` | append to list |
-| `cure(x)` | `type(x)` | type of variable |
-| `sinif` | `class` | define class |
-
-### Graphics (GUI)
-
-| RojLang | what it does |
+| Shortcut | Action |
 |---|---|
-| `pencere(serî, pîvan)` | create a window — `pencere("Title", "600x400")` |
-| `nîşan(w)` | show the window / start the app |
-| `kevir(w, fireh, bilindî, paşreng)` | create a canvas to draw on |
-| `çargoşe(c, x1, y1, x2, y2, reng)` | draw a filled rectangle |
-| `xember(c, x1, y1, x2, y2, reng)` | draw a filled oval / circle |
-| `xêz(c, x1, y1, x2, y2, reng, stûrî)` | draw a line |
-| `nivîskar(c, x, y, nivîs, reng, mezinahî)` | draw text on canvas |
-| `bişkojk(w, nivîs, kar)` | create a clickable button |
-| `nav_çargoşe(w, nivîs, reng)` | create a text label |
-| `rengên_hevber(reng1, reng2, gav)` | generate gradient color list |
+| `F5` / `Ctrl+B` | Run |
+| `Ctrl+T` | New tab |
+| `Ctrl+\`` | Toggle terminal |
+| `Ctrl+F` | Find & Replace |
+| `Ctrl+S` | Save |
 
 ---
 
-## Example programs
+## Keywords — Peyvên Sereke
 
-### Console — guessing game
+### Core
+
+| RojLang | Python | Meaning |
+|---|---|---|
+| `nivîs(x)` | `print(x)` | Print |
+| `nav x = …` | `x = …` | Variable |
+| `xwestin("?")` | `input("?")` | User input |
+| `eger / yan eger / yan` | `if / elif / else` | Conditionals |
+| `dem … :` | `while … :` | While loop |
+| `bo … di … :` | `for … in … :` | For loop |
+| `fonksîyon` | `def` | Function |
+| `vegere` | `return` | Return |
+| `rast / çewt / Tune` | `True / False / None` | Boolean / Null |
+| `ne / û / an` | `not / and / or` | Logic |
+| `bişkîne / berdewam / nîşe` | `break / continue / pass` | Loop control |
+| `derkev` | `exit()` | Exit |
+| `dirêj(x)` | `len(x)` | Length |
+| `cure(x)` | `type(x)` | Type |
+
+### Types & Collections
+
+| RojLang | Python |
+|---|---|
+| `hejmar(x)` | `int(x)` |
+| `nivîsok(x)` | `str(x)` |
+| `hejimarFloat(x)` | `float(x)` |
+| `pêl([…])` | `list([…])` |
+| `ferhenga({…})` | `dict({…})` |
+| `koma({…})` | `set({…})` |
+
+### Math & Random
+
+| RojLang | Python |
+|---|---|
+| `mezin(a,b) / nizim(a,b)` | `max / min` |
+| `jimartina(lst)` | `sum(lst)` |
+| `bijmare(a,b)` | `range(a,b)` |
+| `tomkirin(x,n)` | `round(x,n)` |
+| `şikeftin(x)` | `abs(x)` |
+| `hilbijêre(a,b)` | `randint(a,b)` |
+| `mathSqrt / mathPow / mathPi` | `math.sqrt / pow / pi` |
+
+### Exceptions
+
+| RojLang | Python |
+|---|---|
+| `êşk:` | `try:` |
+| `girtin Exception:` | `except Exception:` |
+| `dewam:` | `finally:` |
+| `avêtin` | `raise` |
+
+### String & List Methods
+
+| RojLang | Python |
+|---|---|
+| `s.jorê() / s.jêrê()` | `.upper() / .lower()` |
+| `s.xêz()` | `.strip()` |
+| `s.veqetîne(x)` | `.split(x)` |
+| `s.biguhêze(a,b)` | `.replace(a,b)` |
+| `lst.têxe(x)` | `.append(x)` |
+| `lst.jêbike(x)` | `.remove(x)` |
+| `lst.rêzkirin()` | `.sort()` |
+
+### GUI
+
+| RojLang | What it does |
+|---|---|
+| `pencere("Title", "800x600")` | Create window |
+| `kevir(w, 800, 600, "#000")` | Drawing canvas |
+| `çargoşe(c, x1,y1,x2,y2, "#reng")` | Rectangle → ID |
+| `xember(c, x1,y1,x2,y2, "#reng")` | Oval/Circle → ID |
+| `xêz(c, x1,y1,x2,y2, "#reng", 2)` | Line → ID |
+| `nivîskar(c, x,y, "text", "#reng", 14)` | Text → ID |
+| `bişkojk(w, "Label", fn)` | Button |
+| `peyam("Title", "Message")` | Message dialog |
+| `nîşan(w)` | Show window — **must be last line** |
+
+### Keyboard & Animation
+
+| RojLang | Python |
+|---|---|
+| `klavBiGire(w, "<Left>", fn)` | `w.bind("<Left>", fn)` |
+| `bilivîne(c, id, dx, dy)` | `c.move(id, dx, dy)` |
+| `piştî(w, 16, fn)` | `w.after(16, fn)` ← 60fps loop |
+| `jêbike_item(c, id)` | `c.delete(id)` |
+| `biguherêze_reng(c, id, "#reng")` | `c.itemconfig(fill=)` |
+
+### Image — v2.1
+
+| RojLang | What it does |
+|---|---|
+| `wêne("logo.png")` | Load PNG/GIF |
+| `wêne("photo.jpg")` | Load JPG/WebP *(needs pillow)* |
+| `wêne_pîvandî("p.jpg", 300, 200)` | Load + resize |
+| `wêne_nîşan(c, x, y, img)` | Show on canvas → ID |
+| `wêne_label(w, img)` | Show in Label widget |
 
 ```
-nav veşartî = hilbijêre(1, 10)
-nav çalak = rast
-
-nivîs("hejmarek ji 1 heta 10 texmîn bike")
-
-dem çalak:
-    nav texmîn = int(xwestin("texmîna te: "))
-    eger texmîn > veşartî:
-        nivîs("mezintir e")
-    yan eger texmîn < veşartî:
-        nivîs("biçûktir e")
-    yan:
-        nivîs("rast!")
-        nav çalak = çewt
+pip install pillow
 ```
 
-### Graphics — Kurdish art
+### Sound — v2.1
+
+| RojLang | What it does |
+|---|---|
+| `deng("muzik.mp3")` | Play once |
+| `deng("muzik.mp3", rast)` | Play looping |
+| `deng_bilindî(0.7)` | Set volume 0.0–1.0 |
+| `deng_rawest()` | Stop all sound |
+| `deng_dengdank("boom.wav")` | Short sound effect |
 
 ```
-nav xalan  = pencere("Hunerê Kurdî", "500x400")
-nav kevça  = kevir(xalan, 500, 400, "#0a0a0f")
-
-# draw shapes
-çargoşe(kevça, 50,  50,  200, 200, "#e63946")
-xember(kevça,  250, 50,  450, 250, "#f0a500")
-xêz(kevça,     50,  300, 450, 300, "#06d6a0", 3)
-
-# add text
-nivîskar(kevça, 250, 360, "☀ RojLang", "#f0a500", 18)
-
-nîşan(xalan)
+pip install pygame
 ```
 
 ---
 
-## File structure
+## Mînak — Examples
+
+### Keyboard movement
+
+```python
+nav w   = pencere("Lîstik", "400x300")
+nav c   = kevir(w, 400, 300, "#0a0a0f")
+nav top = xember(c, 190, 140, 220, 170, "#f0a500")
+
+fonksîyon kbsa(e):
+    eger e.keysym=="Left":  bilivîne(c, top, -6, 0)
+    yan eger e.keysym=="Right": bilivîne(c, top, 6, 0)
+    yan eger e.keysym=="Up":    bilivîne(c, top, 0, -6)
+    yan eger e.keysym=="Down":  bilivîne(c, top, 0, 6)
+
+klavBiGire(w, "<KeyPress>", kbsa)
+nîşan(w)
+```
+
+### Animation loop
+
+```python
+nav w   = pencere("Animasyon", "400x300")
+nav c   = kevir(w, 400, 300, "#0a0a0f")
+nav top = xember(c, 10, 140, 50, 180, "#f0a500")
+
+fonksîyon loop():
+    bilivîne(c, top, 3, 0)
+    piştî(w, 16, loop)
+
+loop()
+nîşan(w)
+```
+
+### Try / Except
+
+```python
+êşk:
+    nav x = hejmar(xwestin("Hejmar: "))
+    nivîs("Çar:", x * 4)
+girtin ValueError:
+    nivîs("Şaşî! Hejmar binivîse.")
+dewam:
+    nivîs("Qediya.")
+```
+
+### Image + Sound
+
+```python
+nav w   = pencere("Media", "400x400")
+nav c   = kevir(w, 400, 400, "#111")
+nav img = wêne_pîvandî("logo.png", 200, 200)
+wêne_nîşan(c, 200, 200, img)
+deng("muzik.mp3", rast)
+nîşan(w)
+```
+
+---
+
+## Pelên Proje — File Structure
 
 ```
 rojlang/
-├── interpreter.py       # the interpreter
-├── install_rojlang.bat  # windows installer
-├── game.ku              # console demo — guessing game
-├── art.ku               # graphics demo — Kurdish art
-└── README.md
+├── interpreter.py           ← Interpreter v2.1  (required)
+├── rojlang_ide.py           ← IDE v3.0
+├── install_rojlang.bat      ← Windows installer
+├── uninstall_rojlang.bat    ← Uninstaller
+├── auto_build.bat           ← Build .exe
+├── BUILD.ps1                ← PowerShell build script
+├── installer.nsi            ← NSIS installer script
+├── rojlang.ico              ← App icon
+├── examples/
+│   ├── spaceship.ku         ← Space shooter game
+│   ├── calculator.ku        ← Calculator GUI
+│   ├── matrix_rain.ku       ← Matrix rain animation
+│   ├── adventure.ku         ← Kurdish text adventure
+│   └── photo_viewer.ku      ← Photo viewer + sound
+├── README.md
+└── LICENSE
 ```
 
 ---
 
-## How it works
+## Malpera Fermî — Website
 
-The interpreter reads your `.ku` file, replaces Kurdish keywords with Python equivalents using regex, injects helper functions (including the full graphics API), then executes everything. Graphics use Python's built-in `tkinter` library — no extra installs needed.
+🌐 Coming soon
 
----
-
-## Contact
-
-- Instagram: [@d7r.x_](https://www.instagram.com/d7r.x_?igsh=cG9xZG55M2traTVn)
-- Email: didad9683@gmail.com
+📸 Instagram: [@d7r.x_](https://www.instagram.com/d7r.x_)
 
 ---
 
 ## License
 
-MIT — do whatever you want with it.
+© 2026 Diyar — All Rights Reserved.  
+See [LICENSE](LICENSE) for full terms.

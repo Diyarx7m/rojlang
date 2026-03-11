@@ -3,500 +3,813 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>RojLang — Documentation</title>
+<title>RojLang v2.1 — Kurdish Programming Language</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&family=Noto+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
 <style>
-:root{--bg:#0a0a0f;--bg2:#111118;--bg3:#1a1a24;--gold:#f0a500;--gold2:#ffd166;--red:#e63946;--green:#06d6a0;--text:#e8e8f0;--muted:#7a7a9a;--border:#2a2a3a;--code-bg:#0d0d16}
+:root{
+  --bg:#07070e;--bg2:#0f0f1a;--bg3:#171724;--bg4:#1f1f2e;
+  --gold:#f0a500;--gold2:#ffd166;--red:#e63946;
+  --green:#06d6a0;--blue:#a8dadc;--purple:#c084fc;
+  --text:#e2e2f0;--muted:#6a6a8a;--border:#22223a;--code-bg:#0b0b14;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans',sans-serif;font-size:15px;line-height:1.75;overflow-x:hidden}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
 
-/* NAV */
-nav{position:sticky;top:0;background:rgba(10,10,15,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);z-index:100;padding:0 1rem;display:flex;align-items:center;justify-content:space-between;height:52px}
-.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--gold);white-space:nowrap}
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;padding:0 1.2rem;height:52px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,7,14,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:.55rem;white-space:nowrap}
 .nav-logo span{color:var(--text);font-weight:400}
-.nav-links{display:flex;gap:.1rem;list-style:none}
-.nav-links a{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);text-decoration:none;padding:.3rem .6rem;border-radius:3px;letter-spacing:.03em;transition:all .2s;white-space:nowrap}
-.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(240,165,0,.07)}
-.nav-menu{display:none;background:none;border:1px solid var(--border);color:var(--text);padding:.3rem .55rem;border-radius:3px;cursor:pointer;font-size:.9rem;flex-shrink:0}
-@media(max-width:700px){
-  .nav-links{display:none;position:fixed;top:52px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);flex-direction:column;padding:.6rem .8rem;gap:.1rem;z-index:99}
+.nav-v{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--green);border:1px solid rgba(6,214,160,.35);padding:.1rem .4rem;border-radius:2px}
+.nav-links{display:flex;gap:.05rem;list-style:none}
+.nav-links a{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.35rem .6rem;border-radius:3px;letter-spacing:.04em;transition:all .18s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(240,165,0,.08)}
+.nav-menu{display:none;background:none;border:1px solid var(--border);color:var(--text);padding:.3rem .5rem;border-radius:3px;cursor:pointer;font-size:.9rem}
+@media(max-width:760px){
+  .nav-links{display:none;position:fixed;top:52px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);flex-direction:column;padding:.7rem .9rem;gap:.1rem;z-index:99}
   .nav-links.open{display:flex}
   .nav-menu{display:block}
 }
 
-/* HERO */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 1.2rem 4rem;overflow:hidden}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(240,165,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(240,165,0,.04) 1px,transparent 1px);background-size:55px 55px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
-.hero::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);width:min(600px,80vw);height:min(600px,80vw);background:radial-gradient(ellipse,rgba(240,165,0,.1) 0%,transparent 70%);pointer-events:none}
-.sun{font-size:2.2rem;animation:spin 30s linear infinite;display:inline-block;position:relative;z-index:1;margin-bottom:.9rem}
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 1.5rem 4rem;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(240,165,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(240,165,0,.035) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse 75% 75% at 50% 50%,black 25%,transparent 100%)}
+.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-58%);width:min(640px,85vw);height:min(640px,85vw);background:radial-gradient(ellipse,rgba(240,165,0,.09) 0%,transparent 65%);pointer-events:none}
+.sun{font-size:2.4rem;animation:spin 28s linear infinite;display:inline-block;position:relative;z-index:1;margin-bottom:1rem;filter:drop-shadow(0 0 18px rgba(240,165,0,.4))}
 @keyframes spin{to{transform:rotate(360deg)}}
-.hero-badge{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.1em;padding:.25rem .7rem;border-radius:2px;margin-bottom:1.2rem;position:relative;z-index:1;animation:fadeUp .8s ease both;max-width:90vw;word-break:break-word}
-.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.4rem,9vw,6rem);line-height:.95;letter-spacing:-.03em;position:relative;z-index:1;animation:fadeUp .9s ease both .1s}
+.hero-badge{position:relative;z-index:1;display:inline-flex;align-items:center;gap:.6rem;border:1px solid rgba(240,165,0,.5);color:var(--gold);font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.12em;padding:.28rem 1rem;border-radius:2px;margin-bottom:1.3rem;animation:fadeUp .7s ease both;background:rgba(240,165,0,.04)}
+.badge-new{background:var(--green);color:#050510;font-size:.5rem;padding:.1rem .38rem;border-radius:2px;font-weight:700;letter-spacing:.05em}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.6rem,10vw,6.5rem);line-height:.9;letter-spacing:-.03em;position:relative;z-index:1;animation:fadeUp .85s ease both .08s}
 .hero h1 span{color:var(--gold)}
-.hero-sub{font-family:'Space Mono',monospace;font-size:clamp(.6rem,2.2vw,.75rem);color:var(--muted);margin-top:1rem;letter-spacing:.02em;position:relative;z-index:1;animation:fadeUp .9s ease both .2s;padding:0 .5rem;line-height:1.6;word-break:break-word}
-.hero-desc{max-width:460px;color:#a0a0c0;margin-top:.7rem;font-size:clamp(.82rem,2.5vw,.92rem);position:relative;z-index:1;animation:fadeUp .9s ease both .3s;padding:0 .5rem}
-.hero-cta{display:flex;gap:.6rem;margin-top:1.8rem;position:relative;z-index:1;animation:fadeUp .9s ease both .4s;flex-wrap:wrap;justify-content:center;width:100%;padding:0 .5rem}
-.hero-cta .btn{flex:1;min-width:140px;max-width:260px;justify-content:center}
+.hero-sub{font-family:'Space Mono',monospace;font-size:clamp(.6rem,2vw,.72rem);color:var(--muted);margin-top:1.1rem;letter-spacing:.03em;position:relative;z-index:1;animation:fadeUp .85s ease both .18s;line-height:1.7}
+.hero-desc{max-width:480px;color:#9898c0;margin-top:.75rem;font-size:.9rem;position:relative;z-index:1;animation:fadeUp .85s ease both .26s}
+.hero-cta{display:flex;gap:.65rem;margin-top:2rem;position:relative;z-index:1;animation:fadeUp .85s ease both .35s;flex-wrap:wrap;justify-content:center;padding:0 .5rem}
+.hero-cta .btn{min-width:140px;justify-content:center}
+.hero-stats{display:flex;gap:2.5rem;margin-top:2.5rem;position:relative;z-index:1;animation:fadeUp .85s ease both .44s;flex-wrap:wrap;justify-content:center}
+.stat-n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.7rem;color:var(--gold);line-height:1}
+.stat-l{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted);letter-spacing:.1em;margin-top:.25rem}
+.scroll-hint{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.14em;z-index:1}
+.scroll-hint::after{content:'';width:1px;height:32px;background:linear-gradient(var(--gold),transparent);animation:grow 1.5s ease-in-out infinite}
+@keyframes grow{0%,100%{opacity:0;transform:scaleY(0);transform-origin:top}55%{opacity:1;transform:scaleY(1);transform-origin:top}}
 
-@media(max-width:480px){
-  .hero{padding:4.5rem .8rem 3.5rem}
-  .hero h1{font-size:clamp(2.6rem,8vw,3.5rem)}
-  .hero-sub{font-size:.62rem;letter-spacing:.01em}
-  .hero-badge{font-size:.5rem;letter-spacing:.07em}
-  .sun{font-size:1.8rem}
-}
-.scroll-line{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.12em;z-index:1}
-.scroll-line::after{content:'';width:1px;height:34px;background:linear-gradient(var(--gold),transparent);animation:lineGrow 1.6s ease-in-out infinite}
-@keyframes lineGrow{0%,100%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1);transform-origin:top}}
-
-/* BUTTONS */
-.btn{font-family:'Space Mono',monospace;font-size:.72rem;padding:.6rem 1.4rem;border-radius:3px;cursor:pointer;text-decoration:none;letter-spacing:.04em;transition:all .2s;display:inline-flex;align-items:center;gap:.45rem;border:none}
-.btn-gold{background:var(--gold);color:#0a0a0f;font-weight:700}.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+/* ── BUTTONS ── */
+.btn{font-family:'Space Mono',monospace;font-size:.7rem;padding:.62rem 1.5rem;border-radius:3px;cursor:pointer;text-decoration:none;letter-spacing:.05em;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem;border:none}
+.btn-gold{background:var(--gold);color:#06060e;font-weight:700}.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(240,165,0,.25)}
+.btn-green{background:var(--green);color:#040e08;font-weight:700}.btn-green:hover{filter:brightness(1.12);transform:translateY(-2px);box-shadow:0 6px 20px rgba(6,214,160,.2)}
 .btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
-.btn-sm{font-size:.65rem;padding:.45rem 1rem}
+.btn-sm{font-size:.63rem;padding:.44rem 1rem}
 
-/* LAYOUT */
-.container{max-width:1060px;margin:0 auto;padding:0 1rem}
-section{padding:4.5rem 0;border-bottom:1px solid var(--border)}
-.section-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
-.section-label::before{content:'';width:18px;height:1px;background:var(--gold)}
-h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.4rem,5vw,2.4rem);line-height:1.1;margin-bottom:.7rem}
-h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.4rem}
-p{color:#a0a0c0;margin-bottom:.7rem}
-code{font-family:'Space Mono',monospace;background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.18);color:var(--gold);padding:.1em .35em;border-radius:3px;font-size:.8em}
+/* ── LAYOUT ── */
+.container{max-width:1060px;margin:0 auto;padding:0 1.2rem}
+section{padding:5rem 0;border-bottom:1px solid var(--border)}
+.section-label{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--gold);letter-spacing:.22em;text-transform:uppercase;margin-bottom:.65rem;display:flex;align-items:center;gap:.55rem}
+.section-label::before{content:'';width:20px;height:1px;background:var(--gold)}
+h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.5rem,5vw,2.5rem);line-height:1.05;margin-bottom:.75rem}
+p{color:#9898b8;margin-bottom:.7rem}
+code{font-family:'Space Mono',monospace;background:rgba(240,165,0,.07);border:1px solid rgba(240,165,0,.16);color:var(--gold);padding:.1em .38em;border-radius:3px;font-size:.8em}
+.new-pill{display:inline-block;background:rgba(6,214,160,.15);color:#06d6a0;border:1px solid rgba(6,214,160,.3);font-family:'Space Mono',monospace;font-size:.48rem;font-weight:700;padding:.09rem .38rem;border-radius:2px;vertical-align:middle;margin-left:.35rem;letter-spacing:.04em}
 
-/* DOWNLOAD BOX */
-.dl-box{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.6rem;margin-top:1.8rem;position:relative;overflow:hidden}
-.dl-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--green),var(--gold))}
-.dl-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:.2rem}
-.dl-sub{font-size:.78rem;color:var(--muted);margin-bottom:1.3rem}
-.dl-files{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.8rem;margin-bottom:1.3rem}
-.file-card{background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:.8rem 1rem;display:flex;align-items:center;gap:.7rem;transition:border-color .2s}
-.file-card:hover{border-color:rgba(240,165,0,.3)}
-.file-icon{font-size:1.4rem;flex-shrink:0}
-.file-name{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--text)}
-.file-desc{font-size:.67rem;color:var(--muted);margin-top:.1rem}
+/* ── DOWNLOAD ── */
+.dl-box{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.8rem;margin-top:1.5rem;position:relative;overflow:hidden}
+.dl-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--green),var(--gold));background-size:200% 100%;animation:shimmer 3s linear infinite}
+@keyframes shimmer{to{background-position:200% 0}}
+.dl-box.ide-box::before{background:linear-gradient(90deg,var(--green),var(--blue),var(--green));background-size:200% 100%;animation:shimmer 3s linear infinite}
+.dl-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:.2rem}
+.dl-sub{font-size:.77rem;color:var(--muted);margin-bottom:1.4rem}
+.dl-files{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:.75rem;margin-bottom:1.3rem}
+.file-card{background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:.8rem 1rem;display:flex;align-items:center;gap:.7rem;transition:border-color .2s,transform .2s}
+.file-card:hover{border-color:rgba(240,165,0,.35);transform:translateY(-1px)}
+.file-icon{font-size:1.5rem;flex-shrink:0}
+.file-name{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--text)}
+.file-desc{font-size:.65rem;color:var(--muted);margin-top:.1rem}
 .dl-btns{display:flex;gap:.6rem;flex-wrap:wrap}
 
-/* KEYWORDS */
-.kw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;border:1px solid var(--border);margin-top:1.8rem;border-radius:5px;overflow:hidden}
-.kw-card{background:var(--bg2);padding:.9rem 1rem;display:flex;align-items:flex-start;gap:.7rem;transition:background .2s;border:1px solid transparent}
-.kw-card:hover{background:var(--bg3);border-color:rgba(240,165,0,.1);z-index:1}
-.kw-ku{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--gold);background:rgba(240,165,0,.07);border:1px solid rgba(240,165,0,.18);padding:.15rem .45rem;border-radius:3px;white-space:nowrap;min-width:100px;text-align:center;flex-shrink:0}
-.kw-arrow{color:var(--muted);font-size:.72rem;padding-top:.22rem;flex-shrink:0}
-.kw-py{font-family:'Space Mono',monospace;font-size:.74rem;color:var(--green)}
-.kw-desc{font-size:.7rem;color:var(--muted);margin-top:.1rem}
+/* ── KW TABS ── */
+.kw-tabs{display:flex;gap:.4rem;margin-bottom:1.3rem;flex-wrap:wrap}
+.kw-tab{font-family:'Space Mono',monospace;font-size:.6rem;padding:.32rem .85rem;border-radius:3px;cursor:pointer;border:1px solid var(--border);color:var(--muted);background:transparent;transition:all .17s;letter-spacing:.05em}
+.kw-tab:hover{border-color:var(--gold);color:var(--gold)}
+.kw-tab.active{background:var(--gold);color:#06060e;border-color:var(--gold);font-weight:700}
+.kw-panel{display:none}.kw-panel.active{display:block}
 
-/* CODE BLOCKS */
+.kw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));gap:1px;border:1px solid var(--border);border-radius:5px;overflow:hidden}
+.kw-card{background:var(--bg2);padding:.85rem 1rem;display:flex;align-items:flex-start;gap:.75rem;transition:background .17s;border:1px solid transparent}
+.kw-card:hover{background:var(--bg3);border-color:rgba(240,165,0,.1);z-index:1}
+.kw-ku{font-family:'Space Mono',monospace;font-size:.7rem;padding:.16rem .48rem;border-radius:3px;white-space:nowrap;flex-shrink:0;min-width:110px;text-align:center;border:1px solid}
+.kw-ku         {color:var(--gold);  background:rgba(240,165,0,.06); border-color:rgba(240,165,0,.18)}
+.kw-ku.purple  {color:var(--purple);background:rgba(192,132,252,.06);border-color:rgba(192,132,252,.2)}
+.kw-ku.green   {color:var(--green); background:rgba(6,214,160,.06); border-color:rgba(6,214,160,.2)}
+.kw-ku.blue    {color:var(--blue);  background:rgba(168,218,220,.06);border-color:rgba(168,218,220,.2)}
+.kw-ku.red     {color:var(--red);   background:rgba(230,57,70,.06); border-color:rgba(230,57,70,.2)}
+.kw-arrow{color:var(--muted);font-size:.7rem;padding-top:.24rem;flex-shrink:0}
+.kw-py{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--green)}
+.kw-desc{font-size:.68rem;color:var(--muted);margin-top:.1rem}
+
+/* ── KEYBOARD SHORTCUTS ── */
+.kbd-section{margin-top:.5rem}
+.kbd-group-title{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;padding:.5rem 0 .6rem;border-bottom:1px solid var(--border);margin-bottom:.8rem;margin-top:1.5rem}
+.kbd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.7rem}
+.kbd-row{display:flex;align-items:center;gap:.85rem;background:var(--bg2);border:1px solid var(--border);border-radius:5px;padding:.75rem 1rem;transition:border-color .18s,transform .18s}
+.kbd-row:hover{border-color:rgba(240,165,0,.22);transform:translateY(-1px)}
+.kbd-keys{display:flex;gap:.28rem;align-items:center;flex-shrink:0}
+kbd{font-family:'Space Mono',monospace;font-size:.62rem;background:var(--bg3);border:1px solid rgba(255,255,255,.1);border-bottom:2px solid rgba(255,255,255,.07);color:var(--text);padding:.2rem .48rem;border-radius:4px;white-space:nowrap;box-shadow:0 1px 0 rgba(0,0,0,.4);display:inline-block}
+.kbd-plus{color:var(--muted);font-size:.65rem;font-family:'Space Mono',monospace}
+.kbd-desc{font-size:.77rem;color:#9898b8}
+.kbd-desc strong{color:var(--text);font-weight:600}
+
+/* ── CODE BLOCKS ── */
 .code-wrap{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-top:1.3rem}
 .code-hdr{background:var(--bg3);padding:.5rem .9rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-.dots{display:flex;gap:.3rem}
-.dots span{width:8px;height:8px;border-radius:50%}
+.dots{display:flex;gap:.32rem}.dots span{width:8px;height:8px;border-radius:50%}
 .dots span:nth-child(1){background:#ff5f57}.dots span:nth-child(2){background:#febc2e}.dots span:nth-child(3){background:#28c840}
-.code-lang{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.07em}
-pre{background:var(--code-bg);padding:1.2rem;overflow-x:auto;font-family:'Space Mono',monospace;font-size:.75rem;line-height:1.85;tab-size:4}
-.ck{color:#f0a500}.cf{color:#06d6a0}.cs{color:#ffd166}.cn{color:#ef476f}.cc{color:#3a3a58;font-style:italic}.cv{color:#a8dadc}
+.code-lang{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.08em}
+pre{background:var(--code-bg);padding:1.2rem;overflow-x:auto;font-family:'Space Mono',monospace;font-size:.73rem;line-height:1.9;tab-size:4}
+.ck{color:#f0a500}.cf{color:#06d6a0}.cs{color:#ffd166}.cn{color:#ef476f}.cc{color:#30304a;font-style:italic}.cv{color:#a8dadc}.cp{color:#c084fc}.ca{color:#ff9f40}
 
-/* EXAMPLES */
-.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem;margin-top:1.8rem}
-.ex-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color .3s}
-.ex-card:hover{border-color:rgba(240,165,0,.3)}
-.ex-title{background:var(--bg3);padding:.6rem .9rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;color:var(--gold);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.35rem}
-.ex-card pre{font-size:.72rem;padding:1rem;line-height:1.78}
+/* ── EXAMPLES ── */
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1rem;margin-top:1.8rem}
+.ex-card{border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color .25s,transform .25s}
+.ex-card:hover{border-color:rgba(240,165,0,.3);transform:translateY(-2px)}
+.ex-title{background:var(--bg3);padding:.65rem .9rem;font-family:'Syne',sans-serif;font-weight:700;font-size:.77rem;color:var(--gold);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.35rem}
+.ex-card pre{font-size:.7rem;padding:1rem;line-height:1.82}
 
-/* STEPS */
+/* ── IDE FEATURES ── */
+.ide-preview{background:var(--bg2);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:1.8rem}
+.ide-bar{background:var(--bg3);padding:.55rem 1rem;display:flex;align-items:center;gap:.8rem;border-bottom:1px solid var(--border)}
+.ide-title{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted)}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:.75rem;padding:1.3rem}
+.feat{display:flex;align-items:flex-start;gap:.7rem;padding:.8rem;background:var(--bg3);border-radius:5px;border:1px solid var(--border);transition:border-color .2s,transform .2s}
+.feat:hover{border-color:rgba(240,165,0,.25);transform:translateY(-1px)}
+.feat-icon{font-size:1.3rem;flex-shrink:0;margin-top:.1rem}
+.feat-t{font-family:'Syne',sans-serif;font-weight:700;font-size:.79rem;color:var(--text);margin-bottom:.15rem}
+.feat-d{font-size:.7rem;color:var(--muted)}
+
+/* ── STEPS ── */
 .steps{display:flex;flex-direction:column;gap:1rem;margin-top:1.8rem}
-.step{display:grid;grid-template-columns:42px 1fr;gap:.9rem;align-items:start}
-.step-n{width:42px;height:42px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;color:var(--gold);flex-shrink:0;position:relative}
+.step{display:grid;grid-template-columns:44px 1fr;gap:.9rem;align-items:start}
+.step-n{width:44px;height:44px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;color:var(--gold);flex-shrink:0;position:relative}
 .step-n::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);width:1px;height:1rem;background:var(--border)}
 .step:last-child .step-n::after{display:none}
-.step-b{padding-top:.3rem}
-.step-b h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.87rem;color:var(--text);margin-bottom:.15rem}
-.step-b p{font-size:.79rem;margin:0;color:#8a8aaa}
+.step-b h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.88rem;color:var(--text);margin-bottom:.15rem;padding-top:.35rem}
+.step-b p{font-size:.78rem;color:#7878a0;margin:0}
 
-/* TROUBLESHOOT */
+/* ── TROUBLE ── */
 .trouble-list{display:flex;flex-direction:column;gap:.8rem;margin-top:1.8rem}
-.tc{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer}
-.tc-head{padding:.9rem 1rem;display:flex;align-items:center;gap:.8rem;transition:background .2s}
+.tc{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:border-color .2s}
+.tc:hover,.tc.open{border-color:rgba(240,165,0,.2)}
+.tc-head{padding:.9rem 1rem;display:flex;align-items:center;gap:.8rem;transition:background .18s}
 .tc-head:hover{background:var(--bg3)}
 .tc-icon{font-size:1rem;flex-shrink:0}
-.tc-q{font-family:'Syne',sans-serif;font-weight:700;font-size:.83rem;color:var(--text);flex:1;line-height:1.35}
-.tc-arr{color:var(--muted);transition:transform .3s;font-size:.75rem;flex-shrink:0}
+.tc-q{font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;color:var(--text);flex:1;line-height:1.35}
+.tc-arr{color:var(--muted);transition:transform .28s;font-size:.7rem;flex-shrink:0}
 .tc.open .tc-arr{transform:rotate(180deg)}
 .tc-body{display:none;padding:0 1rem 1rem;border-top:1px solid var(--border)}
 .tc.open .tc-body{display:block}
-.tc-body p{font-size:.8rem;color:#9090b0;margin-top:.7rem}
+.tc-body p{font-size:.79rem;color:#8080a8;margin-top:.7rem}
 .tc-body .code-wrap{margin-top:.7rem}
-.tc-body pre{font-size:.7rem;padding:.9rem}
-.tag{display:inline-block;font-family:'Space Mono',monospace;font-size:.58rem;padding:.12rem .45rem;border-radius:2px;margin-top:.7rem;letter-spacing:.04em}
+.tc-body pre{font-size:.69rem;padding:.9rem}
+.tag{display:inline-block;font-family:'Space Mono',monospace;font-size:.56rem;padding:.12rem .46rem;border-radius:2px;margin-top:.7rem;letter-spacing:.04em}
 .tag-r{background:rgba(230,57,70,.1);color:var(--red);border:1px solid rgba(230,57,70,.22)}
 .tag-g{background:rgba(6,214,160,.08);color:var(--green);border:1px solid rgba(6,214,160,.2)}
 .tag-o{background:rgba(240,165,0,.08);color:var(--gold);border:1px solid rgba(240,165,0,.2)}
 
-/* REFERENCE TABLE */
+/* ── TABLE ── */
 .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:6px;margin-top:1.5rem}
-table{width:100%;border-collapse:collapse;font-size:.78rem}
-th{background:var(--bg3);color:var(--gold);font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.08em;padding:.65rem .8rem;text-align:left;border-bottom:2px solid var(--gold);white-space:nowrap}
-td{padding:.6rem .8rem;border-bottom:1px solid var(--border);vertical-align:top}
-tr:hover td{background:var(--bg2)}
-td:first-child{font-family:'Space Mono',monospace;color:var(--gold);font-size:.73rem;white-space:nowrap}
-td:nth-child(2){font-family:'Space Mono',monospace;color:var(--green);font-size:.73rem;white-space:nowrap}
-td:nth-child(3){color:#a0a0c0}
-td:nth-child(4){color:var(--muted);font-size:.73rem}
+table{width:100%;border-collapse:collapse;font-size:.76rem}
+th{background:var(--bg3);color:var(--gold);font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.09em;padding:.65rem .85rem;text-align:left;border-bottom:2px solid rgba(240,165,0,.3);white-space:nowrap}
+td{padding:.62rem .85rem;border-bottom:1px solid var(--border);vertical-align:top}
+tr:hover td{background:rgba(255,255,255,.015)}
 
-/* FOOTER */
-footer{text-align:center;padding:3.5rem 1rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted)}
-.f-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:var(--gold);display:block;margin-bottom:.7rem}
+.tbl-section-row td{background:var(--bg3)!important;color:var(--gold);font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;padding:.42rem .85rem;border-bottom:1px solid rgba(240,165,0,.15)}
+td:first-child{font-family:'Space Mono',monospace;color:var(--gold);font-size:.71rem;white-space:nowrap}
+td:nth-child(2){font-family:'Space Mono',monospace;color:var(--green);font-size:.71rem;white-space:nowrap}
+td:nth-child(3){color:#9898b8}
+td:nth-child(4){color:var(--muted);font-size:.71rem}
 
-/* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+/* ── FOOTER ── */
+footer{text-align:center;padding:4rem 1.2rem;font-family:'Space Mono',monospace;font-size:.66rem;color:var(--muted)}
+.f-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--gold);display:block;margin-bottom:.75rem;text-shadow:0 0 40px rgba(240,165,0,.3)}
+.f-links{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.3rem;flex-wrap:wrap}
+.f-link{display:inline-flex;align-items:center;gap:.45rem;color:var(--text);text-decoration:none;font-family:'Space Mono',monospace;font-size:.7rem;background:var(--bg2);border:1px solid var(--border);padding:.48rem 1.1rem;border-radius:4px;transition:all .2s}
+.f-link:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
+
+/* ── MISC ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-
-/* TOAST */
-.toast{position:fixed;bottom:1.2rem;right:1.2rem;background:var(--green);color:#0a0a0f;font-family:'Space Mono',monospace;font-size:.72rem;padding:.55rem 1.1rem;border-radius:4px;z-index:999;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;font-weight:700;max-width:calc(100vw - 2.4rem)}
+.toast{position:fixed;bottom:1.3rem;right:1.3rem;background:var(--green);color:#040e08;font-family:'Space Mono',monospace;font-size:.7rem;padding:.58rem 1.15rem;border-radius:4px;z-index:999;opacity:0;transform:translateY(10px);transition:all .28s;pointer-events:none;font-weight:700;max-width:calc(100vw - 2.6rem)}
 .toast.show{opacity:1;transform:translateY(0)}
+.changelog{display:inline-flex;align-items:center;gap:.6rem;background:rgba(6,214,160,.06);border:1px solid rgba(6,214,160,.2);border-radius:4px;padding:.5rem 1.1rem;margin-bottom:1.4rem;font-family:'Space Mono',monospace;font-size:.66rem}
+.changelog-v{color:var(--green);font-weight:700}.changelog-t{color:#8080a8}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+
 <nav>
-  <div class="nav-logo">ROJ<span>LANG</span> <span style="color:var(--muted);font-size:.62rem;font-family:'Space Mono',monospace;font-weight:400">v1.1</span></div>
+  <a href="#" class="nav-logo">ROJ<span>LANG</span><span class="nav-v">v2.1</span></a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#download">DAKÊŞIN</a></li>
-    <li><a href="#keywords">PEYVÊN</a></li>
+    <li><a href="#download">DOWNLOAD</a></li>
+    <li><a href="#ide">IDE</a></li>
+    <li><a href="#keywords">KEYWORDS</a></li>
+    <li><a href="#shortcuts">SHORTCUTS</a></li>
     <li><a href="#examples">MÎNAK</a></li>
-    <li><a href="#install">SAZKIRIN</a></li>
-    <li><a href="#trouble">PIRSGIRÊK</a></li>
-    <li><a href="#reference">REFERANS</a></li>
+    <li><a href="#install">INSTALL</a></li>
+    <li><a href="#trouble">HELP</a></li>
+    <li><a href="#reference">REF</a></li>
   </ul>
   <button class="nav-menu" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
 </nav>
 
-<!-- HERO -->
+
 <div class="hero">
   <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
   <div class="sun">☀</div>
-  <div class="hero-badge">ZIMANÊ BERNAMESAZIYÊ YÊ KURDÎ</div>
+  <div class="hero-badge">ZIMANÊ BERNAMESAZIYÊ YÊ KURDÎ &nbsp;<span class="badge-new">v2.1 NEW</span></div>
   <h1>ROJ<span>LANG</span></h1>
-  <p class="hero-sub">Kurdish Programming Language<br><span style="opacity:.6">Zimanê Bernamesaziyê yê Kurdî</span></p>
-  <p style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--border);letter-spacing:.1em;margin-top:.5rem;position:relative;z-index:1;animation:fadeUp .9s ease both .18s">v1.1 &nbsp;·&nbsp; Released 2025 &nbsp;·&nbsp; MIT License</p>
-  <p class="hero-desc">Code in Kurdish. Koda xwe bi zimanê xwe binivîse.</p>
+  <p class="hero-sub">Kurdish Programming Language &nbsp;·&nbsp; Zimanê Bernamesaziyê yê Kurdî</p>
+  <p class="hero-desc">Koda xwe bi zimanê xwe binivîse.<br>Code in Kurdish. Run anywhere.</p>
   <div class="hero-cta">
-    <a href="#download" class="btn btn-gold">⬇ DAKÊŞIN — DOWNLOAD</a>
-    <a href="#examples" class="btn btn-outline">MÎNAK — EXAMPLES</a>
+    <a href="#download" class="btn btn-gold">⬇ DOWNLOAD</a>
+    <a href="#ide" class="btn btn-green">🖥 IDE EDITOR</a>
+    <a href="#examples" class="btn btn-outline">☀ MÎNAK</a>
   </div>
-  <div class="scroll-line">SCROLL</div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">70+</div><div class="stat-l">KEYWORDS</div></div>
+    <div class="stat"><div class="stat-n">GUI</div><div class="stat-l">GRAPHICS API</div></div>
+    <div class="stat"><div class="stat-n">IMG</div><div class="stat-l">IMAGE+SOUND</div></div>
+    <div class="stat"><div class="stat-n">IDE</div><div class="stat-l">EDITOR v3.0</div></div>
+    <div class="stat"><div class="stat-n">FREE</div><div class="stat-l">MIT LICENSE</div></div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
 </div>
 
-<!-- DOWNLOAD -->
+
 <section id="download">
   <div class="container">
     <div class="reveal">
       <div class="section-label">DAKÊŞIN — DOWNLOAD</div>
       <h2>Hemû tê de ye <span style="color:var(--gold)">✓</span></h2>
-      <p>Bişkoja "Download All" bitikîne — hemû pêk tên. Click Download All — everything included.</p>
+      <div class="changelog">
+        <span class="changelog-v">v2.1</span>
+        <span style="color:var(--muted)">·</span>
+        <span class="changelog-t">70+ keywords · wêne (image) · deng (sound) · FileTree auto-refresh · bind_all shortcuts</span>
+      </div>
     </div>
-    <div class="dl-box reveal">
-      <div class="dl-title">☀ RojLang — Complete Package</div>
-      <div class="dl-sub">Hemû pelên pêwîst · All required files included</div>
+
+    <div class="dl-box">
+      <div class="dl-title">☀ RojLang — Interpreter + Tools</div>
+      <div class="dl-sub">Ji bo CMD — For command line / terminal use</div>
       <div class="dl-files">
-        <div class="file-card"><div class="file-icon">🐍</div><div><div class="file-name">interpreter.py</div><div class="file-desc">Şîrovekar — The brain</div></div></div>
-        <div class="file-card"><div class="file-icon">⚙️</div><div><div class="file-name">install_rojlang.bat</div><div class="file-desc">Sazker — Windows installer</div></div></div>
-        <div class="file-card"><div class="file-icon">🎮</div><div><div class="file-name">game.ku</div><div class="file-desc">Lîstika mînak — Demo game</div></div></div>
-        <div class="file-card"><div class="file-icon">🎨</div><div><div class="file-name">art.ku</div><div class="file-desc">Hunerê Kurdî — Graphics demo</div></div></div>
+        <div class="file-card"><div class="file-icon">🐍</div><div><div class="file-name">interpreter.py</div><div class="file-desc">Şîrovekar v2.1 — The brain</div></div></div>
+        <div class="file-card"><div class="file-icon">⚙️</div><div><div class="file-name">install_rojlang.bat</div><div class="file-desc">Windows installer</div></div></div>
+        <div class="file-card"><div class="file-icon">🎮</div><div><div class="file-name">game.ku</div><div class="file-desc">Lîstika texmînê — Demo game</div></div></div>
+        <div class="file-card"><div class="file-icon">🚀</div><div><div class="file-name">spaceship.ku</div><div class="file-desc">Keştiya Fezayê — Shooter!</div></div></div>
+        <div class="file-card"><div class="file-icon">🎨</div><div><div class="file-name">art.ku</div><div class="file-desc">Hunerê Kurdî — Art demo</div></div></div>
+        <div class="file-card"><div class="file-icon">🗑️</div><div><div class="file-name">uninstall_rojlang.bat</div><div class="file-desc">Rakirin — Uninstaller</div></div></div>
+        <div class="file-card"><div class="file-icon">🖼️</div><div><div class="file-name">rojlang.ico</div><div class="file-desc">Îkon — App icon (PNG)</div></div></div>
       </div>
       <div class="dl-btns">
-        <button class="btn btn-gold" onclick="downloadAll()">⬇ Hemûyan Daxistin — Download All (4 files)</button>
+        <button class="btn btn-gold" onclick="downloadAll()">⬇ Download All</button>
         <button class="btn btn-outline btn-sm" onclick="dlFile('interpreter')">interpreter.py</button>
         <button class="btn btn-outline btn-sm" onclick="dlFile('installer')">install_rojlang.bat</button>
-        <button class="btn btn-outline btn-sm" onclick="dlFile('game')">game.ku</button>
-        <button class="btn btn-outline btn-sm" onclick="dlFile('art')">art.ku</button>
+        <button class="btn btn-outline btn-sm" onclick="dlFile('uninstall')">uninstall_rojlang.bat</button>
+        <button class="btn btn-outline btn-sm" onclick="dlFile('spaceship')">spaceship.ku</button>
+      </div>
+    </div>
+
+    <div class="dl-box ide-box" style="margin-top:1.2rem;border-color:rgba(6,214,160,.2)">
+      <div class="dl-title" style="color:var(--green)">🖥 RojLang IDE <span class="new-pill">v3.0</span></div>
+      <div class="dl-sub">Edîtorê tam — Full Kurdish editor with syntax highlighting, terminal, autocomplete</div>
+      <div class="dl-files">
+        <div class="file-card" style="border-color:rgba(6,214,160,.2)"><div class="file-icon">📦</div><div><div class="file-name">RojLang-IDE.zip</div><div class="file-desc">Hemû yek ZIP de — EXE + gerekdarî</div></div></div>
+      </div>
+      <div class="dl-btns">
+        <a href="download/RojLang-IDE.zip" class="btn btn-green" download>📦 Download IDE — RojLang-IDE.zip</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- KEYWORDS -->
+
+<section id="ide">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">IDE — EDÎTOR</div>
+      <h2>RojLang <span style="color:var(--gold)">IDE</span> v3.0</h2>
+      <p>Edîtorê taybet ji bo RojLang — Kurdish syntax highlighting, autocomplete, multi-tab, terminal û zêdetir.</p>
+      <p style="font-size:.79rem;color:var(--muted)">Pêdivî: Python 3.8+ &nbsp;·&nbsp; <code>python rojlang_ide.py</code></p>
+    </div>
+    <div class="ide-preview">
+      <div class="ide-bar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="ide-title">☀ RojLang IDE v3.0 — rojlang_ide.py</div>
+      </div>
+      <div class="feat-grid">
+        <div class="feat"><div class="feat-icon">🎨</div><div><div class="feat-t">Syntax Highlighting</div><div class="feat-d">Rengên kurdî — keywords, strings, functions</div></div></div>
+        <div class="feat"><div class="feat-icon">⚡</div><div><div class="feat-t">Autocomplete</div><div class="feat-d">60+ pêşniyar — Tab/Enter qebûl bike</div></div></div>
+        <div class="feat"><div class="feat-icon">📑</div><div><div class="feat-t">Multi-Tab</div><div class="feat-d">Çend pelan hevdem veke — Ctrl+T</div></div></div>
+        <div class="feat"><div class="feat-icon">🌙</div><div><div class="feat-t">Dark / Light Mode</div><div class="feat-d">Rengdanka tarî û ronî</div></div></div>
+        <div class="feat"><div class="feat-icon">⌨</div><div><div class="feat-t">Built-in Terminal</div><div class="feat-d">CMD/bash di IDE-ê de — Ctrl+`</div></div></div>
+        <div class="feat"><div class="feat-icon">▶</div><div><div class="feat-t">One-Click Run</div><div class="feat-d">F5 / Ctrl+B — ji IDE-ê bixebitîne</div></div></div>
+        <div class="feat"><div class="feat-icon">🔍</div><div><div class="feat-t">Find & Replace</div><div class="feat-d">Bibîne û biguherîne — Ctrl+F</div></div></div>
+        <div class="feat"><div class="feat-icon">💾</div><div><div class="feat-t">Auto-Save</div><div class="feat-d">Her 30 saniyeyan xweber tomar dike</div></div></div>
+        <div class="feat"><div class="feat-icon">🌐</div><div><div class="feat-t">Kurdî / English UI</div><div class="feat-d">Du ziman di IDE-ê de</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <section id="keywords">
   <div class="container">
     <div class="reveal">
-      <div class="section-label">GOTINÊN SEREKE — KEYWORDS</div>
+      <div class="section-label">PEYVÊN SEREKE — KEYWORDS</div>
       <h2>Peyva Kurdî <span style="color:var(--gold)">→</span> Python</h2>
-      <p>Hemû peyvên RojLang û maneya wan — All RojLang keywords.</p>
+      <p>RojLang v2.1 — 70+ peyvên kurdî.</p>
     </div>
-    <div class="kw-grid reveal">
-      <div class="kw-card"><div class="kw-ku">nivîs</div><div class="kw-arrow">→</div><div><div class="kw-py">print()</div><div class="kw-desc">Çap bike / Print to screen</div></div></div>
-      <div class="kw-card"><div class="kw-ku">bêje</div><div class="kw-arrow">→</div><div><div class="kw-py">print(end="")</div><div class="kw-desc">Heman rêz / Same line print</div></div></div>
-      <div class="kw-card"><div class="kw-ku">nav</div><div class="kw-arrow">→</div><div><div class="kw-py">= (danasîn)</div><div class="kw-desc">Guhêrbar / Declare variable</div></div></div>
-      <div class="kw-card"><div class="kw-ku">xwestin</div><div class="kw-arrow">→</div><div><div class="kw-py">input()</div><div class="kw-desc">Têketina bikarhêner / User input</div></div></div>
-      <div class="kw-card"><div class="kw-ku">hilbijêre</div><div class="kw-arrow">→</div><div><div class="kw-py">random.randint()</div><div class="kw-desc">Hejmareke rasthatî / Random</div></div></div>
-      <div class="kw-card"><div class="kw-ku">eger</div><div class="kw-arrow">→</div><div><div class="kw-py">if</div><div class="kw-desc">Şerta yekem / First condition</div></div></div>
-      <div class="kw-card"><div class="kw-ku">yan eger</div><div class="kw-arrow">→</div><div><div class="kw-py">elif</div><div class="kw-desc">Şerta din / Another condition</div></div></div>
-      <div class="kw-card"><div class="kw-ku">yan</div><div class="kw-arrow">→</div><div><div class="kw-py">else</div><div class="kw-desc">Wekî din / Otherwise</div></div></div>
-      <div class="kw-card"><div class="kw-ku">dem</div><div class="kw-arrow">→</div><div><div class="kw-py">while</div><div class="kw-desc">Xulama dem / While loop</div></div></div>
-      <div class="kw-card"><div class="kw-ku">bo … di</div><div class="kw-arrow">→</div><div><div class="kw-py">for … in</div><div class="kw-desc">Xulama bo / For loop</div></div></div>
-      <div class="kw-card"><div class="kw-ku">fonksîyon</div><div class="kw-arrow">→</div><div><div class="kw-py">def</div><div class="kw-desc">Fonksiyon / Define function</div></div></div>
-      <div class="kw-card"><div class="kw-ku">vegere</div><div class="kw-arrow">→</div><div><div class="kw-py">return</div><div class="kw-desc">Nirxek vegerîne / Return value</div></div></div>
-      <div class="kw-card"><div class="kw-ku">rast</div><div class="kw-arrow">→</div><div><div class="kw-py">True</div><div class="kw-desc">Nirxa rast / Boolean true</div></div></div>
-      <div class="kw-card"><div class="kw-ku">çewt</div><div class="kw-arrow">→</div><div><div class="kw-py">False</div><div class="kw-desc">Nirxa çewt / Boolean false</div></div></div>
-      <div class="kw-card"><div class="kw-ku">Tune</div><div class="kw-arrow">→</div><div><div class="kw-py">None</div><div class="kw-desc">Vala / Null value</div></div></div>
-      <div class="kw-card"><div class="kw-ku">ne</div><div class="kw-arrow">→</div><div><div class="kw-py">not</div><div class="kw-desc">Înkarkirin / Logical NOT</div></div></div>
-      <div class="kw-card"><div class="kw-ku">û</div><div class="kw-arrow">→</div><div><div class="kw-py">and</div><div class="kw-desc">Hem…hem / Logical AND</div></div></div>
-      <div class="kw-card"><div class="kw-ku">an</div><div class="kw-arrow">→</div><div><div class="kw-py">or</div><div class="kw-desc">Yan…yan / Logical OR</div></div></div>
-      <div class="kw-card"><div class="kw-ku">bişkîne</div><div class="kw-arrow">→</div><div><div class="kw-py">break</div><div class="kw-desc">Xulamê bişkîne / Break loop</div></div></div>
-      <div class="kw-card"><div class="kw-ku">berdewam</div><div class="kw-arrow">→</div><div><div class="kw-py">continue</div><div class="kw-desc">Dewam bike / Continue loop</div></div></div>
-      <div class="kw-card"><div class="kw-ku">nîşe</div><div class="kw-arrow">→</div><div><div class="kw-py">pass</div><div class="kw-desc">Tiştek nake / Do nothing</div></div></div>
-      <div class="kw-card"><div class="kw-ku">derkev</div><div class="kw-arrow">→</div><div><div class="kw-py">exit()</div><div class="kw-desc">Ji bernameyê derkeve / Exit</div></div></div>
-      <div class="kw-card"><div class="kw-ku">dirêj(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">len(x)</div><div class="kw-desc">Dirêjiya lîsteyê / Length</div></div></div>
-      <div class="kw-card"><div class="kw-ku">x.têxe(y)</div><div class="kw-arrow">→</div><div><div class="kw-py">x.append(y)</div><div class="kw-desc">Tiştek lê zêde bike / Append</div></div></div>
-      <div class="kw-card"><div class="kw-ku">cure(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">type(x)</div><div class="kw-desc">Cureya guhêrbar / Type of</div></div></div>
-      <div class="kw-card"><div class="kw-ku">sinif</div><div class="kw-arrow">→</div><div><div class="kw-py">class</div><div class="kw-desc">Sinifekê diyar bike / Define class</div></div></div>
+    <div class="kw-tabs">
+      <button class="kw-tab active" onclick="kwTab('core',this)">CORE</button>
+      <button class="kw-tab" onclick="kwTab('types',this)">TYPES <span class="new-pill">v2</span></button>
+      <button class="kw-tab" onclick="kwTab('math',this)">MATH <span class="new-pill">v2</span></button>
+      <button class="kw-tab" onclick="kwTab('methods',this)">METHODS <span class="new-pill">v2</span></button>
+      <button class="kw-tab" onclick="kwTab('error',this)">ERRORS <span class="new-pill">v2</span></button>
+      <button class="kw-tab" onclick="kwTab('keyboard',this)">⌨ KEYBOARD <span class="new-pill">v2</span></button>
+      <button class="kw-tab" onclick="kwTab('image',this)">🖼 WÊNE <span class="new-pill">v2.1</span></button>
+      <button class="kw-tab" onclick="kwTab('sound',this)">🔊 DENG <span class="new-pill">v2.1</span></button>
+      <button class="kw-tab" onclick="kwTab('gui',this)">GUI / GRAFÎK</button>
     </div>
 
-    <div style="margin-top:2.8rem" class="reveal">
-      <div class="section-label">GRAFÎK — GRAPHICS API</div>
-      <h3 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;margin-bottom:.4rem;color:var(--text)">Peyvên <span style="color:var(--gold)">Grafîkê</span> — GUI Keywords</h3>
-      <p>Ji bo çêkirina pencere, xêzkirin û bişkojkan — For windows, drawing and buttons.</p>
+    <div class="kw-panel active" id="kw-core">
+      <div class="kw-grid">
+        <div class="kw-card"><div class="kw-ku">nivîs(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">print(x)</div><div class="kw-desc">Çap bike / Print</div></div></div>
+        <div class="kw-card"><div class="kw-ku">çap(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">print(x)</div><div class="kw-desc">Alias ji bo nivîs</div></div></div>
+        <div class="kw-card"><div class="kw-ku">bêje(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">print(end="")</div><div class="kw-desc">Heman rêz / No newline</div></div></div>
+        <div class="kw-card"><div class="kw-ku">nav x = …</div><div class="kw-arrow">→</div><div><div class="kw-py">x = …</div><div class="kw-desc">Guhêrbar / Variable</div></div></div>
+        <div class="kw-card"><div class="kw-ku">xwestin("?")</div><div class="kw-arrow">→</div><div><div class="kw-py">input("?")</div><div class="kw-desc">Têketina bikarhêner / Input</div></div></div>
+        <div class="kw-card"><div class="kw-ku">hilbijêre(a,b)</div><div class="kw-arrow">→</div><div><div class="kw-py">randint(a,b)</div><div class="kw-desc">Hejmareke rasthatî</div></div></div>
+        <div class="kw-card"><div class="kw-ku">eger … :</div><div class="kw-arrow">→</div><div><div class="kw-py">if … :</div><div class="kw-desc">If condition</div></div></div>
+        <div class="kw-card"><div class="kw-ku">yan eger … :</div><div class="kw-arrow">→</div><div><div class="kw-py">elif … :</div><div class="kw-desc">Else-if</div></div></div>
+        <div class="kw-card"><div class="kw-ku">yan :</div><div class="kw-arrow">→</div><div><div class="kw-py">else :</div><div class="kw-desc">Otherwise</div></div></div>
+        <div class="kw-card"><div class="kw-ku">dem … :</div><div class="kw-arrow">→</div><div><div class="kw-py">while … :</div><div class="kw-desc">While loop</div></div></div>
+        <div class="kw-card"><div class="kw-ku">bo … di … :</div><div class="kw-arrow">→</div><div><div class="kw-py">for … in … :</div><div class="kw-desc">For loop</div></div></div>
+        <div class="kw-card"><div class="kw-ku">fonksîyon</div><div class="kw-arrow">→</div><div><div class="kw-py">def</div><div class="kw-desc">Fonksiyon / Function</div></div></div>
+        <div class="kw-card"><div class="kw-ku">vegere x</div><div class="kw-arrow">→</div><div><div class="kw-py">return x</div><div class="kw-desc">Return value</div></div></div>
+        <div class="kw-card"><div class="kw-ku">sinif</div><div class="kw-arrow">→</div><div><div class="kw-py">class</div><div class="kw-desc">Class</div></div></div>
+        <div class="kw-card"><div class="kw-ku">rast / çewt</div><div class="kw-arrow">→</div><div><div class="kw-py">True / False</div><div class="kw-desc">Boolean</div></div></div>
+        <div class="kw-card"><div class="kw-ku">Tune</div><div class="kw-arrow">→</div><div><div class="kw-py">None</div><div class="kw-desc">Vala / Null</div></div></div>
+        <div class="kw-card"><div class="kw-ku">ne / û / an</div><div class="kw-arrow">→</div><div><div class="kw-py">not / and / or</div><div class="kw-desc">Mantiq / Logic</div></div></div>
+        <div class="kw-card"><div class="kw-ku">bişkîne</div><div class="kw-arrow">→</div><div><div class="kw-py">break</div><div class="kw-desc">Break loop</div></div></div>
+        <div class="kw-card"><div class="kw-ku">berdewam</div><div class="kw-arrow">→</div><div><div class="kw-py">continue</div><div class="kw-desc">Continue loop</div></div></div>
+        <div class="kw-card"><div class="kw-ku">nîşe</div><div class="kw-arrow">→</div><div><div class="kw-py">pass</div><div class="kw-desc">Do nothing</div></div></div>
+        <div class="kw-card"><div class="kw-ku">derkev</div><div class="kw-arrow">→</div><div><div class="kw-py">exit()</div><div class="kw-desc">Exit program</div></div></div>
+        <div class="kw-card"><div class="kw-ku">dirêj(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">len(x)</div><div class="kw-desc">Length</div></div></div>
+        <div class="kw-card"><div class="kw-ku">cure(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">type(x)</div><div class="kw-desc">Type of variable</div></div></div>
+      </div>
     </div>
-    <div class="kw-grid reveal">
-      <div class="kw-card"><div class="kw-ku">pencere()</div><div class="kw-arrow">→</div><div><div class="kw-py">Tk() window</div><div class="kw-desc">Pencereyek çêdike / Create window</div></div></div>
-      <div class="kw-card"><div class="kw-ku">nîşan(w)</div><div class="kw-arrow">→</div><div><div class="kw-py">mainloop()</div><div class="kw-desc">Pencereyê nîşan dide / Show window</div></div></div>
-      <div class="kw-card"><div class="kw-ku">kevir()</div><div class="kw-arrow">→</div><div><div class="kw-py">Canvas()</div><div class="kw-desc">Rûkala xêzkirinê / Drawing canvas</div></div></div>
-      <div class="kw-card"><div class="kw-ku">çargoşe()</div><div class="kw-arrow">→</div><div><div class="kw-py">create_rectangle()</div><div class="kw-desc">Çargoşeyek xêz dike / Rectangle</div></div></div>
-      <div class="kw-card"><div class="kw-ku">xember()</div><div class="kw-arrow">→</div><div><div class="kw-py">create_oval()</div><div class="kw-desc">Xemberek xêz dike / Circle/oval</div></div></div>
-      <div class="kw-card"><div class="kw-ku">xêz()</div><div class="kw-arrow">→</div><div><div class="kw-py">create_line()</div><div class="kw-desc">Xêzek xêz dike / Draw line</div></div></div>
-      <div class="kw-card"><div class="kw-ku">nivîskar()</div><div class="kw-arrow">→</div><div><div class="kw-py">create_text()</div><div class="kw-desc">Nivîsek li kevirê / Draw text</div></div></div>
-      <div class="kw-card"><div class="kw-ku">bişkojk()</div><div class="kw-arrow">→</div><div><div class="kw-py">Button()</div><div class="kw-desc">Bişkojkek çêdike / Button</div></div></div>
-      <div class="kw-card"><div class="kw-ku">nav_çargoşe()</div><div class="kw-arrow">→</div><div><div class="kw-py">Label()</div><div class="kw-desc">Labelek nivîsê / Text label</div></div></div>
-      <div class="kw-card"><div class="kw-ku">rengên_hevber()</div><div class="kw-arrow">→</div><div><div class="kw-py">gradient list</div><div class="kw-desc">Rengên gerguhêz / Gradient list</div></div></div>
+
+    <div class="kw-panel" id="kw-types">
+      <div class="kw-grid">
+        <div class="kw-card"><div class="kw-ku purple">hejmar(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">int(x)</div><div class="kw-desc">Convert to integer</div></div></div>
+        <div class="kw-card"><div class="kw-ku purple">nivîsok(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">str(x)</div><div class="kw-desc">Convert to string</div></div></div>
+        <div class="kw-card"><div class="kw-ku purple">hejimarFloat(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">float(x)</div><div class="kw-desc">Decimal number</div></div></div>
+        <div class="kw-card"><div class="kw-ku purple">pêl([…])</div><div class="kw-arrow">→</div><div><div class="kw-py">list([…])</div><div class="kw-desc">Create list / Lîste</div></div></div>
+        <div class="kw-card"><div class="kw-ku purple">ferhenga({…})</div><div class="kw-arrow">→</div><div><div class="kw-py">dict({…})</div><div class="kw-desc">Dictionary / Ferheng</div></div></div>
+        <div class="kw-card"><div class="kw-ku purple">koma({…})</div><div class="kw-arrow">→</div><div><div class="kw-py">set({…})</div><div class="kw-desc">Unique set / Kom</div></div></div>
+      </div>
+      <div class="code-wrap" style="margin-top:1rem">
+        <div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">types-example.ku</div></div>
+        <pre><span class="ck">nav</span> <span class="cv">temen</span> = <span class="cp">hejmar</span>(<span class="cf">xwestin</span>(<span class="cs">"Temenê xwe: "</span>))
+<span class="ck">nav</span> <span class="cv">nav_list</span> = <span class="cp">pêl</span>()
+<span class="cv">nav_list</span>.<span class="cf">têxe</span>(<span class="cs">"Roj"</span>)
+<span class="cf">nivîs</span>(<span class="cv">nav_list</span>)   <span class="cc"># → ['Roj']</span></pre>
+      </div>
+    </div>
+
+    <div class="kw-panel" id="kw-math">
+      <div class="kw-grid">
+        <div class="kw-card"><div class="kw-ku green">nizim(a,b)</div><div class="kw-arrow">→</div><div><div class="kw-py">min(a,b)</div><div class="kw-desc">Herî biçûk / Minimum</div></div></div>
+        <div class="kw-card"><div class="kw-ku green">mezin(a,b)</div><div class="kw-arrow">→</div><div><div class="kw-py">max(a,b)</div><div class="kw-desc">Herî mezin / Maximum</div></div></div>
+        <div class="kw-card"><div class="kw-ku green">tomkirin(x,n)</div><div class="kw-arrow">→</div><div><div class="kw-py">round(x,n)</div><div class="kw-desc">Nivzel bike / Round</div></div></div>
+        <div class="kw-card"><div class="kw-ku green">jimartina(lst)</div><div class="kw-arrow">→</div><div><div class="kw-py">sum(lst)</div><div class="kw-desc">Kom bike / Sum</div></div></div>
+        <div class="kw-card"><div class="kw-ku green">şikeftin(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">abs(x)</div><div class="kw-desc">Nirxa mutlak / Absolute</div></div></div>
+        <div class="kw-card"><div class="kw-ku green">bijmare(a,b)</div><div class="kw-arrow">→</div><div><div class="kw-py">range(a,b)</div><div class="kw-desc">Rêzika hejmaran</div></div></div>
+        <div class="kw-card"><div class="kw-ku green">mathSqrt(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">math.sqrt(x)</div><div class="kw-desc">Koka karesê / √</div></div></div>
+        <div class="kw-card"><div class="kw-ku green">mathPow(x,y)</div><div class="kw-arrow">→</div><div><div class="kw-py">math.pow(x,y)</div><div class="kw-desc">Hêza x^y</div></div></div>
+        <div class="kw-card"><div class="kw-ku green">mathPi</div><div class="kw-arrow">→</div><div><div class="kw-py">math.pi</div><div class="kw-desc">π = 3.14159…</div></div></div>
+        <div class="kw-card"><div class="kw-ku green">hilbijêreFloat(a,b)</div><div class="kw-arrow">→</div><div><div class="kw-py">random.uniform(a,b)</div><div class="kw-desc">Random decimal</div></div></div>
+      </div>
+    </div>
+
+    <div class="kw-panel" id="kw-methods">
+      <div class="kw-grid">
+        <div class="kw-card"><div class="kw-ku blue">lst.têxe(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">.append(x)</div><div class="kw-desc">Add to list</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">lst.jêbike(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">.remove(x)</div><div class="kw-desc">Remove from list</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">lst.rêzkirin()</div><div class="kw-arrow">→</div><div><div class="kw-py">.sort()</div><div class="kw-desc">Sort list</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">lst.berevajikirin()</div><div class="kw-arrow">→</div><div><div class="kw-py">.reverse()</div><div class="kw-desc">Reverse list</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">s.jorê()</div><div class="kw-arrow">→</div><div><div class="kw-py">.upper()</div><div class="kw-desc">UPPERCASE</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">s.jêrê()</div><div class="kw-arrow">→</div><div><div class="kw-py">.lower()</div><div class="kw-desc">lowercase</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">s.veqetîne(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">.split(x)</div><div class="kw-desc">Split string</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">s.biguhêze(a,b)</div><div class="kw-arrow">→</div><div><div class="kw-py">.replace(a,b)</div><div class="kw-desc">Replace in string</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">s.bibîne(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">.find(x)</div><div class="kw-desc">Find in string</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">s.xêz()</div><div class="kw-arrow">→</div><div><div class="kw-py">.strip()</div><div class="kw-desc">Strip whitespace</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">s.hejmarê(x)</div><div class="kw-arrow">→</div><div><div class="kw-py">.count(x)</div><div class="kw-desc">Count occurrences</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">s.bike(lst)</div><div class="kw-arrow">→</div><div><div class="kw-py">.join(lst)</div><div class="kw-desc">Join list into string</div></div></div>
+      </div>
+    </div>
+
+    <div class="kw-panel" id="kw-error">
+      <div class="kw-grid">
+        <div class="kw-card"><div class="kw-ku red">êşk :</div><div class="kw-arrow">→</div><div><div class="kw-py">try :</div><div class="kw-desc">Bicerib / Try block</div></div></div>
+        <div class="kw-card"><div class="kw-ku red">girtin Exception:</div><div class="kw-arrow">→</div><div><div class="kw-py">except Exception:</div><div class="kw-desc">Catch error</div></div></div>
+        <div class="kw-card"><div class="kw-ku red">dewam :</div><div class="kw-arrow">→</div><div><div class="kw-py">finally :</div><div class="kw-desc">Always runs</div></div></div>
+        <div class="kw-card"><div class="kw-ku red">avêtin</div><div class="kw-arrow">→</div><div><div class="kw-py">raise</div><div class="kw-desc">Raise an error</div></div></div>
+      </div>
+      <div class="code-wrap" style="margin-top:1rem">
+        <div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">error-example.ku</div></div>
+        <pre><span class="ck">êşk</span>:
+    <span class="ck">nav</span> <span class="cv">x</span> = <span class="cp">hejmar</span>(<span class="cf">xwestin</span>(<span class="cs">"Hejmar: "</span>))
+    <span class="cf">nivîs</span>(<span class="cs">"Çar:"</span>, <span class="cv">x</span> * <span class="cn">4</span>)
+<span class="ck">girtin</span> ValueError:
+    <span class="cf">nivîs</span>(<span class="cs">"Şaşî! Hejmar binivîse."</span>)
+<span class="ck">dewam</span>:
+    <span class="cf">nivîs</span>(<span class="cs">"Qediya."</span>)</pre>
+      </div>
+    </div>
+
+    <div class="kw-panel" id="kw-keyboard">
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1.2rem">Kbsên klavyeyê di bernameyên GUI de — Keyboard event bindings for GUI programs using tkinter.</p>
+      <div class="kw-grid">
+        <div class="kw-card"><div class="kw-ku" style="min-width:130px">klavBiGire(w,k,fn)</div><div class="kw-arrow">→</div><div><div class="kw-py">w.bind(k,fn)</div><div class="kw-desc">Kbsa klavyeyê bigire</div></div></div>
+        <div class="kw-card"><div class="kw-ku">bilivîne(c,id,dx,dy)</div><div class="kw-arrow">→</div><div><div class="kw-py">c.move(id,dx,dy)</div><div class="kw-desc">Canvas item bilivîne</div></div></div>
+        <div class="kw-card"><div class="kw-ku">biguherêze_reng(c,id,r)</div><div class="kw-arrow">→</div><div><div class="kw-py">c.itemconfig(id,fill)</div><div class="kw-desc">Rengê biguherîne</div></div></div>
+        <div class="kw-card"><div class="kw-ku">jêbike_item(c,id)</div><div class="kw-arrow">→</div><div><div class="kw-py">c.delete(id)</div><div class="kw-desc">Item jê bibe</div></div></div>
+        <div class="kw-card"><div class="kw-ku">piştî(w,ms,fn)</div><div class="kw-arrow">→</div><div><div class="kw-py">w.after(ms,fn)</div><div class="kw-desc">Piştî X ms bixebite</div></div></div>
+        <div class="kw-card"><div class="kw-ku">peyam(sernav,nivis)</div><div class="kw-arrow">→</div><div><div class="kw-py">messagebox.showinfo</div><div class="kw-desc">Pencereya peyamê</div></div></div>
+        <div class="kw-card"><div class="kw-ku">bipirse(sernav,soal)</div><div class="kw-arrow">→</div><div><div class="kw-py">askyesno</div><div class="kw-desc">Erê/Na bipirse</div></div></div>
+      </div>
+      <div class="code-wrap" style="margin-top:1.2rem">
+        <div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">keyboard-game.ku — arrow key movement</div></div>
+        <pre><span class="ck">nav</span> <span class="cv">w</span>     = <span class="cf">pencere</span>(<span class="cs">"☀ Lîstik"</span>, <span class="cs">"500x400"</span>)
+<span class="ck">nav</span> <span class="cv">c</span>     = <span class="cf">kevir</span>(<span class="cv">w</span>, <span class="cn">500</span>, <span class="cn">400</span>, <span class="cs">"#0a0a0f"</span>)
+<span class="ck">nav</span> <span class="cv">top</span>   = <span class="cf">xember</span>(<span class="cv">c</span>, <span class="cn">230</span>, <span class="cn">180</span>, <span class="cn">270</span>, <span class="cn">220</span>, <span class="cs">"#f0a500"</span>)
+
+<span class="ca">fonksîyon</span> <span class="cf">çep</span>(<span class="cv">e</span>):  <span class="cf">bilivîne</span>(<span class="cv">c</span>, <span class="cv">top</span>, <span class="cn">-8</span>, <span class="cn">0</span>)
+<span class="ca">fonksîyon</span> <span class="cf">rast</span>(<span class="cv">e</span>): <span class="cf">bilivîne</span>(<span class="cv">c</span>, <span class="cv">top</span>, <span class="cn">8</span>,  <span class="cn">0</span>)
+<span class="ca">fonksîyon</span> <span class="cf">jor</span>(<span class="cv">e</span>):  <span class="cf">bilivîne</span>(<span class="cv">c</span>, <span class="cv">top</span>, <span class="cn">0</span>, <span class="cn">-8</span>)
+<span class="ca">fonksîyon</span> <span class="cf">xwar</span>(<span class="cv">e</span>): <span class="cf">bilivîne</span>(<span class="cv">c</span>, <span class="cv">top</span>, <span class="cn">0</span>,  <span class="cn">8</span>)
+
+<span class="cf">klavBiGire</span>(<span class="cv">w</span>, <span class="cs">"&lt;Left&gt;"</span>,  <span class="cf">çep</span>)
+<span class="cf">klavBiGire</span>(<span class="cv">w</span>, <span class="cs">"&lt;Right&gt;"</span>, <span class="cf">rast</span>)
+<span class="cf">klavBiGire</span>(<span class="cv">w</span>, <span class="cs">"&lt;Up&gt;"</span>,    <span class="cf">jor</span>)
+<span class="cf">klavBiGire</span>(<span class="cv">w</span>, <span class="cs">"&lt;Down&gt;"</span>,  <span class="cf">xwar</span>)
+
+<span class="cf">nîşan</span>(<span class="cv">w</span>)</pre>
+      </div>
+    </div>
+
+
+    <div class="kw-panel" id="kw-image">
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">PNG/GIF bê pêdivî dixebitin. Ji bo JPG/WebP: <code>pip install pillow</code></p>
+      <div class="kw-grid">
+        <div class="kw-card"><div class="kw-ku" style="color:#c084fc;background:rgba(192,132,252,.06);border-color:rgba(192,132,252,.2)">wêne(path)</div><div class="kw-arrow">→</div><div><div class="kw-py">PhotoImage / PIL</div><div class="kw-desc">Bar bike PNG/GIF (bê pillow)</div></div></div>
+        <div class="kw-card"><div class="kw-ku" style="color:#c084fc;background:rgba(192,132,252,.06);border-color:rgba(192,132,252,.2)">wêne("p.jpg")</div><div class="kw-arrow">→</div><div><div class="kw-py">PIL.ImageTk</div><div class="kw-desc">Bar bike JPG/WebP (pêdivî: pillow)</div></div></div>
+        <div class="kw-card"><div class="kw-ku" style="color:#c084fc;background:rgba(192,132,252,.06);border-color:rgba(192,132,252,.2)">wêne_pîvandî(p,f,h)</div><div class="kw-arrow">→</div><div><div class="kw-py">PIL.Image.resize</div><div class="kw-desc">Bar + resize — fireh, bilindî</div></div></div>
+        <div class="kw-card"><div class="kw-ku" style="color:#c084fc;background:rgba(192,132,252,.06);border-color:rgba(192,132,252,.2)">wêne_nîşan(c,x,y,img)</div><div class="kw-arrow">→</div><div><div class="kw-py">canvas.create_image()</div><div class="kw-desc">Li canvas nîşan bide → ID</div></div></div>
+        <div class="kw-card"><div class="kw-ku" style="color:#c084fc;background:rgba(192,132,252,.06);border-color:rgba(192,132,252,.2)">wêne_label(w,img)</div><div class="kw-arrow">→</div><div><div class="kw-py">Label(image=img)</div><div class="kw-desc">Di pencereyê de nîşan bide</div></div></div>
+      </div>
+      <div class="code-wrap" style="margin-top:1rem"><div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">image-example.ku</div></div>
+      <pre><span class="ck">nav</span> <span class="cv">w</span>   = <span class="cf">pencere</span>(<span class="cs">"☀ Wêne"</span>, <span class="cs">"400x400"</span>)
+<span class="ck">nav</span> <span class="cv">c</span>   = <span class="cf">kevir</span>(<span class="cv">w</span>, <span class="cn">400</span>, <span class="cn">400</span>, <span class="cs">"#0a0a0f"</span>)
+<span class="ck">nav</span> <span class="cv">img</span> = <span class="cf">wêne_pîvandî</span>(<span class="cs">"logo.png"</span>, <span class="cn">200</span>, <span class="cn">200</span>)
+<span class="cf">wêne_nîşan</span>(<span class="cv">c</span>, <span class="cn">200</span>, <span class="cn">200</span>, <span class="cv">img</span>)
+<span class="cf">nîşan</span>(<span class="cv">w</span>)</pre></div>
+      <p style="font-size:.74rem;color:var(--muted);margin-top:.6rem">⚠ img guhêrbar bimîne — Keep reference to img or it gets garbage-collected!</p>
+    </div>
+
+    <div class="kw-panel" id="kw-sound">
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem">Pêdivî ye: <code>pip install pygame</code></p>
+      <div class="kw-grid">
+        <div class="kw-card"><div class="kw-ku blue">deng(path)</div><div class="kw-arrow">→</div><div><div class="kw-py">pygame.music.play(0)</div><div class="kw-desc">MP3/WAV lêde — carek</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">deng(path, rast)</div><div class="kw-arrow">→</div><div><div class="kw-py">music.play(-1)</div><div class="kw-desc">Loop lêde — bêdawî</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">deng_dengdank(path)</div><div class="kw-arrow">→</div><div><div class="kw-py">pygame.Sound().play()</div><div class="kw-desc">Efekta kurt WAV</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">deng_rawest()</div><div class="kw-arrow">→</div><div><div class="kw-py">music.stop()</div><div class="kw-desc">Hemû deng rawest</div></div></div>
+        <div class="kw-card"><div class="kw-ku blue">deng_bilindî(0-1)</div><div class="kw-arrow">→</div><div><div class="kw-py">music.set_volume(v)</div><div class="kw-desc">Bilindî — 0.0 heta 1.0</div></div></div>
+      </div>
+      <div class="code-wrap" style="margin-top:1rem"><div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">sound-example.ku</div></div>
+      <pre><span class="ck">nav</span> <span class="cv">w</span> = <span class="cf">pencere</span>(<span class="cs">"🔊 Muzik"</span>, <span class="cs">"300x150"</span>)
+<span class="cf">deng</span>(<span class="cs">"muzik.mp3"</span>, <span class="ck">rast</span>)
+<span class="cf">deng_bilindî</span>(<span class="cn">0.7</span>)
+<span class="ca">fonksîyon</span> <span class="cf">rawest</span>():
+    <span class="cf">deng_rawest</span>()
+<span class="cf">bişkojk</span>(<span class="cv">w</span>, <span class="cs">"⏹ Rawest"</span>, <span class="cf">rawest</span>)
+<span class="cf">nîşan</span>(<span class="cv">w</span>)</pre></div>
+    </div>
+
+    <div class="kw-panel" id="kw-gui">
+      <div class="kw-grid">
+        <div class="kw-card"><div class="kw-ku">pencere(t,p)</div><div class="kw-arrow">→</div><div><div class="kw-py">Tk() window</div><div class="kw-desc">Pencereyek çêdike</div></div></div>
+        <div class="kw-card"><div class="kw-ku">nîşan(w)</div><div class="kw-arrow">→</div><div><div class="kw-py">mainloop()</div><div class="kw-desc">Pencereyê nîşan dide</div></div></div>
+        <div class="kw-card"><div class="kw-ku">kevir(w,f,h,r)</div><div class="kw-arrow">→</div><div><div class="kw-py">Canvas()</div><div class="kw-desc">Drawing canvas</div></div></div>
+        <div class="kw-card"><div class="kw-ku">çargoşe(c,…)</div><div class="kw-arrow">→</div><div><div class="kw-py">create_rectangle()</div><div class="kw-desc">→ returns ID</div></div></div>
+        <div class="kw-card"><div class="kw-ku">xember(c,…)</div><div class="kw-arrow">→</div><div><div class="kw-py">create_oval()</div><div class="kw-desc">→ returns ID</div></div></div>
+        <div class="kw-card"><div class="kw-ku">xêz(c,…)</div><div class="kw-arrow">→</div><div><div class="kw-py">create_line()</div><div class="kw-desc">→ returns ID</div></div></div>
+        <div class="kw-card"><div class="kw-ku">nivîskar(c,…)</div><div class="kw-arrow">→</div><div><div class="kw-py">create_text()</div><div class="kw-desc">→ returns ID</div></div></div>
+        <div class="kw-card"><div class="kw-ku">bişkojk(w,…)</div><div class="kw-arrow">→</div><div><div class="kw-py">Button()</div><div class="kw-desc">Button widget</div></div></div>
+        <div class="kw-card"><div class="kw-ku">nav_çargoşe(…)</div><div class="kw-arrow">→</div><div><div class="kw-py">Label()</div><div class="kw-desc">Text label</div></div></div>
+        <div class="kw-card"><div class="kw-ku">rengên_hevber(…)</div><div class="kw-arrow">→</div><div><div class="kw-py">gradient list</div><div class="kw-desc">Color gradient</div></div></div>
+        <div class="kw-card"><div class="kw-ku">piştî(w,ms,fn)</div><div class="kw-arrow">→</div><div><div class="kw-py">after(ms,fn)</div><div class="kw-desc">Delayed call / animation</div></div></div>
+        <div class="kw-card"><div class="kw-ku">peyam(t,m)</div><div class="kw-arrow">→</div><div><div class="kw-py">messagebox()</div><div class="kw-desc">Message dialog</div></div></div>
+        <div class="kw-card"><div class="kw-ku">bipirse(t,m)</div><div class="kw-arrow">→</div><div><div class="kw-py">askyesno()</div><div class="kw-desc">Yes/No dialog</div></div></div>
+      </div>
     </div>
   </div>
 </section>
+
+
+<section id="shortcuts">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">KLAVYE — SHORTCUTS</div>
+      <h2>Kurtebirên <span style="color:var(--gold)">IDE</span></h2>
+      <p>Hemû kurtebir ji bo RojLang IDE v3.0 — All keyboard shortcuts.</p>
+    </div>
+    <div class="kbd-section">
+      <div class="kbd-group-title">▶ RUN &amp; FILE</div>
+      <div class="kbd-grid">
+        <div class="kbd-row"><div class="kbd-keys"><kbd>F5</kbd><span class="kbd-plus">/</span><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>B</kbd></div><div class="kbd-desc"><strong>Run</strong> — Bernameya xwe bixebitîne</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>S</kbd></div><div class="kbd-desc"><strong>Save</strong> — Tomarkirin</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>⇧</kbd><span class="kbd-plus">+</span><kbd>S</kbd></div><div class="kbd-desc"><strong>Save As</strong> — Wekî nû bişkîne</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>N</kbd></div><div class="kbd-desc"><strong>New File</strong> — Pelê nû</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>O</kbd></div><div class="kbd-desc"><strong>Open File</strong> — Pel veke</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>T</kbd></div><div class="kbd-desc"><strong>New Tab</strong> — Tabloya nû</div></div>
+      </div>
+      <div class="kbd-group-title">🔍 EDIT &amp; SEARCH</div>
+      <div class="kbd-grid">
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>F</kbd></div><div class="kbd-desc"><strong>Find &amp; Replace</strong> — Bibîne û biguherîne</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>Z</kbd></div><div class="kbd-desc"><strong>Undo</strong> — Vegerîne</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>Y</kbd></div><div class="kbd-desc"><strong>Redo</strong> — Ji nû ve bike</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>A</kbd></div><div class="kbd-desc"><strong>Select All</strong> — Hemûyan hilbijêre</div></div>
+      </div>
+      <div class="kbd-group-title">⌨ AUTOCOMPLETE &amp; NAVIGATION</div>
+      <div class="kbd-grid">
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Tab</kbd><span class="kbd-plus">/</span><kbd>Enter</kbd></div><div class="kbd-desc"><strong>Accept</strong> — Pêşniyar qebûl bike</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>↑</kbd><span class="kbd-plus"> </span><kbd>↓</kbd></div><div class="kbd-desc"><strong>Navigate</strong> — Di pêşniyaran de bizivire</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Esc</kbd></div><div class="kbd-desc"><strong>Dismiss</strong> — Pêşniyaran bigire</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>Ctrl</kbd><span class="kbd-plus">+</span><kbd>`</kbd></div><div class="kbd-desc"><strong>Terminal</strong> — CMD/bash toggle</div></div>
+      </div>
+      <div class="kbd-group-title">⌨ KEYBOARD IN GUI PROGRAMS (kurdî)</div>
+      <div class="kbd-grid">
+        <div class="kbd-row"><div class="kbd-keys"><kbd>&lt;Left&gt;</kbd></div><div class="kbd-desc">Arrow Left — Çep</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>&lt;Right&gt;</kbd></div><div class="kbd-desc">Arrow Right — Rast</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>&lt;Up&gt;</kbd></div><div class="kbd-desc">Arrow Up — Jor</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>&lt;Down&gt;</kbd></div><div class="kbd-desc">Arrow Down — Xwar</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>&lt;Return&gt;</kbd></div><div class="kbd-desc">Enter key — Têkeve</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>&lt;Escape&gt;</kbd></div><div class="kbd-desc">Escape key — Revê</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>&lt;space&gt;</kbd></div><div class="kbd-desc">Space bar — Valahî</div></div>
+        <div class="kbd-row"><div class="kbd-keys"><kbd>&lt;Control-q&gt;</kbd></div><div class="kbd-desc">Ctrl+Q — Bigire</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <section id="examples">
   <div class="container">
     <div class="reveal">
       <div class="section-label">MÎNAK — EXAMPLES</div>
-      <h2>Koda <span style="color:var(--gold)">RojLang</span> di kar de</h2>
-      <p>Real programs written entirely in Kurdish keywords.</p>
+      <h2>Koda <span style="color:var(--gold)">RojLang</span> v2.1</h2>
     </div>
     <div class="ex-grid">
-      <div class="ex-card reveal"><div class="ex-title">📦 Guhêrbar — Variables</div><pre><span class="cc"># Danasîna guhêrbar</span>
-<span class="ck">nav</span> <span class="cv">nav_min</span> = <span class="cs">"Roj"</span>
-<span class="ck">nav</span> <span class="cv">temen</span> = <span class="cn">25</span>
-<span class="ck">nav</span> <span class="cv">xwendekar</span> = <span class="ck">rast</span>
+      <div class="ex-card"><div class="ex-title">⌨ Kbsên Klavyeyê — Keyboard</div><pre><span class="ck">nav</span> <span class="cv">w</span> = <span class="cf">pencere</span>(<span class="cs">"Lîstik"</span>,<span class="cs">"400x300"</span>)
+<span class="ck">nav</span> <span class="cv">c</span> = <span class="cf">kevir</span>(<span class="cv">w</span>,<span class="cn">400</span>,<span class="cn">300</span>,<span class="cs">"#0a0a0f"</span>)
+<span class="ck">nav</span> <span class="cv">top</span> = <span class="cf">xember</span>(<span class="cv">c</span>,<span class="cn">190</span>,<span class="cn">140</span>,<span class="cn">220</span>,<span class="cn">170</span>,<span class="cs">"#f0a500"</span>)
 
-<span class="cf">nivîs</span>(<span class="cs">"Nav:"</span>, <span class="cv">nav_min</span>)
-<span class="cf">nivîs</span>(<span class="cs">"Temen:"</span>, <span class="cv">temen</span>)</pre></div>
+<span class="ca">fonksîyon</span> <span class="cf">kbsa</span>(<span class="cv">e</span>):
+    <span class="ck">eger</span> <span class="cv">e.keysym</span>==<span class="cs">"Left"</span>:  <span class="cf">bilivîne</span>(<span class="cv">c</span>,<span class="cv">top</span>,<span class="cn">-6</span>,<span class="cn">0</span>)
+    <span class="ck">yan eger</span> <span class="cv">e.keysym</span>==<span class="cs">"Right"</span>: <span class="cf">bilivîne</span>(<span class="cv">c</span>,<span class="cv">top</span>,<span class="cn">6</span>,<span class="cn">0</span>)
+    <span class="ck">yan eger</span> <span class="cv">e.keysym</span>==<span class="cs">"Up"</span>:    <span class="cf">bilivîne</span>(<span class="cv">c</span>,<span class="cv">top</span>,<span class="cn">0</span>,<span class="cn">-6</span>)
+    <span class="ck">yan eger</span> <span class="cv">e.keysym</span>==<span class="cs">"Down"</span>:  <span class="cf">bilivîne</span>(<span class="cv">c</span>,<span class="cv">top</span>,<span class="cn">0</span>,<span class="cn">6</span>)
 
-      <div class="ex-card reveal"><div class="ex-title">🔀 Şert — Conditionals</div><pre><span class="ck">nav</span> <span class="cv">x</span> = <span class="cn">10</span>
+<span class="cf">klavBiGire</span>(<span class="cv">w</span>,<span class="cs">"&lt;KeyPress&gt;"</span>,<span class="cf">kbsa</span>)
+<span class="cf">nîşan</span>(<span class="cv">w</span>)</pre></div>
 
-<span class="ck">eger</span> <span class="cv">x</span> &gt; <span class="cn">5</span>:
-    <span class="cf">nivîs</span>(<span class="cs">"Mezin ji 5"</span>)
-<span class="ck">yan eger</span> <span class="cv">x</span> == <span class="cn">5</span>:
-    <span class="cf">nivîs</span>(<span class="cs">"Wekhev 5"</span>)
-<span class="ck">yan</span>:
-    <span class="cf">nivîs</span>(<span class="cs">"Biçûk ji 5"</span>)</pre></div>
+      <div class="ex-card"><div class="ex-title">⚠️ Try/Except — Error Handling</div><pre><span class="ck">êşk</span>:
+    <span class="ck">nav</span> <span class="cv">x</span> = <span class="cp">hejmar</span>(<span class="cf">xwestin</span>(<span class="cs">"Hejmar: "</span>))
+    <span class="cf">nivîs</span>(<span class="cs">"Çar:"</span>, <span class="cv">x</span>*<span class="cn">4</span>)
+<span class="ck">girtin</span> ValueError:
+    <span class="cf">nivîs</span>(<span class="cs">"Şaşî! Hejmar binivîse."</span>)
+<span class="ck">dewam</span>:
+    <span class="cf">nivîs</span>(<span class="cs">"Qediya."</span>)</pre></div>
 
-      <div class="ex-card reveal"><div class="ex-title">🔁 Xulama dem — While Loop</div><pre><span class="ck">nav</span> <span class="cv">i</span> = <span class="cn">1</span>
+      <div class="ex-card"><div class="ex-title">📊 Lîste + Math v2.0</div><pre><span class="ck">nav</span> <span class="cv">jin</span> = [<span class="cn">22</span>, <span class="cn">35</span>, <span class="cn">18</span>, <span class="cn">44</span>, <span class="cn">29</span>]
+<span class="cv">jin</span>.<span class="cf">rêzkirin</span>()
+<span class="cf">nivîs</span>(<span class="cs">"Herî mezin:"</span>, <span class="cf">mezin</span>(<span class="cv">jin</span>))
+<span class="cf">nivîs</span>(<span class="cs">"Herî biçûk:"</span>, <span class="cf">nizim</span>(<span class="cv">jin</span>))
+<span class="cf">nivîs</span>(<span class="cs">"Navînî:"</span>,
+    <span class="cf">tomkirin</span>(<span class="cf">jimartina</span>(<span class="cv">jin</span>)/<span class="cf">dirêj</span>(<span class="cv">jin</span>), <span class="cn">1</span>))</pre></div>
 
-<span class="ck">dem</span> <span class="cv">i</span> &lt;= <span class="cn">5</span>:
-    <span class="cf">nivîs</span>(<span class="cs">"Hejmar:"</span>, <span class="cv">i</span>)
-    <span class="cv">i</span> += <span class="cn">1</span></pre></div>
+      <div class="ex-card"><div class="ex-title">🔤 Nivîs Methods v2.0</div><pre><span class="ck">nav</span> <span class="cv">s</span> = <span class="cs">"  silav Kurdistan!  "</span>
+<span class="cf">nivîs</span>(<span class="cv">s</span>.<span class="cf">xêz</span>())
+<span class="cf">nivîs</span>(<span class="cv">s</span>.<span class="cf">jorê</span>())
+<span class="cf">nivîs</span>(<span class="cv">s</span>.<span class="cf">biguhêze</span>(<span class="cs">"silav"</span>,<span class="cs">"merheba"</span>))
+<span class="cc"># → silav Kurdistan!</span>
+<span class="cc"># → SILAV KURDISTAN!</span>
+<span class="cc"># → merheba Kurdistan!</span></pre></div>
 
-      <div class="ex-card reveal"><div class="ex-title">🔄 Xulama bo — For Loop</div><pre><span class="ck">nav</span> <span class="cv">reng</span> = [<span class="cs">"sor"</span>, <span class="cs">"kesk"</span>, <span class="cs">"şîn"</span>]
+      <div class="ex-card"><div class="ex-title">🎨 Animasyon — Animation</div><pre><span class="ck">nav</span> <span class="cv">w</span> = <span class="cf">pencere</span>(<span class="cs">"Animasyon"</span>,<span class="cs">"400x300"</span>)
+<span class="ck">nav</span> <span class="cv">c</span> = <span class="cf">kevir</span>(<span class="cv">w</span>,<span class="cn">400</span>,<span class="cn">300</span>,<span class="cs">"#0a0a0f"</span>)
+<span class="ck">nav</span> <span class="cv">top</span> = <span class="cf">xember</span>(<span class="cv">c</span>,<span class="cn">10</span>,<span class="cn">140</span>,<span class="cn">50</span>,<span class="cn">180</span>,<span class="cs">"#f0a500"</span>)
 
-<span class="ck">bo</span> <span class="cv">r</span> <span class="ck">di</span> <span class="cv">reng</span>:
-    <span class="cf">nivîs</span>(<span class="cs">"Reng:"</span>, <span class="cv">r</span>)</pre></div>
+<span class="ca">fonksîyon</span> <span class="cf">bilivin</span>():
+    <span class="cf">bilivîne</span>(<span class="cv">c</span>, <span class="cv">top</span>, <span class="cn">3</span>, <span class="cn">0</span>)
+    <span class="cf">piştî</span>(<span class="cv">w</span>, <span class="cn">16</span>, <span class="cf">bilivin</span>)
 
-      <div class="ex-card reveal"><div class="ex-title">⚙️ Fonksîyon — Function</div><pre><span class="ck">fonksîyon</span> <span class="cf">silav</span>(<span class="cv">ism</span>):
-    <span class="ck">vegere</span> <span class="cs">"Silav, "</span> + <span class="cv">ism</span> + <span class="cs">"!"</span>
+<span class="cf">bilivin</span>()
+<span class="cf">nîşan</span>(<span class="cv">w</span>)</pre></div>
 
-<span class="cf">nivîs</span>(<span class="cf">silav</span>(<span class="cs">"Roj"</span>))
-<span class="cc"># → Silav, Roj!</span></pre></div>
+      <div class="ex-card"><div class="ex-title">🏠 Ferheng — Dictionary</div><pre><span class="ck">nav</span> <span class="cv">kes</span> = <span class="cp">ferhenga</span>({
+    <span class="cs">"nav"</span>: <span class="cs">"Roj"</span>,
+    <span class="cs">"temen"</span>: <span class="cn">25</span>,
+    <span class="cs">"bajar"</span>: <span class="cs">"Amed"</span>
+})
+<span class="cf">nivîs</span>(<span class="cv">kes</span>[<span class="cs">"nav"</span>], <span class="cs">"ji"</span>, <span class="cv">kes</span>[<span class="cs">"bajar"</span>])
+<span class="cc"># → Roj ji Amed</span></pre></div>
 
-      <div class="ex-card reveal"><div class="ex-title">🎨 Hunerê Kurdî — Graphics</div><pre><span class="cc"># Kurdish art window</span>
-<span class="ck">nav</span> <span class="cv">xalan</span> = <span class="cf">pencere</span>(<span class="cs">"Hunerê Kurdî"</span>, <span class="cs">"500x400"</span>)
-<span class="ck">nav</span> <span class="cv">kevça</span> = <span class="cf">kevir</span>(<span class="cv">xalan</span>, <span class="cn">500</span>, <span class="cn">400</span>, <span class="cs">"#0a0a0f"</span>)
+      <div class="ex-card"><div class="ex-title">🖼️ Wêne — Image</div><pre><span class="ck">nav</span> <span class="cv">w</span>   = <span class="cf">pencere</span>(<span class="cs">"☀ Wêne"</span>, <span class="cs">"400x400"</span>)
+<span class="ck">nav</span> <span class="cv">c</span>   = <span class="cf">kevir</span>(<span class="cv">w</span>, <span class="cn">400</span>, <span class="cn">400</span>, <span class="cs">"#0a0a0f"</span>)
+<span class="ck">nav</span> <span class="cv">img</span> = <span class="cf">wêne_pîvandî</span>(<span class="cs">"logo.png"</span>, <span class="cn">200</span>, <span class="cn">200</span>)
+<span class="cf">wêne_nîşan</span>(<span class="cv">c</span>, <span class="cn">200</span>, <span class="cn">200</span>, <span class="cv">img</span>)
+<span class="cf">nîşan</span>(<span class="cv">w</span>)
+<span class="cc"># pip install pillow  ← ji bo JPG/WebP</span></pre></div>
 
-<span class="cf">çargoşe</span>(<span class="cv">kevça</span>, <span class="cn">50</span>, <span class="cn">50</span>, <span class="cn">200</span>, <span class="cn">200</span>, <span class="cs">"#e63946"</span>)
-<span class="cf">xember</span>(<span class="cv">kevça</span>, <span class="cn">260</span>, <span class="cn">50</span>, <span class="cn">450</span>, <span class="cn">240</span>, <span class="cs">"#f0a500"</span>)
-<span class="cf">xêz</span>(<span class="cv">kevça</span>, <span class="cn">50</span>, <span class="cn">300</span>, <span class="cn">450</span>, <span class="cn">300</span>, <span class="cs">"#06d6a0"</span>, <span class="cn">3</span>)
-<span class="cf">nivîskar</span>(<span class="cv">kevça</span>, <span class="cn">250</span>, <span class="cn">360</span>, <span class="cs">"☀ RojLang"</span>, <span class="cs">"#f0a500"</span>, <span class="cn">18</span>)
-
-<span class="cf">nîşan</span>(<span class="cv">xalan</span>)</pre></div>
-
-      <div class="ex-card reveal"><div class="ex-title">🎮 Lîstika Texmînkirinê</div><pre><span class="ck">nav</span> <span class="cv">veşartî</span> = <span class="cf">hilbijêre</span>(<span class="cn">1</span>, <span class="cn">10</span>)
-<span class="ck">nav</span> <span class="cv">çalak</span> = <span class="ck">rast</span>
-
-<span class="ck">dem</span> <span class="cv">çalak</span>:
-    <span class="ck">nav</span> <span class="cv">texmîn</span> = <span class="cf">int</span>(<span class="cf">xwestin</span>(<span class="cs">"Texmîn: "</span>))
-    <span class="ck">eger</span> <span class="cv">texmîn</span> == <span class="cv">veşartî</span>:
-        <span class="cf">nivîs</span>(<span class="cs">"🎉 Rast!"</span>)
-        <span class="ck">nav</span> <span class="cv">çalak</span> = <span class="ck">çewt</span></pre></div>
+      <div class="ex-card"><div class="ex-title">🔊 Deng — Sound</div><pre><span class="ck">nav</span> <span class="cv">w</span> = <span class="cf">pencere</span>(<span class="cs">"🔊 Muzik"</span>, <span class="cs">"300x150"</span>)
+<span class="cf">deng</span>(<span class="cs">"muzik.mp3"</span>, <span class="ck">rast</span>)
+<span class="cf">deng_bilindî</span>(<span class="cn">0.7</span>)
+<span class="ca">fonksîyon</span> <span class="cf">rawest</span>():
+    <span class="cf">deng_rawest</span>()
+<span class="cf">bişkojk</span>(<span class="cv">w</span>, <span class="cs">"⏹ Rawest"</span>, <span class="cf">rawest</span>)
+<span class="cf">nîşan</span>(<span class="cv">w</span>)
+<span class="cc"># pip install pygame  ← pêdivî</span></pre></div>
     </div>
   </div>
 </section>
 
-<!-- INSTALL -->
+
 <section id="install">
   <div class="container">
     <div class="reveal">
-      <div class="section-label">SAZKIRIN — INSTALLATION</div>
+      <div class="section-label">SAZKIRIN — INSTALL</div>
       <h2>Li ser <span style="color:var(--gold)">Windows</span></h2>
-      <p>Carekê saz bike — li her cihî bikar bîne. Install once — use anywhere.</p>
     </div>
-    <div class="steps reveal">
-      <div class="step"><div class="step-n">1</div><div class="step-b"><h4>⬇ Hemûyan daxistin — Download All</h4><p>Bişkoja "Download All" ya jorîn bitikîne — 3 pel tên daxistin.<br>Click "Download All" above — 3 files will download.</p></div></div>
-      <div class="step"><div class="step-n">2</div><div class="step-b"><h4>📁 Hemûyan di heman peldankê de bixin</h4><p>Hemû pelên daxistî di heman peldankê de bixin (mînak: Desktop).<br>Put all files in the same folder (e.g. Desktop).</p></div></div>
-      <div class="step"><div class="step-n">3</div><div class="step-b"><h4>⚙️ Mişkê rast → Run as administrator</h4><p>Li ser <code>install_rojlang.bat</code> mişkê rast bitikîne → <strong style="color:var(--gold)">"Run as administrator"</strong>.<br>This is important — it needs admin rights to set up PATH.</p></div></div>
-      <div class="step"><div class="step-n">4</div><div class="step-b"><h4>🖥️ Terminalek nû veke — Open new terminal</h4><p>Piştî sazkirinê CMD an Terminal nû veke (PATH tenê di terminalên nû de dixebite).<br>After install, open a new terminal window.</p></div></div>
-      <div class="step"><div class="step-n">5</div><div class="step-b"><h4>🚀 Bikar bîne!</h4><p>Ji her cihî binivîse <code>rojlang filename.ku</code> — an du-klîk li ser her <code>.ku</code> pelê bike! ✅</p></div></div>
-    </div>
-    <div class="code-wrap reveal">
-      <div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">CMD — anywhere on your PC</div></div>
-      <pre><span class="cc"># Ji her peldankê — From any folder:</span>
-<span class="cf">rojlang</span> game.ku
-<span class="cf">rojlang</span> test.ku
-
-<span class="cc"># Debug mode:</span>
-<span class="cf">rojlang</span> game.ku <span class="cs">--debug</span>
-
-<span class="cc"># Bi rêça temam — with full path:</span>
-<span class="cf">rojlang</span> <span class="cs">"C:\Users\te\Desktop\test.ku"</span></pre>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div class="step-b"><h4>⬇ Download All</h4><p>Bişkoja "Download All" bitikîne û hemû pelan daxistin.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-b"><h4>📁 Heman peldank</h4><p>Hemû pelan di heman peldankê de bixin — mînak Desktop.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-b"><h4>⚙️ Run as Administrator</h4><p>Li ser <code>install_rojlang.bat</code> mişkê rast → <strong style="color:var(--gold)">Run as administrator</strong></p></div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-b"><h4>🖥️ Terminal nû veke</h4><p>CMD nû veke — PATH tenê di terminalên nû de dixebite.</p></div></div>
+      <div class="step"><div class="step-n">5</div><div class="step-b"><h4>🚀 IDE yan CMD</h4><p><code>python rojlang_ide.py</code> — IDE bixebitîne &nbsp;·&nbsp; <code>rojlang test.ku</code> — CMD</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- TROUBLESHOOT -->
+<section id="cmdusage" style="padding:3rem 0">
+  <div class="container">
+    <div style="background:rgba(240,165,0,.04);border:1px solid rgba(240,165,0,.2);border-radius:8px;padding:1.8rem">
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:.4rem;color:var(--gold)">⚠️ Heke CMD xeletiyê bide — If CMD gives an error</div>
+      <p style="font-size:.82rem;color:#9898b8;margin-bottom:.8rem">Ev <strong style="color:var(--text)">asayî ye</strong>. Piştî sazkirinê, terminaleke nû veke û biçe klasora pelê xwe:</p>
+      <div style="background:var(--code-bg);border:1px solid var(--border);border-radius:5px;padding:.8rem 1.1rem;font-family:'Space Mono',monospace;font-size:.76rem;color:var(--green);line-height:1.9">
+        cd "C:\Users\Diyar\Desktop\proja-min"<br>
+        rojlang navê-pelê.ku
+      </div>
+      <p style="font-size:.74rem;color:var(--muted);margin-top:.7rem;margin-bottom:0">Nimûne: <code>cd "C:\Users\Hesen\Desktop"</code> → <code>rojlang game.ku</code></p>
+    </div>
+  </div>
+</section>
+
+
 <section id="trouble">
   <div class="container">
     <div class="reveal">
-      <div class="section-label">PIRSGIRÊK — TROUBLESHOOTING</div>
-      <h2>Çareseriya <span style="color:var(--gold)">Pirsgirêkan</span></h2>
-      <p>Common problems and how to fix them — Pirsgirêkên gelemperî û çareyên wan.</p>
+      <div class="section-label">PIRSGIRÊK — HELP</div>
+      <h2>Çareserî <span style="color:var(--gold)">Zû</span></h2>
     </div>
-    <div class="trouble-list reveal">
-
+    <div class="trouble-list">
       <div class="tc" onclick="tog(this)">
-        <div class="tc-head"><div class="tc-icon">🐍</div><div class="tc-q">'python' is not recognized — Python nehat nasîn</div><div class="tc-arr">▼</div></div>
+        <div class="tc-head"><div class="tc-icon">🐍</div><div class="tc-q">'python' is not recognized</div><div class="tc-arr">▼</div></div>
         <div class="tc-body">
           <div class="tag tag-r">PIRSGIRÊKA HERÎ GELEMPERÎ</div>
-          <p>Ev tê wê wateyê ku <strong>Python li ser komputera te saz nebûye</strong>. RojLang bi Python dixebite — divê pêşî Python saz bikî.</p>
-          <div class="code-wrap"><div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">How to install Python</div></div>
-          <pre><span class="cn">1.</span> Biçe: <span class="cs">https://python.org/downloads</span>
-<span class="cn">2.</span> <span class="cs">"Download Python 3.x"</span> bitikîne
-<span class="cn">3.</span> Sazkerê veke
-<span class="cn">4.</span> <span class="ck">☑ "Add Python to PATH"</span> <span class="cc">← Pir girîng! Never forget this!</span>
-<span class="cn">5.</span> <span class="cs">"Install Now"</span> bitikîne
-<span class="cn">6.</span> CMD-ê nû veke û test bike:
-   python --version</pre></div>
-          <div class="tag tag-g">Piştî Python sazkirinê → install_rojlang.bat ji nû ve bixebitîne ✓</div>
+          <p>Python saz nîne. Biçe <code>python.org/downloads</code> → <strong>Add Python to PATH</strong> çekneke!</p>
+          <div class="code-wrap"><div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">test</div></div><pre>python --version</pre></div>
         </div>
       </div>
-
       <div class="tc" onclick="tog(this)">
-        <div class="tc-head"><div class="tc-icon">⚠️</div><div class="tc-q">Python saz kir lê hîn jî 'python' nayê nasîn</div><div class="tc-arr">▼</div></div>
-        <div class="tc-body">
-          <div class="tag tag-o">ÇARESERÎ HÊSAN</div>
-          <p>Dibe ku dema sazkirinê <strong>"Add Python to PATH"</strong> çeknekir. Sazkerê Python dîsa veke → "Modify" → "Add to PATH" têxe.</p>
-          <p>An jî bi destan: <strong>Search</strong> → "Environment Variables" → Path → Edit → New → rêça Python lê zêde bike.<br>
-          Mînak: <code>C:\Users\te\AppData\Local\Programs\Python\Python312</code></p>
-        </div>
-      </div>
-
-      <div class="tc" onclick="tog(this)">
-        <div class="tc-head"><div class="tc-icon">🔧</div><div class="tc-q">'rojlang' nayê nasîn piştî sazkirinê — rojlang not found</div><div class="tc-arr">▼</div></div>
-        <div class="tc-body">
-          <div class="tag tag-o">ÇARESERÎ HÊSAN</div>
-          <p><strong>Terminalek nû veke</strong> — PATH tenê di terminalên nû de dixebite. Terminalê kevin nagihîje PATH-ê nû.</p>
-          <p>Heke hîn nexebite, check bike: <code>C:\RojLang\rojlang.bat</code> heye? Heke nebe, <code>install_rojlang.bat</code> ji nû ve weke admin bixebitîne.</p>
-        </div>
-      </div>
-
-      <div class="tc" onclick="tog(this)">
-        <div class="tc-head"><div class="tc-icon">🛡️</div><div class="tc-q">Installer xelet qediya — Installer failed or did nothing</div><div class="tc-arr">▼</div></div>
-        <div class="tc-body">
-          <div class="tag tag-r">SEDEM GELEMPERÎ</div>
-          <p>Installer bêyî <strong>"Run as administrator"</strong> hat xebitandin. Registry û PATH mafên rêvebir hewce dike.</p>
-          <p><strong>Çareserî:</strong> Mişkê rast → <strong>"Run as administrator"</strong> → Enter bike. Tenê carekê dîsan.</p>
-          <div class="tag tag-g">Carekê dîsa weke admin bixebitîne — that's it ✓</div>
-        </div>
-      </div>
-
-      <div class="tc" onclick="tog(this)">
-        <div class="tc-head"><div class="tc-icon">📄</div><div class="tc-q">Du-klîk li .ku file naxebite — Double-click opens wrong app</div><div class="tc-arr">▼</div></div>
+        <div class="tc-head"><div class="tc-icon">🔧</div><div class="tc-q">'rojlang' nayê nasîn</div><div class="tc-arr">▼</div></div>
         <div class="tc-body">
           <div class="tag tag-o">ÇARESERÎ</div>
-          <p>Bi destan file association rast bike — CMD weke admin veke û ev bixebitîne:</p>
-          <div class="code-wrap"><div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">CMD (Admin)</div></div>
-          <pre>reg add "HKCR\.ku" /ve /d "RojLangFile" /f
-reg add "HKCR\RojLangFile\shell\open\command" /ve /d "cmd.exe /k python \"C:\RojLang\interpreter.py\" \"%%1\"" /f</pre></div>
+          <p><strong>Terminalek nû veke</strong> — PATH tenê di terminalên nû de dixebite. Eger hîn nexebite: <code>install_rojlang.bat</code> weke Admin dîsa bixebitîne.</p>
         </div>
       </div>
-
       <div class="tc" onclick="tog(this)">
-        <div class="tc-head"><div class="tc-icon">🔤</div><div class="tc-q">UnicodeDecodeError — Tîpên Kurdî xelet xuya dikin</div><div class="tc-arr">▼</div></div>
+        <div class="tc-head"><div class="tc-icon">🖥</div><div class="tc-q">IDE naxebite</div><div class="tc-arr">▼</div></div>
         <div class="tc-body">
-          <div class="tag tag-r">PIRSGIRÊKA KODKIRINÊ</div>
-          <p>Pelê <code>.ku</code> divê bi <strong>UTF-8</strong> were hilanîn. Edîtorê xwe check bike:</p>
-          <div class="code-wrap"><div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">Fix by editor</div></div>
-          <pre><span class="cc"># VS Code:</span>
-<span class="cc"># Guşeya jêrîn rastê → UTF-8 divê be</span>
-
-<span class="cc"># Notepad++:</span>
-<span class="cc"># Encoding → Convert to UTF-8</span>
-
-<span class="cc"># Notepad (Windows):</span>
-<span class="cc"># Save As → Encoding → UTF-8</span></pre></div>
+          <div class="tag tag-o">KONTROL BIKE</div>
+          <p><strong>interpreter.py</strong> û <strong>rojlang_ide.py</strong> divê di heman peldankê de bin.</p>
+          <div class="code-wrap"><div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">folder</div></div>
+          <pre>📁 RojLang/
+   rojlang_ide.py
+   interpreter.py</pre></div>
         </div>
       </div>
-
+      <div class="tc" onclick="tog(this)">
+        <div class="tc-head"><div class="tc-icon">🔤</div><div class="tc-q">Arabic/Kurdish text error</div><div class="tc-arr">▼</div></div>
+        <div class="tc-body">
+          <div class="tag tag-g">ÇARESERÎ</div>
+          <p>RojLang IDE xweber UTF-8 bikar tîne. Ji bo edîtorên din: Save As → Encoding → <strong>UTF-8</strong>.</p>
+        </div>
+      </div>
+      <div class="tc" onclick="tog(this)">
+        <div class="tc-head"><div class="tc-icon">🖼️</div><div class="tc-q">wêne() naxebite — JPG/WebP error</div><div class="tc-arr">▼</div></div>
+        <div class="tc-body">
+          <div class="tag tag-o">PÊDIVÎ</div>
+          <p>Ji bo JPG û WebP, <strong>Pillow</strong> pêwîst e. PNG û GIF bê pêdivî dixebitin.</p>
+          <div class="code-wrap"><div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">cmd</div></div><pre>pip install pillow</pre></div>
+        </div>
+      </div>
+      <div class="tc" onclick="tog(this)">
+        <div class="tc-head"><div class="tc-icon">🔊</div><div class="tc-q">deng() naxebite — Sound error</div><div class="tc-arr">▼</div></div>
+        <div class="tc-body">
+          <div class="tag tag-o">PÊDIVÎ</div>
+          <p>Ji bo dengî, <strong>pygame</strong> pêwîst e:</p>
+          <div class="code-wrap"><div class="code-hdr"><div class="dots"><span></span><span></span><span></span></div><div class="code-lang">cmd</div></div><pre>pip install pygame</pre></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- REFERENCE -->
+
 <section id="reference">
   <div class="container">
     <div class="reveal">
-      <div class="section-label">REFERANS — FULL REFERENCE</div>
+      <div class="section-label">REFERANS — FULL TABLE</div>
       <h2>Tabloya <span style="color:var(--gold)">Temam</span></h2>
-      <p>Hemû peyvên RojLang di yek tabloyê de — All keywords in one table.</p>
     </div>
-    <div class="tbl-wrap reveal">
+    <div class="tbl-wrap">
       <table>
         <thead><tr><th>ROJLANG</th><th>PYTHON</th><th>KURDÎ</th><th>ENGLISH</th></tr></thead>
         <tbody>
-          <tr><td>nivîs(x)</td><td>print(x)</td><td>Tişt li ekranê çap dike</td><td>Print to screen</td></tr>
-          <tr><td>bêje(x)</td><td>print(x, end="")</td><td>Çap bê rêzika nû</td><td>Print, no newline</td></tr>
-          <tr><td>nav x = …</td><td>x = …</td><td>Guhêrbar diyar dike</td><td>Declare variable</td></tr>
-          <tr><td>xwestin(x)</td><td>input(x)</td><td>Têketina bikarhêner</td><td>User input</td></tr>
-          <tr><td>hilbijêre(a,b)</td><td>random.randint(a,b)</td><td>Hejmareke rasthatî</td><td>Random integer</td></tr>
-          <tr><td>eger</td><td>if</td><td>Heke</td><td>If condition</td></tr>
-          <tr><td>yan eger</td><td>elif</td><td>Yan heke</td><td>Else-if</td></tr>
-          <tr><td>yan</td><td>else</td><td>Wekî din</td><td>Otherwise</td></tr>
-          <tr><td>dem</td><td>while</td><td>Heta ku</td><td>While loop</td></tr>
-          <tr><td>bo … di</td><td>for … in</td><td>Bo her tiştî</td><td>For each in</td></tr>
-          <tr><td>fonksîyon</td><td>def</td><td>Fonksiyon diyar dike</td><td>Define function</td></tr>
-          <tr><td>vegere</td><td>return</td><td>Nirxek vedigere</td><td>Return value</td></tr>
-          <tr><td>rast</td><td>True</td><td>Nirxa rast</td><td>Boolean true</td></tr>
-          <tr><td>çewt</td><td>False</td><td>Nirxa çewt</td><td>Boolean false</td></tr>
-          <tr><td>Tune</td><td>None</td><td>Vala / Tu tişt</td><td>Null / None</td></tr>
-          <tr><td>ne</td><td>not</td><td>Ne / Nebe</td><td>Logical NOT</td></tr>
-          <tr><td>û</td><td>and</td><td>Hem…hem</td><td>Logical AND</td></tr>
-          <tr><td>an</td><td>or</td><td>Yan…yan</td><td>Logical OR</td></tr>
-          <tr><td>bişkîne</td><td>break</td><td>Xulamê dişkîne</td><td>Break loop</td></tr>
-          <tr><td>berdewam</td><td>continue</td><td>Dewamî dike</td><td>Continue loop</td></tr>
-          <tr><td>nîşe</td><td>pass</td><td>Tiştek nake</td><td>Do nothing</td></tr>
-          <tr><td>derkev</td><td>exit()</td><td>Ji bernameyê derdikeve</td><td>Exit program</td></tr>
-          <tr><td>dirêj(x)</td><td>len(x)</td><td>Dirêjiya lîsteyê</td><td>Length</td></tr>
-          <tr><td>x.têxe(y)</td><td>x.append(y)</td><td>Tiştek lê zêde dike</td><td>Append to list</td></tr>
-          <tr><td>cure(x)</td><td>type(x)</td><td>Cureya guhêrbar</td><td>Type of variable</td></tr>
-          <tr><td>sinif</td><td>class</td><td>Sinifekê diyar dike</td><td>Define class</td></tr>
+          <tr class="tbl-section-row"><td colspan="4">── CORE ─────────────────────────────</td></tr>
+          <tr><td>nivîs / çap</td><td>print()</td><td>Çap bike</td><td>Print</td></tr>
+          <tr><td>bêje(x)</td><td>print(end="")</td><td>Heman rêz</td><td>No newline</td></tr>
+          <tr><td>nav x = …</td><td>x = …</td><td>Guhêrbar</td><td>Variable</td></tr>
+          <tr><td>xwestin("?")</td><td>input("?")</td><td>Têketin</td><td>User input</td></tr>
+          <tr><td>eger / yan eger / yan</td><td>if / elif / else</td><td>Şert</td><td>Conditionals</td></tr>
+          <tr><td>dem … :</td><td>while … :</td><td>Dem xulam</td><td>While loop</td></tr>
+          <tr><td>bo … di … :</td><td>for … in … :</td><td>Bo xulam</td><td>For loop</td></tr>
+          <tr><td>fonksîyon / vegere</td><td>def / return</td><td>Fonksiyon</td><td>Function</td></tr>
+          <tr><td>sinif</td><td>class</td><td>Sinif</td><td>Class</td></tr>
+          <tr><td>rast / çewt / Tune</td><td>True / False / None</td><td>Boolean</td><td>Boolean</td></tr>
+          <tr><td>ne / û / an</td><td>not / and / or</td><td>Mantiq</td><td>Logic</td></tr>
+          <tr><td>bişkîne / berdewam / nîşe</td><td>break / continue / pass</td><td>Kontrol</td><td>Loop control</td></tr>
+          <tr class="tbl-section-row"><td colspan="4">── TYPES &amp; MATH ───────────────────────</td></tr>
+          <tr><td>hilbijêre(a,b)</td><td>randint(a,b)</td><td>Rasthatî</td><td>Random int</td></tr>
+          <tr><td>hilbijêreFloat(a,b)</td><td>random.uniform(a,b)</td><td>Rasthatî float</td><td>Random float</td></tr>
+          <tr><td>hejmar / nivîsok / hejimarFloat</td><td>int / str / float</td><td>Cure</td><td>Type cast</td></tr>
+          <tr><td>pêl / ferhenga / koma</td><td>list / dict / set</td><td>Cureyên berhevkirinê</td><td>Collections</td></tr>
+          <tr><td>dirêj / cure</td><td>len / type</td><td>Dirêjî / Cure</td><td>Length / Type</td></tr>
+          <tr><td>mezin / nizim</td><td>max / min</td><td>Herî mezin/biçûk</td><td>Max / Min</td></tr>
+          <tr><td>jimartina / bijmare</td><td>sum / range</td><td>Kom / Rêz</td><td>Sum / Range</td></tr>
+          <tr><td>tomkirin / şikeftin</td><td>round / abs</td><td>Nivzel / Mutlak</td><td>Round / Abs</td></tr>
+          <tr><td>mathSqrt / mathPow / mathPi</td><td>math.sqrt/pow/pi</td><td>Math</td><td>Math</td></tr>
+          <tr class="tbl-section-row"><td colspan="4">── EXCEPTIONS ──────────────────────────</td></tr>
+          <tr><td>êşk / girtin / dewam</td><td>try / except / finally</td><td>Şaşî girtin</td><td>Error handling</td></tr>
+          <tr><td>avêtin</td><td>raise</td><td>Şaşiyê bavêje</td><td>Raise error</td></tr>
+          <tr class="tbl-section-row"><td colspan="4">── STRING &amp; LIST METHODS ──────────────</td></tr>
+          <tr><td>s.jorê() / s.jêrê()</td><td>.upper() / .lower()</td><td>Tîp</td><td>Case</td></tr>
+          <tr><td>s.veqetîne(x)</td><td>.split(x)</td><td>Veqetîne</td><td>Split</td></tr>
+          <tr><td>s.biguhêze(a,b)</td><td>.replace(a,b)</td><td>Biguherîne</td><td>Replace</td></tr>
+          <tr><td>s.bibîne / s.xêz / s.hejmarê</td><td>.find/.strip/.count</td><td>Nivîs rêbaz</td><td>String methods</td></tr>
+          <tr><td>lst.têxe / lst.jêbike</td><td>.append / .remove</td><td>Lîste</td><td>List methods</td></tr>
+          <tr><td>lst.rêzkirin / lst.berevajikirin</td><td>.sort / .reverse</td><td>Rêz bike</td><td>Sort/Reverse</td></tr>
+          <tr class="tbl-section-row"><td colspan="4">── KEYBOARD &amp; ANIMATION ───────────────</td></tr>
+          <tr><td>klavBiGire(w,k,fn)</td><td>w.bind(k,fn)</td><td>Kbsa klavyeyê</td><td>Key binding</td></tr>
+          <tr><td>bilivîne(c,id,dx,dy)</td><td>c.move(id,dx,dy)</td><td>Bilivîne</td><td>Move item</td></tr>
+          <tr><td>piştî(w,ms,fn)</td><td>w.after(ms,fn)</td><td>Piştî dem</td><td>Delayed call</td></tr>
+          <tr class="tbl-section-row"><td colspan="4">── GUI ─────────────────────────────────</td></tr>
+          <tr><td>peyam / bipirse</td><td>messagebox / askyesno</td><td>Dialog</td><td>Dialog boxes</td></tr>
+          <tr><td>derkev</td><td>exit()</td><td>Derkeve</td><td>Exit</td></tr>
+          <tr class="tbl-section-row"><td colspan="4">── IMAGE — v2.1 ────────────────────────</td></tr>
+          <tr><td>wêne(path)</td><td>PhotoImage / PIL</td><td>Wêne bar bike</td><td>Load image PNG/GIF</td></tr>
+          <tr><td>wêne_pîvandî(p,f,h)</td><td>PIL.Image.resize</td><td>Bar + resize</td><td>Load &amp; resize JPG/WebP</td></tr>
+          <tr><td>wêne_nîşan(c,x,y,img)</td><td>canvas.create_image()</td><td>Li canvas nîşan</td><td>Show on canvas → ID</td></tr>
+          <tr><td>wêne_label(w,img)</td><td>Label(image=img)</td><td>Di pencereyê de</td><td>Show in Label widget</td></tr>
+          <tr class="tbl-section-row"><td colspan="4">── SOUND — v2.1 ────────────────────────</td></tr>
+          <tr><td>deng(path)</td><td>pygame.music.play(0)</td><td>Deng lêde carek</td><td>Play MP3/WAV once</td></tr>
+          <tr><td>deng(path, rast)</td><td>music.play(-1)</td><td>Loop lêde</td><td>Play looping</td></tr>
+          <tr><td>deng_dengdank(path)</td><td>pygame.Sound().play()</td><td>Efekta kurt</td><td>Short sound effect</td></tr>
+          <tr><td>deng_rawest()</td><td>music.stop()</td><td>Hemû rawest</td><td>Stop all sound</td></tr>
+          <tr><td>deng_bilindî(0-1)</td><td>music.set_volume(v)</td><td>Bilindî</td><td>Set volume 0.0–1.0</td></tr>
         </tbody>
       </table>
     </div>
@@ -506,302 +819,840 @@ reg add "HKCR\RojLangFile\shell\open\command" /ve /d "cmd.exe /k python \"C:\Roj
 <footer>
   <span class="f-logo">☀ ROJLANG</span>
   <p>Zimanê bernamesaziyê yê Kurdî — The Kurdish Programming Language</p>
-
-  <div style="display:flex;align-items:center;justify-content:center;gap:1.2rem;margin-top:1.2rem;flex-wrap:wrap">
-    <a href="https://www.instagram.com/d7r.x_?igsh=cG9xZG55M2traTVn"
-       target="_blank" rel="noopener"
-       style="display:inline-flex;align-items:center;gap:.45rem;color:var(--text);text-decoration:none;font-family:'Space Mono',monospace;font-size:.72rem;background:var(--bg2);border:1px solid var(--border);padding:.45rem 1rem;border-radius:4px;transition:all .2s"
-       onmouseover="this.style.borderColor='#f0a500';this.style.color='#f0a500'"
-       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+  <p style="margin-top:.35rem;font-size:.6rem;color:rgba(106,106,138,.45)">v2.1 · 2026 · MIT License</p>
+  <div class="f-links">
+    <a href="https://www.instagram.com/d7r.x_" target="_blank" rel="noopener" class="f-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
       @d7r.x_
     </a>
-    <a href="mailto:didad9683@gmail.com" style="display:inline-flex;align-items:center;gap:.45rem;color:var(--text);text-decoration:none;font-family:'Space Mono',monospace;font-size:.72rem;background:var(--bg2);border:1px solid var(--border);padding:.45rem 1rem;border-radius:4px;transition:all .2s" onmouseover="this.style.borderColor='#f0a500';this.style.color='#f0a500'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      <span class="__cf_email__" data-cfemail="bbdfd2dfdadf828d8388fbdcd6dad2d795d8d4d6">[&#160;didad9683@gmail.com]</span>
-    </a>
   </div>
-
-  <p style="margin-top:1rem;color:#2a2a4a">v1.1 · Released 2026 ·</p>
 </footer>
 
 <div class="toast" id="toast"></div>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ── FILE CONTENTS ──────────────────────────────────────────────
-const INTERPRETER = `# RojLang Interpreter (interpreter.py)
-import re, sys, os, traceback, random
-
-TRANSLATIONS = [
-    (r"\\bfonks\\u00eeon\\b", "def"),
-    (r"\\bniv\\u00ees\\b", "print"),
-    (r"\\beger\\b", "if"),
-    (r"\\byan\\b", "else"),
-    (r"\\bdem\\b", "while"),
-    (r"\\bvegere\\b", "return"),
-    (r"\\bxwestin\\b", "input"),
-    (r"\\bbo\\b", "for"),
-    (r"\\bdi\\b", "in"),
-    (r"\\brast\\b", "True"),
-    (r"\\b\\u00e7ewt\\b", "False"),
-    (r"\\bsinif\\b", "class"),
-    (r"\\bTune\\b", "None"),
-    (r"\\bnav\\b\\s+", ""),
-    (r"\\bn\\u00ee\\u015ee\\b", "pass"),
-    (r"\\bbi\\u015dk\\u00eene\\b", "break"),
-    (r"\\bberdewam\\b", "continue"),
-    (r"\\bderkev\\b", "exit()"),
-    (r"\\bne\\b", "not"),
-    (r"\\b\\u00fb\\b", "and"),
-    (r"\\ban\\b", "or"),
-    (r"\\bb\\u00eaje\\b", "_rojlang_beje"),
-    (r"\\bdirêj\\b", "len"),
-    (r"\\bcure\\b", "type"),
-    (r"\\.têxe\\b", ".append"),
-    (r"\\bhilbij\\u00eere\\b", "random.randint"),
-]
-POST_FIXES = [
-    (r"\\belse\\s+if\\b", "elif"),
-    (r"(?m)(\\S)[ \\t]{2,}", r"\\1 "),
-]
-
-def _rojlang_beje(*args, **kwargs):
-    kwargs.setdefault("end", "")
-    print(*args, **kwargs)
-
-def wergerîne(source):
-    code = source
-    for p, r in TRANSLATIONS:
-        code = re.sub(p, r, code)
-    for p, r in POST_FIXES:
-        code = re.sub(p, r, code)
-    return code
-
-def bijêre(file_path, debug=False):
-    if not file_path.endswith(".ku"):
-        print(f"[RojLang] Şaşî: '{file_path}' nayê qebûlkirin.")
-        sys.exit(1)
-    if not os.path.isfile(file_path):
-        print(f"[RojLang] Şaşî: Dosya '{file_path}' nehat dîtin.")
-        sys.exit(1)
-    with open(file_path, "r", encoding="utf-8") as fh:
-        src = fh.read()
-    py_src = wergerîne(src)
-    if debug:
-        print("\\n" + "─"*60 + "\\n  [RojLang DEBUG]\\n" + "─"*60)
-        for i, ln in enumerate(py_src.splitlines(), 1):
-            print(f"  {i:>4} │ {ln}")
-        print("─"*60 + "\\n")
-    g = {"__name__": "__main__", "_rojlang_beje": _rojlang_beje, "random": random}
-    try:
-        exec(compile(py_src, file_path, "exec"), g)
-    except SyntaxError as e:
-        print(f"\\n[RojLang] Şaşiya Syntax (rêz {e.lineno}): {e.msg}\\n  → {e.text}")
-        sys.exit(1)
-    except SystemExit:
-        pass
-    except Exception:
-        print("\\n[RojLang] Şaşiya Runtime:")
-        traceback.print_exc()
-        sys.exit(1)
-
-def main():
-    args = sys.argv[1:]
-    debug = "--debug" in args
-    if debug: args.remove("--debug")
-    bijêre(args[0] if args else "test.ku", debug=debug)
-
-if __name__ == "__main__":
-    main()
-`;
-
-const INSTALLER = `@echo off
-:: RojLang Installer for Windows - Run as Administrator!
-echo.
-echo  *** RojLang Installer - Sazkerê RojLang ***
-echo.
-set INSTALL_DIR=C:\\RojLang
-set SCRIPT_DIR=%~dp0
-echo [1/5] Creating C:\\RojLang...
-if not exist "%INSTALL_DIR%" mkdir "%INSTALL_DIR%"
-echo [2/5] Copying interpreter.py...
-if exist "%SCRIPT_DIR%interpreter.py" (
-    copy /Y "%SCRIPT_DIR%interpreter.py" "%INSTALL_DIR%\\interpreter.py" >nul
-    echo       OK!
-) else (
-    echo       ERROR: interpreter.py not found! Put both files in same folder.
-    pause & exit /b 1
-)
-echo [3/5] Creating rojlang.bat...
-(echo @echo off & echo python "%INSTALL_DIR%\\interpreter.py" %%*) > "%INSTALL_DIR%\\rojlang.bat"
-echo       OK!
-echo [4/5] Adding to PATH...
-powershell -Command "$p=[System.Environment]::GetEnvironmentVariable('Path','Machine');if($p -notlike '*C:\\RojLang*'){[System.Environment]::SetEnvironmentVariable('Path',$p+';C:\\RojLang','Machine');Write-Host '      OK!'}else{Write-Host '      Already in PATH.'}"
-echo [5/5] Registering .ku files...
-reg add "HKCR\\.ku" /ve /d "RojLangFile" /f >nul 2>&1
-reg add "HKCR\\RojLangFile" /ve /d "RojLang Source" /f >nul 2>&1
-reg add "HKCR\\RojLangFile\\DefaultIcon" /ve /d "C:\\Windows\\System32\\shell32.dll,41" /f >nul 2>&1
-reg add "HKCR\\RojLangFile\\shell\\open\\command" /ve /d "cmd.exe /k python \\"%INSTALL_DIR%\\interpreter.py\\" \\"%%1\\"" /f >nul 2>&1
-echo       OK!
-echo.
-echo ==========================================
-echo  RojLang saz bu! / RojLang installed!
-echo ==========================================
-echo  Open a NEW terminal and type: rojlang yourfile.ku
-echo  Or double-click any .ku file!
-echo.
-pause
-`;
-
-const GAME = `# Listika Texminkirine - RojLang
-# Mînak: rojlang game.ku
-
-nav hejmare_vesarti = hilbijere(1, 10)
-
-nivis("Xer hati listika texminkirine!")
-nivis("Ez hejmarek ji 1 heta 10 hilbijartim...")
-nivis("Tu dikari texmin biki?")
-nivis("------------------------------")
-
-nav berdewame = rast
-
-dem berdewame:
-    nav texmina_te = int(xwestin("Texmina xwe binivise (1-10): "))
-
-    eger texmina_te > hejmare_vesarti:
-        nivis("Hejmar mestre! Hejmareke bicuktir biceribine.")
-
-    yan eger texmina_te < hejmare_vesarti:
-        nivis("Hejmar bicuktir! Hejmareke mezintir biceribine.")
-
-    yan:
-        nivis("Ere! Tu bi ser keti! Hejmara vesarti", hejmare_vesarti, "bu!")
-        nav berdewame = cewt
-
-nivis("------------------------------")
-nivis("Spas ji bo listina xwe!")
-`;
-
-const ART = `# Hunere Kurdi - Kurdish Art
-# RojLang v1.1 - Graphics Demo
-# Mînak: rojlang art.ku
-
-nav xalan = pencere("Hunere Kurdi - RojLang", "620x520")
-nav kevca = kevir(xalan, 620, 520, "#0a0a0f")
-
-nav sor   = "#e63946"
-nav zer   = "#f0a500"
-nav kesk  = "#06d6a0"
-nav sin   = "#a8dadc"
-nav mor   = "#9b5de5"
-nav pembe = "#f15bb5"
-nav spi   = "#e8e8f0"
-nav tari  = "#0a0a0f"
-
-nav renganê_pasxane = rengên_hevber("#0a0a0f", "#1a1a2e", 10)
-nav j = 0
-bo r di renganê_pasxane:
-    çargoşe(kevca, 0, j * 52, 620, j * 52 + 52, r)
-    j += 1
-
-xêz(kevca, 0,   0,   620, 0,   zer, 3)
-xêz(kevca, 0,   517, 620, 517, zer, 3)
-xêz(kevca, 0,   0,   0,   520, zer, 2)
-xêz(kevca, 618, 0,   618, 520, zer, 2)
-
-nav cx = 310
-nav cy = 210
-
-nav i = 0
-dem i < 12:
-    nav gose = i * 30
-    nav rad = math.radians(gose)
-    nav x1 = int(cx + 85 * math.cos(rad))
-    nav y1 = int(cy + 85 * math.sin(rad))
-    nav x2 = int(cx + 130 * math.cos(rad))
-    nav y2 = int(cy + 130 * math.sin(rad))
-    xêz(kevca, x1, y1, x2, y2, zer, 4)
-    i += 1
-
-xember(kevca, cx-75, cy-75, cx+75, cy+75, zer)
-xember(kevca, cx-55, cy-55, cx+55, cy+55, "#e8a000")
-xember(kevca, cx-35, cy-35, cx+35, cy+35, tari)
-xember(kevca, cx-18, cy-18, cx+18, cy+18, sor)
-
-çargoşe(kevca, 30,  60,  110, 140, sor)
-çargoşe(kevca, 30,  165, 110, 245, kesk)
-çargoşe(kevca, 30,  270, 110, 350, pembe)
-
-çargoşe(kevca, 510, 60,  590, 140, sin)
-çargoşe(kevca, 510, 165, 590, 245, zer)
-çargoşe(kevca, 510, 270, 590, 350, mor)
-
-nav renganê_reze = [sor, zer, kesk, sin, mor, pembe]
-nav cx2 = 65
-bo rr di renganê_reze:
-    xember(kevca, cx2-28, 390, cx2+28, 446, rr)
-    xember(kevca, cx2-18, 400, cx2+18, 436, tari)
-    cx2 += 82
-
-nivîskar(kevca, 310, 466, "☀  ROJLANG  ☀", zer, 20, "Arial")
-nivîskar(kevca, 310, 495, "Zimane Bernamesaziye ye Kurdi", spi, 11, "Arial")
-
-nîşan(xalan)
-`;
-
-function dlFile(key) {
-  const map = {
-    interpreter: {n:'interpreter.py', c:INTERPRETER},
-    installer:   {n:'install_rojlang.bat', c:INSTALLER},
-    game:        {n:'game.ku', c:GAME},
-    art:         {n:'art.ku', c:ART}
-  };
-  const f = map[key];
-  const isKu = f.n.endsWith('.ku');
-  const blob = new Blob([f.c], {type: isKu ? 'application/octet-stream' : 'text/plain;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href=url; a.download=f.n;
-  document.body.appendChild(a); a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  toast('\u2b07 ' + f.n + ' hat daxistin!');
-}
-
-function downloadAll(){
-  ['interpreter','installer','game','art'].forEach((k,i)=>setTimeout(()=>dlFile(k),i*500));
-  setTimeout(()=>toast('\u2713 Hem\u00fb 4 p\u00eal hatin daxistin! All 4 files downloaded!'),2200);
-}
-
+<script>
+// ── Toast ──
 function toast(msg){
   const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),3200);
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3200);
 }
 
+// ── Accordion (trouble/FAQ) ──
 function tog(el){
   const open=el.classList.contains('open');
   document.querySelectorAll('.tc').forEach(c=>c.classList.remove('open'));
-  if(!open) el.classList.add('open');
+  if(!open)el.classList.add('open');
 }
 
-// Scroll reveal
+// ── Keyword tabs ──
+function kwTab(id,btn){
+  document.querySelectorAll('.kw-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.kw-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('kw-'+id).classList.add('active');
+}
+
+// ── File contents ──
+const _FILES = {
+  interpreter: { n:'interpreter.py',        c:`import re
+import sys
+import os
+import traceback
+import random
+import math
+
+
+TRANSLATIONS = [
+    (r'\\bfonksîyon\\b',  'def'),
+    (r'\\bfonksiyon\\b',  'def'),
+
+    (r'\\bnivîs\\b',      'print'),
+    (r'\\bnivis\\b',      'print'),
+
+    (r'\\bbêje\\b',       '_ku_beje'),
+    (r'\\bbeje\\b',       '_ku_beje'),
+
+    (r'\\bxwestin\\b',    'input'),
+
+    (r'\\bhilbijêre\\b',  'random.randint'),
+    (r'\\bhilbijere\\b',  'random.randint'),
+
+    (r'\\beger\\b',       'if'),
+    (r'\\byan\\b',        'else'),
+    (r'\\bdem\\b',        'while'),
+    (r'\\bvegere\\b',     'return'),
+    (r'\\bbo\\b',         'for'),
+    (r'\\bdi\\b',         'in'),
+
+    (r'\\brast\\b',       'True'),
+
+    (r'\\bçewt\\b',       'False'),
+    (r'\\bcewt\\b',       'False'),
+
+    (r'\\bsinif\\b',      'class'),
+    (r'\\bTune\\b',       'None'),
+
+    (r'\\bnav\\b\\s+',     ''),
+
+    (r'\\bnîşe\\b',       'pass'),
+    (r'\\bnise\\b',       'pass'),
+
+    (r'\\bbişkîne\\b',    'break'),
+    (r'\\bbiskine\\b',    'break'),
+
+    (r'\\bberdewam\\b',   'continue'),
+    (r'\\bderkev\\b',     'exit()'),
+
+    (r'\\bne\\b',         'not'),
+    (r'\\bû\\b',          'and'),
+    (r'\\bu\\b',          'and'),
+    (r'\\ban\\b',         'or'),
+
+    (r'\\bdirêj\\b',      'len'),
+    (r'\\bdirej\\b',      'len'),
+
+    (r'\\bcure\\b',       'type'),
+
+    (r'\\.têxe\\b',       '.append'),
+    (r'\\.texe\\b',       '.append'),
+
+    (r'\\bhejmar\\b',         'int'),
+    (r'\\bnivîsok\\b',        'str'),
+    (r'\\bnivisok\\b',        'str'),
+    (r'\\bhejimarFloat\\b',   'float'),
+
+    (r'\\bpêl\\b',            'list'),
+    (r'\\bpel\\b',            'list'),
+    (r'\\bferhenga\\b',       'dict'),
+    (r'\\bkoma\\b',           'set'),
+
+    (r'\\bnizim\\b',          'min'),
+    (r'\\bmezin\\b',          'max'),
+    (r'\\btomkirin\\b',       'round'),
+    (r'\\bjimartina\\b',      'sum'),
+    (r'\\bbijmare\\b',        'range'),
+    (r'\\bşikeftin\\b',       'abs'),
+    (r'\\bsikeftin\\b',       'abs'),
+    (r'\\bmathSqrt\\b',       'math.sqrt'),
+    (r'\\bmathPow\\b',        'math.pow'),
+    (r'\\bmathPi\\b',         'math.pi'),
+    (r'\\bhilbijêreFloat\\b', 'random.uniform'),
+    (r'\\bhilbijereFloat\\b', 'random.uniform'),
+
+    (r'\\bçap\\b',            'print'),
+    (r'\\bcap\\b',            'print'),
+
+    (r'\\bêşk\\b',            'try'),
+    (r'\\besk\\b',            'try'),
+    (r'\\bgirtin\\b',         'except'),
+    (r'\\bdewam\\b',          'finally'),
+    (r'\\bavêtin\\b',         'raise'),
+    (r'\\bavitin\\b',         'raise'),
+
+    (r'\\.jorê\\(\\)',        '.upper()'),
+    (r'\\.jore\\(\\)',        '.upper()'),
+    (r'\\.jêrê\\(\\)',        '.lower()'),
+    (r'\\.jere\\(\\)',        '.lower()'),
+    (r'\\.veqetîne\\b',       '.split'),
+    (r'\\.veqetine\\b',       '.split'),
+    (r'\\.biguhêze\\b',       '.replace'),
+    (r'\\.biguhez\\b',        '.replace'),
+    (r'\\.bibîne\\b',         '.find'),
+    (r'\\.bibine\\b',         '.find'),
+    (r'\\.xêz\\(\\)',         '.strip()'),
+    (r'\\.xez\\(\\)',         '.strip()'),
+    (r'\\.hejmarê\\b',        '.count'),
+    (r'\\.hejmare\\b',        '.count'),
+    (r'\\.bike\\b',           '.join'),
+    (r'\\.jêbike\\b',         '.remove'),
+    (r'\\.jebike\\b',         '.remove'),
+    (r'\\.rêzkirin\\(\\)',     '.sort()'),
+    (r'\\.rezkirin\\(\\)',     '.sort()'),
+    (r'\\.berevajikirin\\(\\)','.reverse()'),
+
+    (r'\\bklavBiGire\\b',     'klavBiGire'),
+    (r'\\bbilivîne\\b',       'bilivîne'),
+    (r'\\bbilivine\\b',       'bilivîne'),
+    (r'\\bbiguherêze_reng\\b','biguherêze_reng'),
+    (r'\\bjêbike_item\\b',    'jêbike_item'),
+    (r'\\bjebike_item\\b',    'jêbike_item'),
+    (r'\\bpiştî\\b',          'piştî'),
+    (r'\\bpistî\\b',          'piştî'),
+    (r'\\bpeyam\\b',          'peyam'),
+    (r'\\bbipirse\\b',        'bipirse'),
+    (r'\\bwêne\\b',            'wêne'),
+    (r'\\bwene\\b',            'wêne'),
+    (r'\\bwêne_pîvandî\\b',   'wêne_pîvandî'),
+    (r'\\bwene_pivandi\\b',   'wêne_pîvandî'),
+    (r'\\bwêne_nîşan\\b',     'wêne_nîşan'),
+    (r'\\bwene_nishan\\b',    'wêne_nîşan'),
+    (r'\\bwêne_label\\b',     'wêne_label'),
+    (r'\\bwene_label\\b',     'wêne_label'),
+    (r'\\bdeng\\b',            'deng'),
+    (r'\\bdeng_lêde\\b',      'deng'),
+    (r'\\bdeng_leyide\\b',    'deng'),
+    (r'\\bdeng_rawest\\b',    'deng_rawest'),
+    (r'\\bdeng_dengdank\\b',  'deng_dengdank'),
+    (r'\\bdeng_bilindî\\b',   'deng_bilindî'),
+    (r'\\bdeng_bilindi\\b',   'deng_bilindî'),
+]
+
+POST_FIXES = [
+    (r'\\belse\\s+if\\b',      'elif'),
+    (r'(?m)(\\S)[ \\t]{2,}',  r'\\1 '),
+]
+
+
+def _ku_beje(*args, **kwargs):
+
+    kwargs.setdefault('end', '')
+    print(*args, **kwargs)
+
+
+def _make_gui_env():
+    try:
+        import tkinter as tk
+    except ImportError:
+        return {}
+
+    def pencere(seri='RojLang ☀', pivan='600x450'):
+        w = tk.Tk()
+        w.title(seri)
+        w.geometry(pivan)
+        w.configure(bg='#0a0a0f')
+        w.resizable(False, False)
+        return w
+
+    def _nishan(w):
+        w.mainloop()
+
+    def kevir(w, fireh=500, bilindi=400, pasreng='#0a0a0f'):
+        c = tk.Canvas(w, width=fireh, height=bilindi,
+                      bg=pasreng, highlightthickness=0)
+        c.pack()
+        return c
+
+    def _cargosse(c, x1, y1, x2, y2, reng='#f0a500', sinor=''):
+        c.create_rectangle(x1, y1, x2, y2, fill=reng, outline=sinor)
+
+    def _xember(c, x1, y1, x2, y2, reng='#f0a500', sinor=''):
+        c.create_oval(x1, y1, x2, y2, fill=reng, outline=sinor)
+
+    def _xez(c, x1, y1, x2, y2, reng='#f0a500', sturi=2):
+        c.create_line(x1, y1, x2, y2, fill=reng, width=sturi)
+
+    def _niviskar(c, x, y, nivis, reng='#e8e8f0', mezinahi=14, font='Arial'):
+        c.create_text(x, y, text=str(nivis), fill=reng, font=(font, mezinahi))
+
+    def _biskojk(w, nivis, kar, reng='#f0a500', pasreng='#1a1a24'):
+        b = tk.Button(w, text=nivis, command=kar,
+                      fg=reng, bg=pasreng, activeforeground=pasreng,
+                      activebackground=reng, relief='flat',
+                      padx=14, pady=6, cursor='hand2', font=('Arial', 11))
+        b.pack(pady=4)
+        return b
+
+    def _nav_cargosse(w, nivis, reng='#e8e8f0', pasreng='#111118', mezinahi=12):
+        l = tk.Label(w, text=nivis, fg=reng, bg=pasreng,
+                     font=('Arial', mezinahi))
+        l.pack(pady=2)
+        return l
+
+    def _rengen_hevber(reng1, reng2, gav=10):
+        def h2r(h):
+            h = h.lstrip('#')
+            return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+        def r2h(r, g, b):
+            return f'#{int(r):02x}{int(g):02x}{int(b):02x}'
+        r1, g1, b1 = h2r(reng1)
+        r2, g2, b2 = h2r(reng2)
+        return [r2h(
+            r1 + (r2 - r1) * i / (gav - 1),
+            g1 + (g2 - g1) * i / (gav - 1),
+            b1 + (b2 - b1) * i / (gav - 1),
+        ) for i in range(gav)]
+
+
+    def _pistad(w, ms, fn):
+
+        w.after(int(ms), fn)
+
+    def _peyam(sernav='RojLang', nivis=''):
+        from tkinter import messagebox as _mb
+        _mb.showinfo(sernav, str(nivis))
+
+    def _bipirse(sernav='RojLang ☀', nivis='Erê / Na?'):
+        from tkinter import messagebox as _mb
+        return _mb.askyesno(sernav, str(nivis))
+
+
+    def _klav_bi_gire(w, klav, kar):
+
+        w.bind(str(klav), kar)
+
+    def _klav_bide(canvas_or_widget, klav, kar):
+        canvas_or_widget.bind(str(klav), kar)
+
+    def _klav_gişt(w, kar):
+
+        w.bind("<KeyPress>", kar)
+
+    _KLAV_CTRL   = "<Control-%s>".__mod__
+    _KLAV_ALT    = "<Alt-%s>".__mod__
+    _KLAV_SHIFT  = "<Shift-%s>".__mod__
+
+    def _nivisa_enter(kar):
+        return "<Return>"
+
+    def _nivisa_escape(kar):
+        return "<Escape>"
+
+    def _nivisa_space(kar):
+        return "<space>"
+
+    def _bilivine(c, item_id, dx, dy):
+
+        c.move(item_id, dx, dy)
+
+    def _biguheze_reng(c, item_id, reng):
+
+        try:    c.itemconfig(item_id, fill=reng)
+        except: c.itemconfig(item_id, fg=reng)
+
+    def _cargosse2(c, x1, y1, x2, y2, reng='#f0a500', sinor=''):
+
+        return c.create_rectangle(x1, y1, x2, y2, fill=reng, outline=sinor)
+
+    def _xember2(c, x1, y1, x2, y2, reng='#f0a500', sinor=''):
+
+        return c.create_oval(x1, y1, x2, y2, fill=reng, outline=sinor)
+
+    def _xez2(c, x1, y1, x2, y2, reng='#f0a500', sturi=2):
+
+        return c.create_line(x1, y1, x2, y2, fill=reng, width=sturi)
+
+    def _niviskar2(c, x, y, nivis, reng='#e8e8f0', mezinahi=14, font='Arial'):
+
+        return c.create_text(x, y, text=str(nivis), fill=reng, font=(font, mezinahi))
+
+    def _jebike_item(c, item_id):
+
+        c.delete(item_id)
+
+    def _wene_bar(path):
+        try:
+            from PIL import Image as _I, ImageTk as _IT
+            return _IT.PhotoImage(_I.open(str(path)))
+        except ImportError:
+            import tkinter as _tk2
+            return _tk2.PhotoImage(file=str(path))
+        except Exception as _ex:
+            print(f"[RojLang] wêne: {_ex}"); return None
+
+    def _wene_pivandi(path, fireh=None, bilindi=None):
+        try:
+            from PIL import Image as _I, ImageTk as _IT
+            _img = _I.open(str(path))
+            if fireh and bilindi:
+                _img = _img.resize((int(fireh), int(bilindi)))
+            elif fireh:
+                _r = int(fireh) / _img.width
+                _img = _img.resize((int(fireh), int(_img.height * _r)))
+            elif bilindi:
+                _r = int(bilindi) / _img.height
+                _img = _img.resize((int(_img.width * _r), int(bilindi)))
+            return _IT.PhotoImage(_img)
+        except Exception as _ex:
+            print(f"[RojLang] wêne_pîvandî: {_ex} — pip install pillow")
+            return None
+
+    def _wene_nishan(canvas, x, y, img_ref, anchor_s='center'):
+        if img_ref is None: return None
+        return canvas.create_image(int(x), int(y), image=img_ref, anchor=anchor_s)
+
+    def _wene_label(widget, img_ref):
+        if img_ref is None: return None
+        import tkinter as _tk2
+        _lbl = _tk2.Label(widget, image=img_ref, bg='#0a0a0f')
+        _lbl.image = img_ref; _lbl.pack(); return _lbl
+
+    def _deng_lede(path, loop=False):
+        try:
+            import pygame as _pg
+            if not _pg.get_init(): _pg.init()
+            if not _pg.mixer.get_init(): _pg.mixer.init()
+            _pg.mixer.music.load(str(path))
+            _pg.mixer.music.play(-1 if loop else 0)
+        except ImportError:
+            print("[RojLang] deng: pip install pygame")
+        except Exception as _ex:
+            print(f"[RojLang] deng: {_ex}")
+
+    def _deng_dengdank(path):
+        try:
+            import pygame as _pg
+            if not _pg.get_init(): _pg.init()
+            if not _pg.mixer.get_init(): _pg.mixer.init()
+            _snd = _pg.mixer.Sound(str(path)); _snd.play(); return _snd
+        except ImportError:
+            print("[RojLang] deng_dengdank: pip install pygame")
+        except Exception as _ex:
+            print(f"[RojLang] deng_dengdank: {_ex}")
+
+    def _deng_rawest():
+        try:
+            import pygame as _pg; _pg.mixer.music.stop()
+        except: pass
+
+    def _deng_bilindi(vol):
+        try:
+            import pygame as _pg; _pg.mixer.music.set_volume(float(vol))
+        except: pass
+
+    return {
+        'pencere':              pencere,
+        'nîşan':                _nishan,
+        'kevir':                kevir,
+        'çargoşe':              _cargosse2,
+        'xember':               _xember2,
+        'xêz':                  _xez2,
+        'nivîskar':             _niviskar2,
+        'bişkojk':              _biskojk,
+        'nav_çargoşe':          _nav_cargosse,
+        'rengên_hevber':        _rengen_hevber,
+        'piştî':                _pistad,
+        'peyam':                _peyam,
+        'bipirse':              _bipirse,
+        'klavBiGire':           _klav_bi_gire,
+        'klav_bide':            _klav_bide,
+        'klavGişt':             _klav_gişt,
+        'bilivîne':             _bilivine,
+        'biguherêze_reng':      _biguheze_reng,
+        'jêbike_item':          _jebike_item,
+        'wêne':                 _wene_bar,
+        'wene':                 _wene_bar,
+        'wêne_pîvandî':         _wene_pivandi,
+        'wene_pivandi':         _wene_pivandi,
+        'wêne_nîşan':           _wene_nishan,
+        'wene_nishan':          _wene_nishan,
+        'wêne_label':           _wene_label,
+        'wene_label':           _wene_label,
+        'deng':                 _deng_lede,
+        'deng_lêde':            _deng_lede,
+        'deng_leyide':          _deng_lede,
+        'deng_rawest':          _deng_rawest,
+        'deng_dengdank':        _deng_dengdank,
+        'deng_bilindî':         _deng_bilindi,
+        'deng_bilindi':         _deng_bilindi,
+        'nishan':               _nishan,
+        'cargose':              _cargosse2,
+        'xez':                  _xez2,
+        'niviskar':             _niviskar2,
+        'biskojk':              _biskojk,
+        'nav_cargose':          _nav_cargosse,
+        'rengen_hevber':        _rengen_hevber,
+        'pistî':                _pistad,
+        'bilivine':             _bilivine,
+        'biguhereze_reng':      _biguheze_reng,
+        'jebike_item':          _jebike_item,
+    }
+
+
+def _inject_globals(code: str) -> str:
+
+    import re as _re
+
+    lines = code.splitlines(keepends=True)
+
+    asgn = _re.compile(r'^([\\w\\u00C0-\\u024F\\u0600-\\u06FF]+)\\s*(?:[+\\-*/%&|^]?=)(?!=)', _re.UNICODE)
+    global_names: set = set()
+    for ln in lines:
+        s = ln.lstrip()
+        if len(ln) - len(s) == 0:
+            if not _re.match(r'(def|class|if|elif|else|for|while|try|except|finally|with|import|from|@|#)', s):
+                m = asgn.match(s)
+                if m:
+                    global_names.add(m.group(1))
+
+    if not global_names:
+        return code
+
+    result   = []
+    i        = 0
+    n        = len(lines)
+    func_re  = _re.compile(r'^( *)def\\s+([\\w\\u00C0-\\u024F]+)', _re.UNICODE)
+
+    while i < n:
+        ln = lines[i]
+        fm = func_re.match(ln)
+        if not fm:
+            result.append(ln)
+            i += 1
+            continue
+
+        func_base_indent = len(fm.group(1))
+        result.append(ln)
+        i += 1
+
+        body_indent = func_base_indent + 4
+        for j in range(i, n):
+            s2 = lines[j].lstrip()
+            if s2 and not s2.startswith('#'):
+                body_indent = len(lines[j]) - len(s2)
+                break
+
+        body_lines = []
+        while i < n:
+            bln  = lines[i]
+            bs   = bln.lstrip()
+            bind = len(bln) - len(bs)
+            if bs == '' or bs.startswith('#'):
+                body_lines.append(bln)
+                i += 1
+                continue
+            if bind <= func_base_indent:
+                break
+            body_lines.append(bln)
+            i += 1
+
+        needs_global = set()
+        for bln in body_lines:
+            bs = bln.lstrip()
+            if bs.startswith(('#', 'def ', 'class ')):
+                continue
+            m2 = asgn.match(bs)
+            if m2 and m2.group(1) in global_names:
+                needs_global.add(m2.group(1))
+
+        if needs_global:
+            prefix   = ' ' * body_indent
+            g_stmt   = prefix + 'global ' + ', '.join(sorted(needs_global)) + '\\n'
+            result.append(g_stmt)
+
+        result.extend(body_lines)
+
+    return ''.join(result)
+
+
+def wergerine(source):
+
+    strings_saved  = []
+    comments_saved = []
+
+    def save_str(m):
+        strings_saved.append(m.group(0))
+        return f'__ROJSTR{len(strings_saved) - 1}__'
+
+    code = re.sub(
+        r'("""[\\s\\S]*?"""|\\'\\'\\'[\\s\\S]*?\\'\\'\\'|'
+        r'"[^"\\n\\\\]*(?:\\\\.[^"\\n\\\\]*)*"|'
+        r"'[^'\\n\\\\]*(?:\\\\.[^'\\n\\\\]*)*')",
+        save_str, source
+    )
+
+    def save_com(m):
+        comments_saved.append(m.group(0))
+        return f'__ROJCOM{len(comments_saved) - 1}__'
+
+    code = re.sub(r'#[^\\n]*', save_com, code)
+
+    for pattern, replacement in TRANSLATIONS:
+        code = re.sub(pattern, replacement, code)
+    for pattern, replacement in POST_FIXES:
+        code = re.sub(pattern, replacement, code)
+
+    code = _inject_globals(code)
+
+    for i, s in enumerate(strings_saved):
+        code = code.replace(f'__ROJSTR{i}__', s)
+    for i, c in enumerate(comments_saved):
+        code = code.replace(f'__ROJCOM{i}__', c)
+
+    return code
+
+wergerîne = wergerine
+
+
+def bijere(file_path, debug=False):
+    if sys.platform == "win32":
+        try:
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+            sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+        except AttributeError:
+            pass
+
+    if not file_path.endswith('.ku'):
+        print(f"[RojLang] Sasi: '{file_path}' naye qebulkirin, pel dive bi .ku biqede")
+        sys.exit(1)
+
+    if not os.path.isfile(file_path):
+        print(f"[RojLang] Sasi: Pel '{file_path}' nehat ditin")
+        sys.exit(1)
+
+    with open(file_path, 'r', encoding='utf-8') as f:
+        source = f.read()
+
+    translated = wergerine(source)
+
+    if debug:
+        sep = '-' * 58
+        print(f'\\n{sep}\\n  [DEBUG] translated output:\\n{sep}')
+        for i, ln in enumerate(translated.splitlines(), 1):
+            print(f'  {i:>4} | {ln}')
+        print(f'{sep}\\n')
+
+    env = {
+        '__name__': '__main__',
+        '_ku_beje': _ku_beje,
+        'random':   random,
+        'math':     math,
+    }
+    env.update(_make_gui_env())
+
+    try:
+        compiled = compile(translated, file_path, 'exec')
+        exec(compiled, env)
+    except SyntaxError as e:
+        ln   = e.lineno or 0
+        text = e.text or ""
+        src_lines = source.splitlines()
+        ku_line = src_lines[ln-1].strip() if 0 < ln <= len(src_lines) else text.strip()
+        print(f'\\n[RojLang] !! Sasiya Syntax li reza {ln}:')
+        print(f'  >> {ku_line}')
+        print(f'  ({e.msg})')
+        sys.exit(1)
+    except SystemExit:
+        pass
+    except Exception as e:
+        tb = traceback.extract_tb(sys.exc_info()[2])
+        src_lines = source.splitlines()
+        ku_frame = None
+        for frame in tb:
+            if frame.filename == file_path:
+                ku_frame = frame
+        if ku_frame:
+            ln = ku_frame.lineno
+            ku_line = src_lines[ln-1].strip() if 0<ln<=len(src_lines) else ""
+            print(f'\\n[RojLang] !! Sasi li reza {ln}:')
+            print(f'  >> {ku_line}')
+            print(f'  ({type(e).__name__}: {e})')
+        else:
+            print(f'\\n[RojLang] !! Sasi: {type(e).__name__}: {e}')
+        sys.exit(1)
+
+
+bijêre = bijere
+
+
+def main():
+    args = sys.argv[1:]
+    debug = '--debug' in args
+    if debug:
+        args.remove('--debug')
+    bijere(args[0] if args else 'test.ku', debug=debug)
+
+
+if __name__ == '__main__':
+    main()
+` },
+  installer:   { n:'install_rojlang.bat',   c:`@echo off
+chcp 65001 > nul
+title RojLang v2.1 Installer
+echo.
+echo  *** RojLang v2.1 - Sazkirin / Installer ***
+echo.
+cd /d "%~dp0"
+python --version > nul 2>&1
+if errorlevel 1 (
+    echo  [ERROR] Python nedîtin! Biçe: python.org/downloads
+    pause & exit /b 1
+)
+for /f "tokens=*" %%i in ('python -c "import sys; print(sys.prefix)"') do set PYDIR=%%i
+set SCRIPTS=%PYDIR%\\Scripts
+copy /Y "%~dp0interpreter.py" "%SCRIPTS%\\rojlang_interpreter.py" > nul
+echo @python "%SCRIPTS%\\rojlang_interpreter.py" %%* > "%SCRIPTS%\\rojlang.cmd"
+echo.
+echo  Serkeftin! RojLang hat sazkirin.
+echo  Ji bo bikar bîne: cd "klasora-te" û rojlang pelê.ku
+echo  CMD nû veke ji bo PATH nûkirin.
+pause
+` },
+  uninstall:   { n:'uninstall_rojlang.bat', c:`@echo off
+echo.
+echo  *** RojLang Rakirin / Uninstaller ***
+echo.
+echo [1/3] Removing C:\\\\RojLang folder...
+if exist "C:\\\\RojLang" (
+    rmdir /S /Q "C:\\\\RojLang"
+    echo       OK!
+) else (
+    echo       C:\\\\RojLang was not found.
+)
+echo [2/3] Removing from PATH...
+powershell -Command "$p=[System.Environment]::GetEnvironmentVariable('Path','Machine');$np=$p -replace ';?C:\\\\\\\\RojLang','';[System.Environment]::SetEnvironmentVariable('Path',$np,'Machine');Write-Host '      OK!'"
+echo [3/3] Removing .ku file association...
+reg delete "HKCR\\\\.ku" /f >nul 2>&1
+reg delete "HKCR\\\\RojLangFile" /f >nul 2>&1
+echo.
+echo ==========================================
+echo  RojLang hat rakirin! / Uninstalled!
+echo ==========================================
+pause
+` },
+  spaceship:   { n:'spaceship.ku',          c:`# ☀ Keştiya Fezayê — RojLang Space Shooter
+nav W = 520
+nav H = 620
+nav w = pencere("Keştiya Fezayê ☀", "520x620")
+nav c = kevir(w, W, H, "#050510")
+nav i = 0
+dem i < 55:
+    nav sx = hilbijêre(0, W)
+    nav sy = hilbijêre(0, H)
+    xember(c, sx, sy, sx+1, sy+1, "#aaaaff")
+    i += 1
+nav kx = 260
+nav ky = 540
+nav ship = çargoşe(c, kx-14, ky-22, kx+14, ky+18, "#06d6a0")
+nav eng   = xember(c, kx-8, ky+18, kx+8, ky+30, "#f0a500")
+nav flame = xember(c, kx-6, ky+28, kx+6, ky+44, "#e63946")
+nav score_id = nivîskar(c, 60, 18, "XALEK: 0", "#f0a500", 13, "Courier")
+nav xalek = 0
+nav lîstik = rast
+nav çep = çewt
+nav rast2 = çewt
+nav guleler = pêl()
+nav dijmin = pêl()
+
+fonksîyon keşti_bilivin(dx):
+    nav kx = kx + dx
+    bilivîne(c, ship,  dx, 0)
+    bilivîne(c, eng,   dx, 0)
+    bilivîne(c, flame, dx, 0)
+
+fonksîyon dijmin_zêde():
+    nav dx3 = hilbijêre(20, W-20)
+    nav d1 = xember(c, dx3-16, 30, dx3+16, 62, "#e63946")
+    nav d2 = xember(c, dx3-8,  38, dx3+8,  54, "#0a0a1a")
+    dijmin.têxe(pêl([d1, d2, dx3, 46, hilbijêre(-2,2)]))
+
+dijmin_zêde()
+dijmin_zêde()
+dijmin_zêde()
+
+fonksîyon key_çep(e): nav çep = rast
+fonksîyon key_rast(e): nav rast2 = rast
+fonksîyon key_çep_berde(e): nav çep = çewt
+fonksîyon key_rast_berde(e): nav rast2 = çewt
+
+fonksîyon atêş(e):
+    nav g1 = xêz(c, kx, ky-24, kx, ky-40, "#ffd166", 3)
+    guleler.têxe(pêl([g1, kx, ky-32]))
+
+fonksîyon loop():
+    eger ne lîstik: vegere
+    eger çep û kx > 20: keşti_bilivin(-7)
+    eger rast2 û kx < W-20: keşti_bilivin(7)
+    nav gnû = pêl()
+    nav gi = 0
+    dem gi < dirêj(guleler):
+        nav g = guleler[gi]
+        bilivîne(c, g[0], 0, -13)
+        nav gy3 = g[2] - 13
+        eger gy3 > 0: gnû.têxe(pêl([g[0], g[1], gy3]))
+        yan: jêbike_item(c, g[0])
+        gi += 1
+    nav guleler = gnû
+    nav dnû = pêl()
+    nav di3 = 0
+    dem di3 < dirêj(dijmin):
+        nav d = dijmin[di3]
+        nav dx3 = d[4]
+        bilivîne(c, d[0], dx3, 1)
+        bilivîne(c, d[1], dx3, 1)
+        nav dxn = d[2]+dx3
+        nav dyn = d[3]+1
+        eger dxn < 20 an dxn > W-20: nav dx3 = -dx3
+        nav kişt = çewt
+        nav gi2 = 0
+        dem gi2 < dirêj(guleler) û ne kişt:
+            nav g2 = guleler[gi2]
+            eger şikeftin(g2[1]-dxn)<20 û şikeftin(g2[2]-dyn)<20:
+                jêbike_item(c, d[0])
+                jêbike_item(c, d[1])
+                jêbike_item(c, g2[0])
+                nav xalek = xalek + 10
+                c.itemconfig(score_id, text=f"XALEK: {xalek}")
+                dijmin_zêde()
+                kişt = rast
+            gi2 += 1
+        eger ne kişt: dnû.têxe(pêl([d[0],d[1],dxn,dyn,dx3]))
+        di3 += 1
+    nav dijmin = dnû
+    piştî(w, 28, loop)
+
+klavBiGire(w, "<Left>",  key_çep)
+klavBiGire(w, "<Right>", key_rast)
+klavBiGire(w, "<KeyRelease-Left>",  key_çep_berde)
+klavBiGire(w, "<KeyRelease-Right>", key_rast_berde)
+klavBiGire(w, "<space>", atêş)
+w.focus_set()
+loop()
+nîşan(w)
+` },
+};
+
+// ── Single file download ──
+function dlFile(key){
+  const f=_FILES[key];
+  if(!f)return;
+  const blob=new Blob([f.c],{type:'application/octet-stream'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=f.n;
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(url);
+  toast('⬇ '+f.n+' hat daxistin!');
+}
+
+// ── Download all ──
+function downloadAll(){
+  ['interpreter','installer','uninstall','spaceship'].forEach((k,i)=>
+    setTimeout(()=>dlFile(k), i*400)
+  );
+}
+
+// ── Copy code ──
+function copyCode(btn){
+  const pre=btn.closest('.code-block, pre, .ex-card')?.querySelector('pre') || btn.previousElementSibling;
+  if(!pre)return;
+  navigator.clipboard.writeText(pre.innerText).then(()=>{
+    const old=btn.textContent;btn.textContent='✓';
+    setTimeout(()=>btn.textContent=old,1800);
+  });
+}
+
+// ── Scroll reveal ──
 const obs=new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{
-    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*65);obs.unobserve(e.target);}
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'),i*60);
+      obs.unobserve(e.target);
+    }
   });
-},{threshold:0.07});
+},{threshold:0.01, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// Active nav + close mobile menu on click
-const secs=document.querySelectorAll('section[id]');
-const nlinks=document.querySelectorAll('.nav-links a');
+// ── Active nav on scroll ──
+const _secs=document.querySelectorAll('section[id]');
+const _nlinks=document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll',()=>{
   let cur='';
-  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-70)cur=s.id;});
-  nlinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+  _secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)cur=s.id;});
+  _nlinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
 });
-nlinks.forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+_nlinks.forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('navLinks')?.classList.remove('open');
+}));
 </script>
 </body>
 </html>
